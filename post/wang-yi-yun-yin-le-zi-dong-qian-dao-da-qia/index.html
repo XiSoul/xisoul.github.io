@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XiSoul</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css">
+    <link rel="stylesheet" href="media/css/post.css">
+    <link rel="stylesheet" href="media/live2d/css/live2d.css" />
+    
+</head>
+<body class=" mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink">
+<header class="mdui-toolbar mdui-color-pink mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="z-index: 1000">
+    <a href="javascript:;" mdui-drawer="{target: '#left-drawer',overlay:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+    <span class="mdui-typo-title">XiSoul</span>
+    <div class="mdui-toolbar-spacer"></div>
+<!--    <a href="javascript:history.go(0);" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+</header>
+
+<div class="mdui-drawer mdui-color-white mdui-drawer-full-height mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list">
+        <li class="mdui-subheader">菜单</li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/" class="mdui-list-item-content">首页</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/archives" class="mdui-list-item-content">归档</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/tags" class="mdui-list-item-content">标签</a>
+        </li>
+        
+        <li class="mdui-list-item mdui-ripple">
+            <a href="/post/about" class="mdui-list-item-content">关于</a>
+        </li>
+        
+    </ul>
+</div>
+
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            <article id="post-1270" class="post-1270 post type-post status-publish format-standard hentry category-90 category-129 tag-149">
+                <header class="entry-header">
+                    <h1 class="entry-title">网易云音乐自动签到打卡</h1>
+                    <p class="entry-census">发布于 2020-04-18</p>
+                    <hr>
+                </header>
+                <div class="neko">
+                    <h4 id="1首先寻找一个自动打卡的网站">1.首先寻找一个自动打卡的网站👇</h4>
+<p>一键打卡签到网站：<a href="xisoul.ml">xisoul.ml</a>(欢迎添加到书签)</p>
+<p>想自己搭建的源码在下面👇</p>
+<p>网易云.zip:<a href="https://474b.com/file/18637835-438131110">https://474b.com/file/18637835-438131110</a></p>
+<p>👂如果小白不想那么复杂的话可以不看下面的操作自己每天手动签到打卡</p>
+<h4 id="2去腾讯云函数里面新建一个空白的python36模板">2.去腾讯云函数里面新建一个空白的Python3.6模板</h4>
+<figure data-type="image" tabindex="1"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9AyA23Xj3MQDXY9nY31Kk2b3whvdg7oP8FsKmAVFhyBmXf3SvvF*WE2WOITJTtRZKBA!!/b&amp;bo=7AMMAgAAAAADB8M!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>代码有两种：</p>
+<h5 id="一种cookie失效时间快">一种cookie（失效时间快）</h5>
+<pre><code class="language-python"># -*- coding: utf8 -*-
+import requests
+import json
+ 
+ 
+def main_handler(event, context):
+ 
+ 
+    url = 'https://你的网站/api.php?do=daka'
+    url2 = 'https://你的网站/api.php?do=sign'
+    #headers = {'Content-Type': 'application/json;charset=UTF-8' }
+        
+    cookie = {&quot;Cookie&quot;:&quot;打卡时抓包的cookie&quot;}
+    post = 'do=daka'
+    post2= 'do=sign'
+    r = requests.post(url, json=post,cookies=cookie)
+    r2 = requests.post(url2, json=post2,cookies=cookie)
+    a =requests.get('https://sc.ftqq.com/server酱的key.send?text=' + r.text+ r2.text )
+    print(r.text,cookie)
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9A4Aw4KRxkT1J0QhtGOYjGJWjm4vOchnk4zr513wNdRztTe3vkyytsPeP5jNS3erB0g!!/b&amp;bo=dwfpAwAAAAADB7g!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<h5 id="第二种用户名md5密码随机值">第二种：用户名+md5（密码）+随机值</h5>
+<pre><code class="language-python"># -*- coding: utf8 -*-
+import requests
+import json
+import random
+ 
+ 
+def main_handler(event, context):
+ 
+ 
+    url = '你的网站/api.php?do=login'
+    url2 = '你的网站/api.php?do=daka'
+    url3= '你的网站/api.php?do=sign'
+    payload = {'uin': '帐号',
+    'pwd': '抓包得到md5加密的密码',
+    'r': random.uniform(0, 1)}
+    post = 'do=daka'
+    sign= 'do=sign'
+ 
+    sess = requests.Session()
+ 
+    response = sess.post( url, data = payload).text
+ 
+    result = sess.post(url2, data = post).text
+ 
+    result2 = sess.post(url3, data = sign).text
+ 
+    #message = json.loads(result)['count']
+    a =requests.get('https://sc.ftqq.com/你的key.send?text=' + result+ result2 + '&amp;desp=' + result + result2)
+    print(result,result2)
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9A3ZvmJtNMBQAQScpyaPtoKWERJeVS7j0isD05lhktsC906YsOT6IcWw.dXcplpegYA!!/b&amp;bo=eQfjAwAAAAADB7w!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>cookie和key需要自行修改,如无需推送则把sever酱那一行删除即可</p>
+<p>不知道什么是server酱移步：<a href="http://sc.ftqq.com/3.version">http://sc.ftqq.com/3.version</a></p>
+<h4 id="3在云函数的触发方式里面添加触发方式设定定时计划">3.在云函数的触发方式里面添加触发方式设定定时计划</h4>
+<p>名称</p>
+<p>wyy</p>
+<p>触发器周期</p>
+<p>自定义触发周期</p>
+<p>cron表达式</p>
+<p>0 0 1,8,12 * * * *</p>
+<p>表示在每天的一点、八点和十二点会自动运行</p>
+<p>附上一个网易云下载付费音乐的软件：<br>
+网易云音乐付费下载.rar:<a href="https://474b.com/file/18637835-438139765">https://474b.com/file/18637835-438139765</a> https://474b.com/file/18637835-438139765</p>
+<p>然后就可以躺着升级了！</p>
+<p>教程来自52pojie</p>
+
+                </div>
+            </article>
+        </main>
+    </div>
+    <div class="doc-footer-nav mdui-color-theme">
+        <div class="mdui-container">
+            <div class="mdui-row">
+                
+                <div class="mdui-col-xs-2 mdui-col-sm-6 doc-footer-nav-left"></div>
+                
+                
+                <a href="https://xisoul.ml/post/windows-mei-hua-zhuang-tai-lan/" class="mdui-ripple mdui-color-theme mdui-col-xs-10 mdui-col-sm-6 doc-footer-nav-right">
+                    <div class="doc-footer-nav-text">
+                        <i class="mdui-icon material-icons">arrow_forward</i>
+                        <span class="doc-footer-nav-direction">下一篇文章</span>
+                        <div class="doc-footer-nav-chapter">Windows美化状态栏</div>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+    <br>
+    
+        
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+    var gitalk = new Gitalk({
+        clientID: '3213825d6912da71eed6',
+        clientSecret: '378e9e995600af65c6d7cbe89f6add9183005bf6',
+        repo: 'XiSoul.github.io',
+        owner: 'XiSoul',
+        admin: ['XiSoul'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+
+    gitalk.render('gitalk-container')
+
+</script>
+
+        
+
+        
+    
+    
+</div>
+<footer class="mdui-container footer ">
+<!--    <div class="head_card-offset"></div>-->
+    <div class="mdui-row mdui-row-gapless">
+        <div class="k-container">
+            <img width="100%" src="/media/img/skirt.png">
+        </div>
+    </div>
+
+    <div class="site-info">
+        
+    </div>
+</footer>
+<div id="landlord" style="left:5px;bottom:0px;">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
+    <div class="live_talk_input_body">
+        <div class="live_talk_input_name_body">
+            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
+        </div>
+        <div class="live_talk_input_text_body">
+            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
+            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
+        </div>
+    </div>
+    <input name="live_talk" id="live_talk" value="1" type="hidden" />
+    <div class="live_ico_box">
+        <div class="live_ico_item type_info" id="showInfoBtn"></div>
+        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
+        <div class="live_ico_item type_music" id="musicButton"></div>
+        <div class="live_ico_item type_youdu" id="youduButton"></div>
+        <div class="live_ico_item type_quit" id="hideButton"></div>
+        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
+        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input name="live2dBGM" value="https://img.apa70.com/123.mp3" type="hidden">
+        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
+    </div>
+</div>
+<div id="open_live2d">召唤伊斯特瓦尔</div>
+<script>
+    var message_Path = '/media/live2d/';//资源目录，如果目录不对请更改
+    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
+</script>
+<!--<script src="/media/js/jquery-3.3.1.min.js"></script>-->
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/media/live2d/js/message.js"></script>
+
+</body>
+<script src="//cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
+<script src="/media/layer/layer.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.11.1/dist/av-min.js"></script>
+<script src="//unpkg.com/vue@next"></script>
+<script>
+    
+</script>
+<script type="module" src="/media/js/post.js"></script>
+</html>

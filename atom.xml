@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://xisoul.ml</id>
+    <title>XiSoul</title>
+    <updated>2022-09-18T03:10:21.420Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://xisoul.ml"/>
+    <link rel="self" href="https://xisoul.ml/atom.xml"/>
+    <logo>https://xisoul.ml/images/avatar.png</logo>
+    <icon>https://xisoul.ml/favicon.ico</icon>
+    <rights>All rights reserved 2022, XiSoul</rights>
+    <entry>
+        <title type="html"><![CDATA[网易云音乐自动签到打卡]]></title>
+        <id>https://xisoul.ml/post/wang-yi-yun-yin-le-zi-dong-qian-dao-da-qia/</id>
+        <link href="https://xisoul.ml/post/wang-yi-yun-yin-le-zi-dong-qian-dao-da-qia/">
+        </link>
+        <updated>2020-04-18T12:05:06.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="1首先寻找一个自动打卡的网站">1.首先寻找一个自动打卡的网站👇</h4>
+<p>一键打卡签到网站：<a href="xisoul.ml">xisoul.ml</a>(欢迎添加到书签)</p>
+<p>想自己搭建的源码在下面👇</p>
+<p>网易云.zip:<a href="https://474b.com/file/18637835-438131110">https://474b.com/file/18637835-438131110</a></p>
+<p>👂如果小白不想那么复杂的话可以不看下面的操作自己每天手动签到打卡</p>
+<h4 id="2去腾讯云函数里面新建一个空白的python36模板">2.去腾讯云函数里面新建一个空白的Python3.6模板</h4>
+<figure data-type="image" tabindex="1"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9AyA23Xj3MQDXY9nY31Kk2b3whvdg7oP8FsKmAVFhyBmXf3SvvF*WE2WOITJTtRZKBA!!/b&amp;bo=7AMMAgAAAAADB8M!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>代码有两种：</p>
+<h5 id="一种cookie失效时间快">一种cookie（失效时间快）</h5>
+<pre><code class="language-python"># -*- coding: utf8 -*-
+import requests
+import json
+ 
+ 
+def main_handler(event, context):
+ 
+ 
+    url = 'https://你的网站/api.php?do=daka'
+    url2 = 'https://你的网站/api.php?do=sign'
+    #headers = {'Content-Type': 'application/json;charset=UTF-8' }
+        
+    cookie = {&quot;Cookie&quot;:&quot;打卡时抓包的cookie&quot;}
+    post = 'do=daka'
+    post2= 'do=sign'
+    r = requests.post(url, json=post,cookies=cookie)
+    r2 = requests.post(url2, json=post2,cookies=cookie)
+    a =requests.get('https://sc.ftqq.com/server酱的key.send?text=' + r.text+ r2.text )
+    print(r.text,cookie)
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9A4Aw4KRxkT1J0QhtGOYjGJWjm4vOchnk4zr513wNdRztTe3vkyytsPeP5jNS3erB0g!!/b&amp;bo=dwfpAwAAAAADB7g!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<h5 id="第二种用户名md5密码随机值">第二种：用户名+md5（密码）+随机值</h5>
+<pre><code class="language-python"># -*- coding: utf8 -*-
+import requests
+import json
+import random
+ 
+ 
+def main_handler(event, context):
+ 
+ 
+    url = '你的网站/api.php?do=login'
+    url2 = '你的网站/api.php?do=daka'
+    url3= '你的网站/api.php?do=sign'
+    payload = {'uin': '帐号',
+    'pwd': '抓包得到md5加密的密码',
+    'r': random.uniform(0, 1)}
+    post = 'do=daka'
+    sign= 'do=sign'
+ 
+    sess = requests.Session()
+ 
+    response = sess.post( url, data = payload).text
+ 
+    result = sess.post(url2, data = post).text
+ 
+    result2 = sess.post(url3, data = sign).text
+ 
+    #message = json.loads(result)['count']
+    a =requests.get('https://sc.ftqq.com/你的key.send?text=' + result+ result2 + '&amp;desp=' + result + result2)
+    print(result,result2)
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9A3ZvmJtNMBQAQScpyaPtoKWERJeVS7j0isD05lhktsC906YsOT6IcWw.dXcplpegYA!!/b&amp;bo=eQfjAwAAAAADB7w!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>cookie和key需要自行修改,如无需推送则把sever酱那一行删除即可</p>
+<p>不知道什么是server酱移步：<a href="http://sc.ftqq.com/3.version">http://sc.ftqq.com/3.version</a></p>
+<h4 id="3在云函数的触发方式里面添加触发方式设定定时计划">3.在云函数的触发方式里面添加触发方式设定定时计划</h4>
+<p>名称</p>
+<p>wyy</p>
+<p>触发器周期</p>
+<p>自定义触发周期</p>
+<p>cron表达式</p>
+<p>0 0 1,8,12 * * * *</p>
+<p>表示在每天的一点、八点和十二点会自动运行</p>
+<p>附上一个网易云下载付费音乐的软件：<br>
+网易云音乐付费下载.rar:<a href="https://474b.com/file/18637835-438139765">https://474b.com/file/18637835-438139765</a> https://474b.com/file/18637835-438139765</p>
+<p>然后就可以躺着升级了！</p>
+<p>教程来自52pojie</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Windows美化状态栏]]></title>
+        <id>https://xisoul.ml/post/windows-mei-hua-zhuang-tai-lan/</id>
+        <link href="https://xisoul.ml/post/windows-mei-hua-zhuang-tai-lan/">
+        </link>
+        <updated>2020-04-15T04:33:06.000Z</updated>
+        <content type="html"><![CDATA[<p>TrafficMonitor状态栏显示网速内存CPU状态。以为两个版本自行选择下载</p>
+<p>TrafficMonitor_V1.78_<strong>x64</strong>.7z:<a href="https://474b.com/file/18637835-437704363">https://474b.com/file/18637835-437704363</a></p>
+<p>TrafficMonitor_V1.78_<strong>x86</strong>.7z:<a href="https://474b.com/file/18637835-437704345">https://474b.com/file/18637835-437704345</a></p>
+<p>原作者<a href="https://github.com/zhongyang219/TrafficMonitor">github地址</a></p>
+<p>这是效果图</p>
+<figure data-type="image" tabindex="1"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9AyPjPmOk13tC10C3bhJTaycLVZzXyZo0D1s68IQZNm1H1AqZJ0aeEdtt0gue5hkEUw!!/b&amp;bo=gAcyAAAAAAADB5c!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>状态栏透明Private.BlurClear.exe: <a href="https://474b.com/file/18637835-437704870">https://474b.com/file/18637835-437704870<br>
+</a></p>
+<h2 id="食用方法下载文件复制到以下路径cusersxisoul这里的xisoul是你自己电脑的用户名appdataroamingmicrosoftwindowsstart-menuprogramsstartup">🍨<strong>食用方法</strong>：下载文件复制到以下路径C:\Users\XiSoul(这里的xisoul是你自己电脑的用户名)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</h2>
+<figure data-type="image" tabindex="2"><img src="http://m.qpic.cn/psc?/V13Ok3EX0khEJi/6srbhn710T4Nam1Tpgw9A*uSKda8j4a9N3k1QDDwAiOzM4wM99v88Zq4PEA8sMN3bZwkDFZbOXGBw4HErWNi.g!!/b&amp;bo=TwOiAAAAAAADB8w!&amp;rf=viewer_4" alt="" loading="lazy"></figure>
+<p>这是比较轻量级的，双击即可开启。放在启动菜单是为了让他开机自启.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给大家安利一款浏览器edge]]></title>
+        <id>https://xisoul.ml/post/gei-da-jia-an-li-yi-kuan-liu-lan-qi-edge/</id>
+        <link href="https://xisoul.ml/post/gei-da-jia-an-li-yi-kuan-liu-lan-qi-edge/">
+        </link>
+        <updated>2020-03-25T06:07:54.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="在此不针对任何一款浏览器">在此不针对任何一款浏览器！</h2>
+<p>官方链接:<a href="https://www.microsoft.com/zh-cn/edge">https://www.microsoft.com/zh-cn/edge</a>(<strong>官方不挂梯子下载非常慢</strong>)</p>
+<p>日更，周更和beta版下载<a href="https://www.microsoftedgeinsider.com/zh-cn/download/">https://www.microsoftedgeinsider.com/zh-cn/download/</a>(<strong>macOS iOS Android入口</strong>)</p>
+<p>文件比较小所以传城通吃🍜：<a href="https://474b.com/file/18637835-431735791">https://474b.com/file/18637835-431735791</a>（<strong>推荐</strong>）</p>
+<p><strong>详解来自bilibili：</strong></p>
+<iframe width=900 height=800 src="//player.bilibili.com/player.html?aid=95579061&bvid=BV1yE411L74K&cid=163172548&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<p>此edge非win10自带的edge</p>
+<p>现在国内常见的浏览器有：IE、Firefox、QQ浏览器、Safari、Opera、Google Chrome、百度浏览</p>
+<p>器、搜狗浏览器、猎豹浏览器、360浏览器、UC浏览器、遨游浏览器、世界之窗浏览器等。但目前最为主流</p>
+<p>浏览器有五大款，分别是IE、Firefox、Google Chrome、Safari、Opera。</p>
+<p>浏览器最重要的是内核。内核就是渲染页面的。经常有些高大上的页面进去不显示或者是进去显示错位，效果</p>
+<p>差。国产好多浏览器都是套壳的，内核版本低</p>
+<p>1、IE浏览器内核：Trident内核，也是俗称的IE内核；</p>
+<p>2、Chrome浏览器内核：统称为Chromium内核或Chrome内核，以前是Webkit内核，现在是Blink内核；</p>
+<p>3、Firefox浏览器内核：Gecko内核，俗称Firefox内核；</p>
+<p>4、Safari浏览器内核：Webkit内核；</p>
+<p>5、Opera浏览器内核：最初是自己的Presto内核，后来是Webkit，现在是Blink内核；</p>
+<p>6、360浏览器、猎豹浏览器内核：IE+Chrome双内核；</p>
+<p>7、搜狗、遨游、QQ浏览器内核：Trident（兼容模式）+Webkit（高速模式）；</p>
+<p>8、百度浏览器、世界之窗内核：IE内核；</p>
+<p>9、2345浏览器内核：以前是IE内核，现在也是IE+Chrome双内核；</p>
+<p>edge beta采用的内核是<strong>Chromium</strong>最新内核实时跟Chrome同步</p>
+<figure data-type="image" tabindex="1"><img src="https://t1.picb.cc/uploads/2020/03/25/k02tUT.png" alt="" loading="lazy"></figure>
+<h3 id="页面干净无任何一刀99999">页面干净无任何<strong>一刀99999</strong></h3>
+<figure data-type="image" tabindex="2"><img src="https://t1.picb.cc/uploads/2020/03/25/k02w6M.png" alt="" loading="lazy"></figure>
+<h3 id="保护隐私拒绝隐私跟踪"><strong>保护隐私</strong>，拒绝隐私跟踪。</h3>
+<h3 id=""></h3>
+<p>不会像你在某度搜索的东西去淘宝推荐给你。美其名曰方便你我，个性化广告。</p>
+<figure data-type="image" tabindex="3"><img src="https://t1.picb.cc/uploads/2020/03/25/k02c3a.png" alt="" loading="lazy"></figure>
+<p>拓展商店国内可用。占用内存小，轻量。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[各类使用网站合集]]></title>
+        <id>https://xisoul.ml/post/xue-xi-wang-zhan/</id>
+        <link href="https://xisoul.ml/post/xue-xi-wang-zhan/">
+        </link>
+        <updated>2020-03-22T10:09:42.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="学习">📚学习</h3>
+<p>​        知乎：<a href="http://www.zhihu.com">http://www.zhihu.com</a></p>
+<p>​        大学资源网：<a href="http://www.dxzy163.com/">http://www.dxzy163.com/</a></p>
+<p>​        简答题：<a href="http://www.jiandati.com/">http://www.jiandati.com/</a></p>
+<p>​        网易公开课：<a href="https://open.163.com/ted/">https://open.163.com/ted/</a></p>
+<p>​        网易云课堂：<a href="https://study.163.com/">https://study.163.com/</a></p>
+<p>​        中国大学 MOOC：<a href="http://www.icourse163.org">http://www.icourse163.org</a></p>
+<p>​        网易云课堂：<a href="https://study.163.com/">https://study.163.com/</a></p>
+<p>​        哔哩哔哩弹幕网：<a href="http://www.bilibili.com">http://www.bilibili.com</a></p>
+<p>​        我要自学网：<a href="http://www.51zxw.net">http://www.51zxw.net</a></p>
+<p>​        学堂在线：<a href="https://next.xuetangx.com/">https://next.xuetangx.com/</a></p>
+<p>​        爱课程：<a href="http://www.icourses.cn">http://www.icourses.cn</a></p>
+<p>​        貓ロ米论文：<a href="https://lunwen.im/">https://lunwen.im/</a></p>
+<p>​        iData（论文搜索）：<a href="http://www.cn-ki.net">http://www.cn-ki.net</a></p>
+<p>​        文泉考试：<a href="https://www.wqkaoshi.com">https://www.wqkaoshi.com</a></p>
+<p>​        码农之家（计算机电子书下载）：<a href="http://www.xz577.com">http://www.xz577.com</a></p>
+<p>​        鸠摩搜书：<a href="http://www.jiumodiary.com">http://www.jiumodiary.com</a></p>
+<p>​        云海电子图书馆：<a href="http://www.pdfbook.cn">http://www.pdfbook.cn</a></p>
+<p>​        周读（书籍搜索）：<a href="ireadweek.com">ireadweek.com</a></p>
+<p>​        知轩藏书：<a href="http://www.zxcs.me/">http://www.zxcs.me/</a></p>
+<p>​        脚本之家电子书下载：<a href="https://www.jb51.net/books/">https://www.jb51.net/books/</a></p>
+<p>​        搜书 VIP-电子书搜索：<a href="http://www.soshuvip.com/all.html">http://www.soshuvip.com/all.html</a></p>
+<p>​        书格（在线古籍图书馆）：<a href="https://new.shuge.org/">https://new.shuge.org/</a></p>
+<p>​        术语在线：<a href="http://www.termonline.cn/">http://www.termonline.cn/</a></p>
+<p>​        必看网（人生必看的书籍）：<a href="https://www.biikan.com/">https://www.biikan.com/</a></p>
+<h3 id="冷知识-黑科技">💡冷知识 / 黑科技</h3>
+<p>​        上班摸鱼必备（假装电脑系统升级）：<a href="http://fakeupdate.net/">http://fakeupdate.net/</a></p>
+<p>​        创意光线绘画：<a href="http://weavesilk.com/">http://weavesilk.com/</a></p>
+<p>​        星系观察：<a href="https://stellarium-web.org/">https://stellarium-web.org/</a></p>
+<p>​        煎蛋：<a href="http://jandan.net/">http://jandan.net/</a></p>
+<p>​        渣男-说话的艺术：<a href="https://lovelive.tools/">https://lovelive.tools/</a></p>
+<p>​        全历史：<a href="https://www.allhistory.com/">https://www.allhistory.com/</a></p>
+<p>​        iData：<a href="https://www.cn-ki.net/">https://www.cn-ki.net/</a></p>
+<p>​        caj 云阅读：<a href="http://cajviewer.cnki.net/cajcloud/">http://cajviewer.cnki.net/cajcloud/</a></p>
+<h3 id="资源搜索">📡资源搜索</h3>
+<p>​        DogeDoge 搜索引擎：<a href="http://www.dogedoge.com">http://www.dogedoge.com</a></p>
+<p>​        秘迹搜索：<a href="https://mijisou.com/">https://mijisou.com/</a></p>
+<p>​        小白盘：<a href="https://www.xiaobaipan.com/">https://www.xiaobaipan.com/</a></p>
+<p>​        云盘精灵（资源搜索）：<a href="http://www.yunpanjingling.com">http://www.yunpanjingling.com</a></p>
+<p>​        虫部落（资源搜索）：<a href="http://www.chongbuluo.com">http://www.chongbuluo.com</a></p>
+<p>​        如风搜（资源搜索）：<a href="http://www.rufengso.net/">http://www.rufengso.net/</a></p>
+<p>​        爱扒：<a href="https://www.zyboe.com/">https://www.zyboe.com/</a></p>
+<h3 id="小工具">🔑小工具</h3>
+<p>​        云端超级应用空间（PS，PPT，Excel，Ai）：<a href="https://uzer.me/">https://uzer.me/</a></p>
+<p>​        在线接口测试（Getman）：<a href="https://getman.cn/">https://getman.cn/</a></p>
+<p>​        香当网（年终总结，个人简历，事迹材料，租赁合同，演讲稿）：<a href="https://www.xiangdang.net/">https://www.xiangdang.net/</a></p>
+<p>​        二维码生成：<a href="https://cli.im/">https://cli.im/</a></p>
+<p>​        搜狗翻译：<a href="fanyi.sogou.com">fanyi.sogou.com</a></p>
+<p>​        熵数（图表制作，数据可视化）：<a href="https://dydata.io/appv2/#/pages/index/home">https://dydata.io/appv2/#/pages/index/home</a></p>
+<p>​        拷贝兔：<a href="https://cp.anyknew.com/">https://cp.anyknew.com/</a></p>
+<p>​        图片无限变放大：<a href="http://bigjpg.com/zh">http://bigjpg.com/zh</a></p>
+<p>​        幕布（在线大纲笔记工具）：<a href="mubu.com">mubu.com</a></p>
+<p>​        奶牛快传（在线传输文件利器）：<a href="cowtransfer.com">cowtransfer.com</a></p>
+<p>​        在线转换器（在线转换器转换任何测量单位）：<a href="https://zh.justcnw.com/">https://zh.justcnw.com/</a><br>
+​        调查问卷制作：<a href="https://www.wenjuan.com/">https://www.wenjuan.com/</a></p>
+<p>​        果核剥壳（软件下载）：<a href="https://www.ghpym.com/">https://www.ghpym.com/</a></p>
+<p>​        软件下载：<a href="https://www.unyoo.com/">https://www.unyoo.com/</a></p>
+<p>​        MSDN 我告诉你（windows10 系统镜像下载）：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
+<h3 id="导航页工具集">🚀导航页（工具集）</h3>
+<p>​        NiceTool.net 好工具网：<a href="http://www.nicetool.net/">http://www.nicetool.net/</a></p>
+<p>​        现实君工具箱（综合型在线工具集成网站）：<a href="http://tool.uixsj.cn/">http://tool.uixsj.cn/</a></p>
+<p>​        蓝调网站：<a href="http://lcoc.top/">http://lcoc.top/</a></p>
+<p>​        偷渡鱼：<a href="https://touduyu.com/">https://touduyu.com/</a></p>
+<p>​        牛导航：<a href="http://www.ziliao6.com/">http://www.ziliao6.com/</a></p>
+<p>​        小呆导航：<a href="https://www.webjike.com/index.html">https://www.webjike.com/index.html</a></p>
+<p>​        简法主页：<a href="http://www.jianfast.com/">http://www.jianfast.com/</a></p>
+<p>​        KIM 主页：<a href="https://kim.plopco.com/">https://kim.plopco.com/</a></p>
+<p>​        聚 BT：<a href="https://jubt.net/cn/index.html">https://jubt.net/cn/index.html</a></p>
+<p>​        精准云工具合集：<a href="https://jingzhunyun.com/">https://jingzhunyun.com/</a></p>
+<p>​        兔 2 工具合集：<a href="https://www.tool2.cn/">https://www.tool2.cn/</a></p>
+<p>​        爱资料工具（在线实用工具集合）：<a href="http://www.toolnb.com">http://www.toolnb.com</a></p>
+<p>​        工具导航：<a href="https://hao.logosc.cn/">https://hao.logosc.cn/</a></p>
+<h3 id="看视频">🎥看视频</h3>
+<p>​        电影推荐（分类别致）：<a href="http://www.mvcat.com">http://www.mvcat.com</a></p>
+<p>​        去看 TV：<a href="https://www.qukantv.net/">https://www.qukantv.net/</a></p>
+<p>​        动漫视频网：<a href="http://www.zzzfun.com/">http://www.zzzfun.com/</a></p>
+<p>​        94 神马电影网：<a href="http://www.9rmb.com/">http://www.9rmb.com/</a></p>
+<p>​        NO 视频官网：<a href="http://www.novipnoad.com/">http://www.novipnoad.com/</a></p>
+<p>​        蓝光画质电影：<a href="http://www.languang.co/">http://www.languang.co/</a></p>
+<p>​        在线看剧：<a href="http://dy.27234.cn/">http://dy.27234.cn/</a></p>
+<p>​        大数据导航：<a href="http://hao.199it.com/">http://hao.199it.com/</a></p>
+<p>​        多功能图片网站：<a href="https://www.logosc.cn/so/">https://www.logosc.cn/so/</a></p>
+<p>​        牛牛 TV：<a href="http://www.ziliao6.com/tv/">http://www.ziliao6.com/tv/</a></p>
+<p>​        VideoFk 解析视频：<a href="http://www.videofk.com/">http://www.videofk.com/</a></p>
+<p>​        蓝调网站：<a href="http://lcoc.top/vip2.3/">http://lcoc.top/vip2.3/</a></p>
+<h3 id="学设计">📏学设计</h3>
+<p>​        免费音频素材：<a href="https://icons8.cn/music">https://icons8.cn/music</a></p>
+<p>​        新 CG 儿（视频素材模板，无水印+免费下载）：<a href="https://www.newcger.com/">https://www.newcger.com/</a></p>
+<p>​        小图标下载：<a href="https://www.easyicon.net/">https://www.easyicon.net/</a></p>
+<p>​        第一字体转换器：<a href="http://www.diyiziti.com/">http://www.diyiziti.com/</a></p>
+<p>​        doyoudosh（平面设计）：<a href="http://www.doyoudo.com">http://www.doyoudo.com</a></p>
+<p>​        企业宣传视频在线制作：<a href="https://duomu.tv/">https://duomu.tv/</a></p>
+<p>​        MAKE 海报设计官网：<a href="http://maka.im/">http://maka.im/</a></p>
+<p>​        一键海报神器：<a href="https://www.logosc.cn/photo/?utm">https://www.logosc.cn/photo/?utm</a></p>
+<p>​        字由（字体设计）：<a href="http://www.hellofont.cn/">http://www.hellofont.cn/</a></p>
+<p>​        查字体网站：<a href="https://fonts.safe.360.cn/">https://fonts.safe.360.cn/</a></p>
+<p>​        爱给网（免费素材下载的网站，包括音效、配乐，3D、视频、游戏，平面、教程）：<a href="http://www.aigei.com/">http://www.aigei.com/</a></p>
+<p>​        在线视频剪辑：<a href="https://bilibili.clipchamp.com/editor">https://bilibili.clipchamp.com/editor</a></p>
+<h3 id="搞文档">📜搞文档</h3>
+<p>​        即书（在线制作 PPT）：<a href="https://www.keysuper.com/">https://www.keysuper.com/</a></p>
+<p>​        PDF 处理：<a href="https://smallpdf.com/cn">https://smallpdf.com/cn</a></p>
+<p>​        PDF 处理：<a href="https://www.ilovepdf.com/zh-cn">https://www.ilovepdf.com/zh-cn</a></p>
+<p>​        PDF 处理： <a href="https://www.pdfpai.com/">https://www.pdfpai.com/</a></p>
+<p>​        PDF 处理：<a href="https://www.hipdf.cn/">https://www.hipdf.cn/</a></p>
+<p>​        腾讯文档（在线协作编辑和管理文档）：<a href="docs.qq.com">docs.qq.com</a></p>
+<p>​        ProcessOn（在线协作制作结构图）：<a href="http://www.processon.com">http://www.processon.com</a></p>
+<p>​        iLovePDF（在线转换 PDF 利器）：<a href="http://www.ilovepdf.com">http://www.ilovepdf.com</a></p>
+<p>​        PPT 在线制作：<a href="https://www.woodo.cn/">https://www.woodo.cn/</a></p>
+<p>​        PDF24 工具（pdf 处理工具）：<a href="https://tools.pdf24.org/en">https://tools.pdf24.org/en</a></p>
+<p>​        IMGBOT（在线图片处理）：<a href="http://www.imgbot.ai">http://www.imgbot.ai</a></p>
+<p>​        福昕云编辑（在线编辑 PDF）：<a href="edit.foxitcloud.cn">edit.foxitcloud.cn</a></p>
+<p>​        TinyPNG（在线压缩图片）：<a href="tinypng.com">tinypng.com</a></p>
+<p>​        UZER.ME（在线使用各种大应用，在线使用 CAD，MATLAB，Office 三件套）：<a href="uzer.me">uzer.me</a></p>
+<p>​        优品 PPT（模板下载）：<a href="http://www.ypppt.com/">http://www.ypppt.com/</a></p>
+<p>​        第一 PPT（模板下载）：<a href="http://www.1ppt.com/xiazai/">http://www.1ppt.com/xiazai/</a></p>
+<p>​        三顿 PPT 导航：<a href="sandunppt.com">sandunppt.com</a></p>
+<h2 id="找图片">🔍找图片</h2>
+<h3 id="电脑壁纸">💻电脑壁纸：</h3>
+<p>​        <a href="http://lcoc.top/bizhi/">http://lcoc.top/bizhi/</a></p>
+<p>​        <a href="https://unsplash.com/">https://unsplash.com/</a></p>
+<p>​        <a href="https://pixabay.com/">https://pixabay.com/</a></p>
+<p>​        <a href="https://www.pexels.com/">https://www.pexels.com/</a></p>
+<p>​        <a href="https://visualhunt.com/">https://visualhunt.com/</a></p>
+<p>​        <a href="https://www.ssyer.com/">https://www.ssyer.com/</a></p>
+<p>​        彼岸图网：<a href="http://pic.netbian.com/">http://pic.netbian.com/</a></p>
+<p>​        极像素（超高清大图）：<a href="https://www.sigoo.com/">https://www.sigoo.com/</a></p>
+<p>​        免费版权图片搜索：<a href="https://www.logosc.cn/so">https://www.logosc.cn/so</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://xisoul.ml/post/hello-gridea/</id>
+        <link href="https://xisoul.ml/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
