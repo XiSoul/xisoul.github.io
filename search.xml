@@ -13,4 +13,54 @@
         <tag>hexo 教程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>hexo博客搭建</title>
+    <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<blockquote>
+<p>hexo博客自由度非常高，对小白来说，不太友好，配置容易出错。网上有很多教程，但是不知道问题在哪还是很容易踩坑，这里我就以我自己的博客搭建过程来讲解一下hexo+github+cloudflare来实现</p>
+</blockquote>
+<p>这里引用一下有基础的同志可以参考一下：<a href="https://www.mubu.com/doc/C85kyZw3UU">https://www.mubu.com/doc/C85kyZw3UU</a><strong>首先声明，这个文档不是我写的，转载过来的，为了防止别人删除文档，所以我保存了一份</strong></p>
+<h2 id="下载安装必要的工具"><a href="#下载安装必要的工具" class="headerlink" title="下载安装必要的工具"></a>下载安装必要的工具</h2><h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>这个是nodejs各个历史版本地址：<a href="https://nodejs.org/en/about/previous-releases">Node.js — Previous Releases (nodejs.org)</a></p>
+<blockquote>
+<p>为什么选择历史版本？</p>
+<p>有些博客主题构建，需要的插件不支持新版本，或者构建出来页面空白。所以按照主题开发者的要求的版本来。</p>
+</blockquote>
+<h3 id="安装git工具"><a href="#安装git工具" class="headerlink" title="安装git工具"></a>安装git工具</h3><blockquote>
+<p>这一步开始你得有一个github的账号，<a href="https://github.com/">https://github.com/</a>  如果是使用gitee账号请参考幕布，为什么我不使用gitee，因为gitee部署静态页面需要实名</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>-hexo -搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电脑卸载软件推荐，解决卸载不干净问题</title>
+    <url>/2024/03/18/%E7%94%B5%E8%84%91%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%8D%B8%E8%BD%BD%E4%B8%8D%E5%B9%B2%E5%87%80%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>问题出现在我win11笔记本，电脑里面有office了，之前用的比较习惯，然后电脑里面里面又有WPS，所以正常按照卸载流程卸载，卸载不干净。问了好多人，网上查阅资料还是不行。有部分人会出现这个问题。</p>
+</blockquote>
+<h1 id="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"><a href="#问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。" class="headerlink" title="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"></a>问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。</h1><p>之前出现这个问题，网上的方法：</p>
+<p>一、删除WPS注册表。</p>
+<p>二、然后再就是重装，改默认然后再卸载。</p>
+<p>以上两种方法我都试过了，我通过软件卸载后我大概知道问题出在哪，就是注册表删除不干净。我在使用第一种方法的时候，删除了几条注册表之后还是不行。所以转用第二种方法，我又在官网上面下载了WPS，然后改了修复，改了默认卸载还是不行。最后用软件删除注册表，里面大概有2000多条。</p>
+<hr>
+<h1 id="解决：使用HiBit-uninstaller卸载"><a href="#解决：使用HiBit-uninstaller卸载" class="headerlink" title="解决：使用HiBit uninstaller卸载"></a>解决：使用HiBit uninstaller卸载</h1><p>为什么卸载软件那么多推荐这款，因为比较轻量，功能齐全，免费。</p>
+<p>官网：<a href="https://hibitsoft.ir/">HiBitSoftware</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134455.png" alt="image-20240318211755561"></p>
+<p>点击下载安装就可以了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134456.png" alt="image-20240318212024077"></p>
+<p>勾选所要卸载的软件，这里也可以多选，然后点击卸载所选项</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134457.png" alt="image-20240318212222757"></p>
+<p>点击启动，卸载完之后这里就变成了扫描。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134458.png" alt="image-20240318212319468">然后就跳出扫描剩余项，拉倒下面我们看到，电脑残留的文件，还有注册表。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134459.png" alt="image-20240318212643464"></p>
+<p>创建备份和日志报告，有分析需求的同志可以的打开。然后点击完成就OK了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xisoul/picgo/blogs/pictures/202403182134461.png" alt="image-20240318212926055"></p>
+<p>工具里面有很多功能，可以找到自己电脑里面的垃圾文件，和没用的注册表，也可以将软件添加到上下文菜单（也就是鼠标右键）以后使用也方便。</p>
+]]></content>
+      <tags>
+        <tag>软件推荐</tag>
+        <tag>解决的问题</tag>
+      </tags>
+  </entry>
 </search>
