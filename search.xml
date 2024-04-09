@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ai绘画基础总结（一）安装设置</title>
+    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
+</blockquote>
+<h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
+<p><img src="https://img2.imgtp.com/2024/04/01/xJfm5OyL.png" alt="image-20240331100214741"></p>
+<p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
+<p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
+<p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
+<p><strong>疯狂ai启动器</strong>：<a href="https://www.bilibili.com/video/BV1VS421w7fb/">王炸来了！全新Comfyui疯狂Ai启动器,更加好用易用人性化兼容秋叶绘世整合包启动器_哔哩哔哩_bilibili</a>（在群里面薅过来的链接，当然b站也有）</p>
+<p><strong>Comflowy</strong>：<a href="https://www.comflowy.com/zh-CN">Comflowy 介绍 – Comflowy</a></p>
+<p><strong>普通版</strong>：</p>
+<p>123网盘下载地址：<a href="https://www.123pan.com/s/42q0Vv-SYvVd.html">https://www.123pan.com/s/42q0Vv-SYvVd.html</a><br>夸克网盘下载地址：<a href="https://pan.quark.cn/s/41aeb9394841">https://pan.quark.cn/s/41aeb9394841</a><br>百度网盘下载地址：<a href="https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1">https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1</a></p>
+<p><strong>开发者满血版</strong>：</p>
+<p>百度网盘:<br><a href="https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour">https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour</a><br>夸克网盘:<br><a href="https://pan.quark.cn/s/d306fa633fa7">https://pan.quark.cn/s/d306fa633fa7</a></p>
+<p><strong>嘟嘟嘟上传的整合包</strong>:<br><a href="https://www.123pan.com/s/42q0Vv-eXvVd.html">https://www.123pan.com/s/42q0Vv-eXvVd.html</a><br>提取码:KbrA 模型文件需要另外下载,太大,放不进整合包<br><a href="https://www.123pan.com/s/42q0Vv-G2vVd.html">https://www.123pan.com/s/42q0Vv-G2vVd.html</a><br>提取码:BKG7 模型文件,下载完替换上面的整合包即可</p>
+<blockquote>
+<p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
+</blockquote>
+<h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
+<p><img src="https://img2.imgtp.com/2024/04/01/cTFDLRPl.png" alt="image-20240331103004050"></p>
+<p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
+<p><img src="https://img2.imgtp.com/2024/04/01/RwKeqNSc.png" alt="image-20240331103040742"></p>
+<p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
+<p><img src="https://img2.imgtp.com/2024/04/01/KKkq364J.png" alt="image-20240331102524108"></p>
+<blockquote>
+<p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>-ComfyUI -AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AI绘画拉取模型失败，DOS开启代理</title>
+    <url>/2024/04/02/AI%E7%BB%98%E7%94%BB%E6%8B%89%E5%8F%96%E6%A8%A1%E5%9E%8B%E5%A4%B1%E8%B4%A5%EF%BC%8CDOS%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>我用了这么久的代理第一次知道DOS里面要开代理，惭愧惭愧。在我远程拉取模型的时候，挂科学也一直失败。在网上找报错找了很长时间没找到，最后经过一位群友的提示下，才知道问题出在DOS代理上面。</p>
+<p>直接看文章第一部分就行，要是直接tun不行，再看下面的</p>
+</blockquote>
+<h1 id="直接开启tun"><a href="#直接开启tun" class="headerlink" title="直接开启tun"></a>直接开启tun</h1><p><img src="https://img2.imgtp.com/2024/04/02/oGS1eVLV.png" alt="image-20240402173541664"></p>
+<blockquote>
+<p>这个是V2的开启方法</p>
+</blockquote>
+<p><img src="https://img2.imgtp.com/2024/04/02/luTIWgSi.png" alt="image-20240402175845535"></p>
+<p>测试的时候发现一个问题，开启后不会立马生效需要等个十几秒左右，有可能是系统缓存没刷新<img src="https://img2.imgtp.com/2024/04/02/bb3DOGmB.png" alt="image-20240402173655956"></p>
+<h2 id="检查代理"><a href="#检查代理" class="headerlink" title="检查代理"></a>检查代理</h2><p>测试的时候<strong>不要</strong>直接ping，ping不走http。直接用curl。</p>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">curl -vv www.google.com</span><br></pre></td></tr></table></figure>
+<h1 id="Windows代理配置"><a href="#Windows代理配置" class="headerlink" title="Windows代理配置"></a>Windows代理配置</h1><p>单击「开始」，然后在搜索程序和文件框中键入 cmd。<br>在程序列表中右键单击 cmd.exe，然后单击以<strong>管理员身份运行</strong>。<br>键入命令 <strong>netsh winhttp set proxy host:port</strong> 设置代理，由于本机有运行 clash，所以这里设置代理为 127.0.0.1:7890，当然其他软件也有这个功能，自行摸索。</p>
+<h2 id="使用winhttp设置代理"><a href="#使用winhttp设置代理" class="headerlink" title="使用winhttp设置代理"></a>使用winhttp设置代理</h2><p>根据测试这种方法好像不太行</p>
+<p><img src="https://img2.imgtp.com/2024/04/02/1XjPMDFj.png" alt="image-20240402174459421"></p>
+<h3 id="代理设置："><a href="#代理设置：" class="headerlink" title="代理设置："></a>代理设置：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp <span class="built_in">set</span> proxy <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh winhttp set proxy 127.0.0.1:7897</span><br><span class="line"></span><br><span class="line">当前的 WinHTTP 代理服务器设置:</span><br><span class="line"></span><br><span class="line">    代理服务器:  127.0.0.1:7897</span><br><span class="line">    绕过列表     :  (无)</span><br><span class="line"></span><br><span class="line">C:\WINDOWS\system32&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看代理："><a href="#查看代理：" class="headerlink" title="查看代理："></a>查看代理：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp show proxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">show</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    代理服务器:  127.0.0.1:7897</span></span><br><span class="line"><span class="function">    绕过列表     :  (无)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="取消代理"><a href="#取消代理" class="headerlink" title="取消代理"></a>取消代理</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp reset proxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">reset</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    直接访问(没有代理服务器)。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用环境变量直接用set"><a href="#使用环境变量直接用set" class="headerlink" title="使用环境变量直接用set"></a>使用环境变量直接用set</h2><p>这种方法我也测试了，确实是代理了，但是跑不通。</p>
+<p><img src="https://img2.imgtp.com/2024/04/02/Aw3cOhQY.png" alt="image-20240402175507674"></p>
+<p>注意不要直接在clash里面复制命令，因为那玩意复制了后面有空格</p>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set all_proxy=http://127.0.0.1:7897</span><br></pre></td></tr></table></figure>
+<p>查看环境变量 直接cmd里面输入 <strong>set</strong> 在里面就能看到我们刚刚设置的代理了</p>
+<p><strong>电脑重启之后还需要重新配置</strong></p>
+]]></content>
+      <tags>
+        <tag>-解决的问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客搭建</title>
     <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<blockquote>
@@ -21,10 +93,345 @@
       </tags>
   </entry>
   <entry>
+    <title>ai绘画基础总结（三）学习工作流</title>
+    <url>/2024/03/31/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%89%EF%BC%89%E5%AD%A6%E4%B9%A0%E5%B7%A5%E4%BD%9C%E6%B5%81/</url>
+    <content><![CDATA[<blockquote>
+<p>教程源于学习：<a href="https://www.bilibili.com/video/BV13b4y1G7s9/?spm_id_from=333.788&amp;vd_source=f82ab981c5010bda151ee99a98c48791">AI绘画进阶入门ComfyUI系列教程-1.简易安装于配置完全指南！_哔哩哔哩_bilibili</a>，编写此教程目的作为笔记使用。</p>
+</blockquote>
+<h1 id="一、基本工作流控件"><a href="#一、基本工作流控件" class="headerlink" title="一、基本工作流控件"></a>一、基本工作流控件</h1><h2 id="K采样器"><a href="#K采样器" class="headerlink" title="K采样器"></a>K采样器</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">随即种</td>
+<td style="text-align:center">生成的图片id</td>
+</tr>
+<tr>
+<td style="text-align:center">运行后操作</td>
+<td style="text-align:center">fixed（固定）、increment（增加）、decrement（减少）、randomize（随机）、</td>
+</tr>
+<tr>
+<td style="text-align:center">步数</td>
+<td style="text-align:center">采样步数通常20-60步</td>
+</tr>
+<tr>
+<td style="text-align:center">CFG</td>
+<td style="text-align:center">通常7，少一点就是4</td>
+</tr>
+<tr>
+<td style="text-align:center">采样器</td>
+<td style="text-align:center">euler_ancestral+调度器normal对应webui中Eulera（最普通的生成方式）、dpmpp_2m+调度器karras对应webui中的dpm++2m Karras（没有sde效果好，增加了图片的发挥和想象力）、uni_pc和LCM类似（10步之内出不错的图像）</td>
+</tr>
+<tr>
+<td style="text-align:center">调度器</td>
+<td style="text-align:center">karras，ddim（可能会崩），simple（作者实验，不好用），normal（线性降噪╱型，泛用式调度器）<img src="https://img2.imgtp.com/2024/04/02/1JzNJBfv.png" alt="image-20240331141330211" style="zoom:10%;" />，karras（曲线降噪s型，较为平滑，刚开始比较少，到了中间大幅降噪，快结束时又比较少）<img src="https://img2.imgtp.com/2024/04/02/qBSBHc16.png" alt="image-20240331141353547" style="zoom:10%;" />，karras（急速降噪， 后半部，收敛块）<img src="https://img2.imgtp.com/2024/04/02/xV9rsYp1.png" alt="image-20240331141239157" style="zoom:10%;" />，sgm配合采样器LCM搭配使用</td>
+</tr>
+<tr>
+<td style="text-align:center">降噪</td>
+<td style="text-align:center">默认文生图就是1，图生图的重绘幅度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="K采样器（高级）"><a href="#K采样器（高级）" class="headerlink" title="K采样器（高级）"></a>K采样器（高级）</h2><p>添加噪波二次渲染不需要</p>
+<p>第一次渲染，开始步数默认为0，步数为30，结束降噪步数比30大没有任何意义。如果小于步数就会主动停止。现在结束降噪步数为20，那么还剩余10步，就会传递给下一次降噪。返回噪波需要开启。二次渲染如果步数到了就不需要了。</p>
+<blockquote>
+<p>也就是说当一次渲染为30步，开始降噪步数为0，结束降噪步数20，在20步结束了降噪步数，返回噪波需要开启噪波，第二次渲染的时候，步数为也为30，开始降噪步数要设成20。结束降噪步数&gt;步数</p>
+</blockquote>
+<p>这种方法适合不同模型的融合采样二次精炼，在SDXL和1.5模型都适用。</p>
+<h2 id="CheckPoint加载器（简易）"><a href="#CheckPoint加载器（简易）" class="headerlink" title="CheckPoint加载器（简易）"></a>CheckPoint加载器（简易）</h2><p>加载主模型。模型训练的时候像素512<em>512的图像（真实空间（Pixel space）每一个像素生成的空间），训练后压缩一块一块的64 </em> 64电脑会在小块的空间（潜在空间）里面合成我们想要的消息，然后转换成我们肉眼所能看到的图像。</p>
+<blockquote>
+<p>自己想的一个小小的例子，方便大家理解。</p>
+<p><strong>1. 前期准备：</strong></p>
+<ul>
+<li>您作为一个定制花瓶的生产者，已经积累了丰富的设计经验。</li>
+<li>您准备了一个房间，里面存放了成千上万打碎的花瓶碎片。这些碎片代表了像素，而整个房间就是您的大模型，包含了丰富的花瓶样式和元素。</li>
+</ul>
+<p><strong>2. 接收需求：</strong></p>
+<ul>
+<li>有一天，有客户提出了他们的花瓶需求，通过语言描述的方式告诉您他们想要的花瓶样式。</li>
+</ul>
+<p><strong>3. 根据需求提取碎片：</strong></p>
+<ul>
+<li>您进入房间（大模型），开始根据客户的描述（CLIP文本编码器）来寻找符合要求的碎片（像素）。</li>
+<li>这个过程中，K采样器会帮助您从众多的碎片中挑选出最合适的那些。</li>
+</ul>
+<p><strong>4. 草图设计：</strong></p>
+<ul>
+<li>您现在有了这些碎片，接下来需要进行设计。</li>
+<li>您开始根据碎片的编号和需求进行草图设计（K采样器步数）。这个步骤中，调度器会帮助您决定如何组合这些碎片，以达到最佳的设计效果。</li>
+<li>草图的粗糙程度可以通过降噪技术来调整，使设计更加精确和美观。</li>
+</ul>
+<p><strong>5. 实物组装：</strong></p>
+<ul>
+<li>草图设计完成后，您拥有了花瓶的基本结构和样式。</li>
+<li>但是，草图上的只是线条和碎片编号，还不是真正的花瓶。</li>
+<li>这时，您会利用VAE编码器来进行最后的组装。VAE编码器会根据您的草图，将对应的碎片（像素）进行组装，生成最终的花瓶实物。</li>
+</ul>
+</blockquote>
+<p><img src="https://img2.imgtp.com/2024/04/02/ZPWC8AUs.png" alt="image-20240331143321726"></p>
+<p><img src="https://img2.imgtp.com/2024/04/02/blas2FqX.png" alt="image-20240331143508156"></p>
+<p><img src="https://img2.imgtp.com/2024/04/02/5K2A0zRT.png" alt="image-20240331143529991"></p>
+<blockquote>
+<p><strong>图生图流程</strong></p>
+<p><strong>1. 初始图片上传</strong></p>
+<ul>
+<li>用户上传一张照片作为参考，这张照片可以是一个具体的物体、风景、人物等，它提供了图生图过程的初始形态和细节。</li>
+</ul>
+<p><strong>2. 接收需求清单</strong></p>
+<ul>
+<li>用户输入一系列的正负提示词，作为对生成图片的具体要求或期望。这些提示词可以包括颜色、风格、元素增减等各个方面的描述。</li>
+</ul>
+<p><strong>3. 细节还原与碎片提取</strong></p>
+<ul>
+<li>系统根据您上传的照片，在大模型（即像素碎片库）中寻找与照片细节相匹配的碎片。这些碎片的提取过程确保了原始照片的细节能够得到很好的保留。</li>
+</ul>
+<p><strong>4. 设计与制作</strong></p>
+<ul>
+<li>有了初始照片和用户需求，系统开始根据这些信息进行设计和制作。它会在保持照片原有细节的基础上，根据用户的正负提示词，调整图片的颜色、添加或删除某些元素，以及改变整体风格等。</li>
+</ul>
+<p><strong>5. 降噪与重绘幅度调整</strong></p>
+<ul>
+<li>在这个过程中，降噪设置起到了关键作用。它决定了图片重绘的幅度。当降噪设置为0.几时，表示对原始图片的改动较小，更多地保留了原始细节。而降噪设置的参数越大，系统对图片的重绘幅度就越大，生成的图片与原始图片的差异也就越明显。</li>
+</ul>
+<p><strong>6. 最终生成</strong></p>
+<ul>
+<li>经过上述步骤后，系统最终生成一张既保留了原始照片细节，又符合用户需求的全新图片。这张图片是原始图片与用户需求的完美结合，展现了图生图技术的强大能力。</li>
+</ul>
+<p>通过这样的流程，图生图技术能够根据用户提供的照片和需求，生成出既符合用户期望又具有创意的全新图片。这种技术不仅在艺术创作中有着重要的应用价值，也在许多其他领域如设计、广告等中发挥着重要作用。</p>
+</blockquote>
+<h3 id="Checkpoint加载器（pysss）"><a href="#Checkpoint加载器（pysss）" class="headerlink" title="Checkpoint加载器（pysss）"></a>Checkpoint加载器（pysss）</h3><blockquote>
+<p>瑞士军刀：新建节点&gt;加载器&gt;Checkpoint加载器（pysss）</p>
+</blockquote>
+<p>加载模型是分类，适用于模型储存在不同文件夹分类内,模型比较多的小伙伴.</p>
+<h2 id="Empty-Latent-Image"><a href="#Empty-Latent-Image" class="headerlink" title="Empty Latent Image"></a>Empty Latent Image</h2><p>决定潜在空间的图像大小，batch_size批次，就是生成多少张图，K采样器输入输出都需要潜在空间控制。</p>
+<h2 id="VAE解码"><a href="#VAE解码" class="headerlink" title="VAE解码"></a>VAE解码</h2><p>图片会在潜在空间之后解码</p>
+<h2 id="预览图像、保存图像"><a href="#预览图像、保存图像" class="headerlink" title="预览图像、保存图像"></a>预览图像、保存图像</h2><p>VAE解码后，今儿可以看到我们的图像了。保存图像路径可以设置，默认存在ComfyUI文件夹下的output内。</p>
+<h2 id="CLIP文本编码器"><a href="#CLIP文本编码器" class="headerlink" title="CLIP文本编码器"></a>CLIP文本编码器</h2><p>我们输入的是String类型的字符串，然后通过编码传给采样器。</p>
+<p>以下节点需要安装插件使用，部分节点输出可能是String，所以需要使用默认CLIP文本编码器在CLIP节点上面右键选择<strong>转换为文本输入</strong></p>
+<p>当然这种操作可以适用绝大多数节点，就像编程一样，可以把某些节点内的参数转换成变量使用。例如重绘多采样器或者放大操作使用共享相同的随机种子，专门的变量框可以使用元节点，也可以直接拉。</p>
+<h3 id="CLIP文本编码器（Argos翻译）"><a href="#CLIP文本编码器（Argos翻译）" class="headerlink" title="CLIP文本编码器（Argos翻译）"></a>CLIP文本编码器（Argos翻译）</h3><blockquote>
+<p>汉化插件：新建节点&gt;ALEK节点&gt;条件</p>
+</blockquote>
+<p>from设置现在的语言to设置要翻译的语言</p>
+<p>文本翻译过后是否正确，可以使用预览文字和展示文本节点来查看。下同。</p>
+<h3 id="CLIP文本编码器（翻译高级）"><a href="#CLIP文本编码器（翻译高级）" class="headerlink" title="CLIP文本编码器（翻译高级）"></a>CLIP文本编码器（翻译高级）</h3><blockquote>
+<p>汉化插件：新建节点&gt;ALEK节点&gt;条件</p>
+</blockquote>
+<p>form设置auto自动to目标语言</p>
+<p>add_proxies可以开启代理</p>
+<p>service设置翻译引擎</p>
+<h3 id="CLIP文本编码器（翻译）"><a href="#CLIP文本编码器（翻译）" class="headerlink" title="CLIP文本编码器（翻译）"></a>CLIP文本编码器（翻译）</h3><blockquote>
+<p>汉化插件：新建节点&gt;ALEK节点&gt;条件</p>
+</blockquote>
+<p>form设置auto自动to目标语言</p>
+<p>manual_translate  手动翻译</p>
+<h3 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h3><blockquote>
+<p>瑞士军刀插件：新建节点&gt;实用工具&gt;字符串操作</p>
+</blockquote>
+<p>append追加replace替换</p>
+<p>可以提升文本框为变量，然后用翻译文本组合使用，每个翻译文本框里面都可以输入不同的场景，这样逻辑会更加清晰。比如第一个是场景环境，第二个是对人物进行修饰的提示词，还有很多操作。</p>
+<h3 id="CLIP文本编码SDXL（优化）"><a href="#CLIP文本编码SDXL（优化）" class="headerlink" title="CLIP文本编码SDXL（优化）"></a>CLIP文本编码SDXL（优化）</h3><blockquote>
+<p>SDXL Prompt Styler插件：新建节点&gt;高级&gt;条件</p>
+</blockquote>
+<p>普通版：宽高，裁剪宽高一般不动，目标宽高。CLIP中的分辨率一般是真实生成图像的倍数关系，一般都是2倍，4倍这种，配个瑞士军刀的数学表达式使用会更简单。</p>
+<p>优化：相比普通的CLIP文本编码SDXL，优化适用于二次精炼。</p>
+<h3 id="数学表达式"><a href="#数学表达式" class="headerlink" title="数学表达式"></a>数学表达式</h3><blockquote>
+<p>新建节点&gt;实用工具</p>
+</blockquote>
+<p>可以直接作用于空Latent节点输出的宽高。</p>
+<p>假设空Latent节点宽高为1024，直接空Latent出连在A上。获取数据就是<strong>a.width</strong>，此时他就是1024。如果4倍就是<strong>a.width * 4</strong>。注意在这个里面，不管条件是什么输出的只是一个数，出整数或者浮点直接连接CLIP文本编码SDXL的进宽高就行了。</p>
+<h2 id="加载图像"><a href="#加载图像" class="headerlink" title="加载图像"></a>加载图像</h2><blockquote>
+<p>新建节点&gt;图像&gt;加载图像</p>
+</blockquote>
+<p>图片上传输入。mask就是图片蒙版，有可能照片年代久了，有些地方不出清楚了，或者之前有些地方不好看，我们就把它圈起来然他对圈起来的地方重新设计。</p>
+<p>使用遮罩后要使用VAE内补码编码器，不然不识别遮罩。</p>
+<h2 id="VAE内补码编码器"><a href="#VAE内补码编码器" class="headerlink" title="VAE内补码编码器"></a>VAE内补码编码器</h2><blockquote>
+<p>新建节点&gt;Latent&gt;内补&gt;VAE内补码编码器</p>
+</blockquote>
+<p>相比普通VAE编码多了一个遮罩连接点。</p>
+<p>使用遮罩后，注意自己的题词，不然会出现更多的手和脚或者衣服之内的。</p>
+<h2 id="图像裁剪"><a href="#图像裁剪" class="headerlink" title="图像裁剪"></a>图像裁剪</h2><blockquote>
+<p>新建节点&gt;图像&gt;变换&gt;图像裁剪</p>
+</blockquote>
+<p>宽高设置，x，y实现裁剪偏移，在右侧菜单栏中更多选项中勾选自动执行（Auto Queue）改变状态。配合图像按系数缩放节点来实现</p>
+<h2 id="CLIP设置停止层"><a href="#CLIP设置停止层" class="headerlink" title="CLIP设置停止层"></a>CLIP设置停止层</h2><p>对应webui Clip跳过层</p>
+<h2 id="WD14反推提示词"><a href="#WD14反推提示词" class="headerlink" title="WD14反推提示词"></a>WD14反推提示词</h2><blockquote>
+<p>新建节点&gt;图像&gt;WD14反推提示词</p>
+</blockquote>
+<p>节点需要插件，并且配置科学，从远程批量下载模型提示词。同时也可以下载模型，本地运行。</p>
+<p>在clash中要开启tun转发，在cmd管理员模式下输入上面命令并可开启代理。不会的请参考：<a href="https://xisoul.cn/archives/1712053060615">AI绘画拉取模型失败，DOS开启代理 | XiSoul Blog’s</a></p>
+<p>模型：设置反推提示词模型</p>
+<p>置信度：阈值，给的越低，反推出来的提示词越零碎，越详细。阈值越高，就会挑一些主要的提示词描述。角色置信度同理。</p>
+<p>排除标签就是反推出来的字符串中有你不想要的，你可以复制粘贴进去。</p>
+<p>同时也可以配合瑞士军刀插件字符串操作。</p>
+<h2 id="SDXL风格化提示词（高级）"><a href="#SDXL风格化提示词（高级）" class="headerlink" title="SDXL风格化提示词（高级）"></a>SDXL风格化提示词（高级）</h2><blockquote>
+<p>新建节点&gt;实用工具&gt;SDXL风格化提示词（高级）</p>
+</blockquote>
+<p>L偏向于tag，类型人物，座椅板凳这种名词描述，短袖，牛仔裤。</p>
+<p>G偏向于风格，形容词，比如形容女性的头发：长发短发，什么颜色。穿着什么样：什么样的短袖，什么样的牛仔裤。</p>
+<p>输出为字符串，普通的SDXL需要提供CLIP文本编码器将文本框提升为连接点，SDXL风格化提示词（高级）需要提供CLIP文本编码器SDXL。</p>
+<p>SDXL默认加载一个offset的Lora，进行光线调节。使用风格化提示词，简单的图像也可以没必要使用offset的Lora。</p>
+<p>负面词应用可以控制只应用G或者L。</p>
+<h2 id="ControlNet应用"><a href="#ControlNet应用" class="headerlink" title="ControlNet应用"></a>ControlNet应用</h2><h3 id="ControlNet应用（高级）"><a href="#ControlNet应用（高级）" class="headerlink" title="ControlNet应用（高级）"></a>ControlNet应用（高级）</h3><blockquote>
+<p>新建节点&gt;条件</p>
+</blockquote>
+<p>高级和普通相比，多了开始时间和结束时间，连接点方面分为正负输出。</p>
+<p>图像不能直接输入给ControlNet应用，需要安装预处理组件</p>
+<h2 id="Aux集成预处理器"><a href="#Aux集成预处理器" class="headerlink" title="　Aux集成预处理器"></a>　Aux集成预处理器</h2><blockquote>
+<p>ControlNet插件:新建节点&gt;ControlNet预处理器</p>
+</blockquote>
+<p>方便简单调用各种预处理器</p>
+<h2 id="Lora加载器"><a href="#Lora加载器" class="headerlink" title="Lora加载器"></a>Lora加载器</h2><h3 id="Lora加载器（pysss）"><a href="#Lora加载器（pysss）" class="headerlink" title="Lora加载器（pysss）"></a>Lora加载器（pysss）</h3><blockquote>
+<p>瑞士军刀：新建节点&gt;加载器</p>
+</blockquote>
+<p>相比普通的，加载Lora方便文件夹内模型管理</p>
+<h1 id="二、快捷操作"><a href="#二、快捷操作" class="headerlink" title="二、快捷操作"></a>二、快捷操作</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Keybind</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl + Enter</td>
+<td>出图</td>
+</tr>
+<tr>
+<td>Ctrl + Z/Ctrl + Y</td>
+<td>撤销</td>
+</tr>
+<tr>
+<td>Ctrl + S</td>
+<td>保存工作流</td>
+</tr>
+<tr>
+<td>Ctrl + O</td>
+<td>载入工作流</td>
+</tr>
+<tr>
+<td>Ctrl + A</td>
+<td>选择所有节点</td>
+</tr>
+<tr>
+<td>Alt + C</td>
+<td>折叠所选节点</td>
+</tr>
+<tr>
+<td>Ctrl + M</td>
+<td>屏蔽/取消屏蔽节点</td>
+</tr>
+<tr>
+<td>Ctrl + B</td>
+<td>穿过所选节点（就像此节点不存在，连线会穿越节点）</td>
+</tr>
+<tr>
+<td>Delete/Backspace</td>
+<td>删除节点</td>
+</tr>
+<tr>
+<td>Ctrl + Delete/Backspace</td>
+<td>清空界面</td>
+</tr>
+<tr>
+<td>Space</td>
+<td>按住之后画布会随着鼠标移动</td>
+</tr>
+<tr>
+<td>Ctrl/Shift + Click</td>
+<td>多选</td>
+</tr>
+<tr>
+<td>Ctrl + C/Ctrl + V</td>
+<td>复制粘贴节点</td>
+</tr>
+<tr>
+<td>Ctrl + C/Ctrl + Shift + V</td>
+<td>保持连线复制粘贴</td>
+</tr>
+<tr>
+<td>Shift + Drag</td>
+<td>同时移动多个节点</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>加载默认工作流</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>切换队列可见性</td>
+</tr>
+<tr>
+<td>H</td>
+<td>切换出图历史可见性</td>
+</tr>
+<tr>
+<td>R</td>
+<td>刷新界面</td>
+</tr>
+<tr>
+<td>双击</td>
+<td>打开节点搜索界面</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>多选：按住ctrl+鼠标拖动</p>
+<p>多选后可以右键创建模板组</p>
+<p>鼠标中间可以添加中转节点（理线器）</p>
+<h1 id="三、功能操作"><a href="#三、功能操作" class="headerlink" title="三、功能操作"></a>三、功能操作</h1><h2 id="放大缩放"><a href="#放大缩放" class="headerlink" title="放大缩放"></a>放大缩放</h2><h3 id="空间内放大"><a href="#空间内放大" class="headerlink" title="空间内放大"></a>空间内放大</h3><h4 id="潜空间前放大"><a href="#潜空间前放大" class="headerlink" title="潜空间前放大"></a>潜空间前放大</h4><h5 id="Latent缩放"><a href="#Latent缩放" class="headerlink" title="Latent缩放"></a>Latent缩放</h5><p>指定宽高倍数，粗暴放大，只是尺寸变大。</p>
+<h5 id="Latent按系数缩放"><a href="#Latent按系数缩放" class="headerlink" title="Latent按系数缩放"></a>Latent按系数缩放</h5><p>指定倍数，粗暴放大，二次采样注意重绘幅度。</p>
+<h4 id="模型方法"><a href="#模型方法" class="headerlink" title="模型方法"></a>模型方法</h4><h5 id="放大模型加载器"><a href="#放大模型加载器" class="headerlink" title="放大模型加载器"></a>放大模型加载器</h5><blockquote>
+<p>新建节点&gt;图像&gt;放大&gt;图像通过模型放大</p>
+<p>放大中图像缩放，图像按系数缩放也是粗暴放大</p>
+</blockquote>
+<p>4x-UltraSharp.pth</p>
+<h4 id="SD放大"><a href="#SD放大" class="headerlink" title="SD放大"></a>SD放大</h4><blockquote>
+<p>新建节点&gt;图像&gt;放大&gt;SD放大</p>
+</blockquote>
+<p>SD放大节点混合了采样器采用区块式和webui一样。</p>
+<p>区块大小自定义，区块模糊就是边缘羽化大小，分块分区通常默认。</p>
+<p>接缝修复模式通常采用Band Pass效果较强，Half Tile比较弱。Half Tile+Intersections效果折中。如果不选默认为none会不起作用。</p>
+<p>SD放大（不放大）少一个，方法模型连接点。用于二次采样二次修复</p>
+<h2 id="遮罩"><a href="#遮罩" class="headerlink" title="遮罩"></a>遮罩</h2><blockquote>
+<p>新建节点&gt;遮罩&gt;加载图像遮罩</p>
+</blockquote>
+<p>这个操作是直接在潜空间里面拿图，不需要二次采样</p>
+<blockquote>
+<p>新建节点&gt;Latent&gt;内补&gt;设置Latent噪波遮罩</p>
+</blockquote>
+<p>可以直接遮罩连接点向旁边拖选择设置Latent噪波遮罩,然后直接使用上一个K采样器输出的Latent然后输出到下一个K采样器</p>
+<h2 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h2><p>CLIP视觉加载器输入到CLIP视觉编码，同时将图像也输入。输出unCLIP条件也可以利用提示词传给条件零化然后传给unCLIP条件，再然后直接传给K采样器。这个过程可以利用多CLIP视觉编码进行风格化图片等等。</p>
+]]></content>
+      <tags>
+        <tag>-ComfyUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在hexo上创建一篇文章</title>
+    <url>/2024/03/10/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="Page-Front-matter"><a href="#Page-Front-matter" class="headerlink" title="Page Front-matter"></a>Page Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">type:</span><br><span class="line">comments:</span><br><span class="line">description:</span><br><span class="line">keywords:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aside:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line"><span class="section">random:</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+<p>title    【必需】页面标题<br>date    【必需】页面创建日期<br>type    【必需】标签、分类和友情链接三个页面需要配置<br>updated    【可选】页面更新日期<br>description    【可选】页面描述<br>keywords    【可选】页面关键字<br>comments    【可选】显示页面评论模块 (默认 true)<br>top_img    【可选】页面顶部图片<br>mathjax    【可选】显示mathjax (当设置mathjax的per_page: false时，才需要配置，默认 false)<br>katex    【可选】显示katex (当设置katex的per_page: false时，才需要配置，默认 false)<br>aside    【可选】显示侧边栏 (默认 true)<br>aplayer    【可选】在需要的页面加载aplayer的js和css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开 (true/false) (默认为设置中highlight_shrink的配置)<br>random    【可选】配置友情链接是否随机排序（默认为 false)</p>
+<hr>
+<h2 id="Post-Front-matter"><a href="#Post-Front-matter" class="headerlink" title="Post Front-matter"></a>Post Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">keywords:</span><br><span class="line">description:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">comments:</span></span><br><span class="line"><span class="emphasis">cover:</span></span><br><span class="line"><span class="emphasis">toc:</span></span><br><span class="line"><span class="emphasis">toc_</span>number:</span><br><span class="line">toc<span class="emphasis">_style_</span>simple:</span><br><span class="line">copyright:</span><br><span class="line">copyright<span class="emphasis">_author:</span></span><br><span class="line"><span class="emphasis">copyright_</span>author<span class="emphasis">_href:</span></span><br><span class="line"><span class="emphasis">copyright_</span>url:</span><br><span class="line">copyright<span class="emphasis">_info:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line">aside:</span><br><span class="line">abcjs:</span><br></pre></td></tr></table></figure>
+<p>写法    解释<br>title    【必需】文章标题<br>date    【必需】文章创建日期<br>updated    【可选】文章更新日期<br>tags    【可选】文章标签<br>categories    【可选】文章分类<br>keywords    【可选】文章关键字<br>description    【可选】文章描述<br>top_img    【可选】文章顶部图片<br>cover    【可选】文章缩略图(如果没有设置top_img,文章页顶部将显示缩略图，可设为false/图片地址/留空)<br>comments    【可选】显示文章评论模块(默认 true)<br>toc    【可选】显示文章TOC(默认为设置中toc的enable配置)<br>toc_number    【可选】显示toc_number(默认为设置中toc的number配置)<br>toc_style_simple    【可选】显示 toc 简洁模式<br>copyright    【可选】显示文章版权模块(默认为设置中post_copyright的enable配置)<br>copyright_author    【可选】文章版权模块的文章作者<br>copyright_author_href    【可选】文章版权模块的文章作者链接<br>copyright_url    【可选】文章版权模块的文章连结链接<br>copyright_info    【可选】文章版权模块的版权声明文字<br>mathjax    【可选】显示mathjax(当设置 mathjax 的 per_page: false 时，才需要配置，默认 false )<br>katex    【可选】显示 katex (当设置 katex 的 per_page: false 时，才需要配置，默认 false )<br>aplayer    【可选】在需要的页面加载 aplayer 的 js 和 css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开(true/false)(默认为设置中 highlight_shrink 的配置)<br>aside    【可选】显示侧边栏 (默认 true)<br>abcjs    【可选】加载 abcjs (当设置 abcjs 的 per_page: false 时，才需要配置，默认 false )</p>
+]]></content>
+      <tags>
+        <tag>hexo 教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电脑卸载软件推荐，解决卸载不干净问题</title>
     <url>/2024/03/18/%E7%94%B5%E8%84%91%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%8D%B8%E8%BD%BD%E4%B8%8D%E5%B9%B2%E5%87%80%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
-<p>问题出现在我win11笔记本，电脑里面有office了，之前用的比较习惯，然后电脑里面里面又有WPS，所以正常按照卸载流程卸载，卸载不干净。问了好多人，网上查阅资料还是不行。有部分人会出现这个问题。</p>
+<p>问题出现在我win11笔记本，电脑里面有office了，之前用的比较习惯，然后电脑里面又有WPS，所以正常按照卸载流程卸载，卸载不干净。问了好多人，网上查阅资料还是不行。有部分人会出现这个问题。</p>
 </blockquote>
 <h1 id="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"><a href="#问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。" class="headerlink" title="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"></a>问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。</h1><p>之前出现这个问题，网上的方法：</p>
 <p>一、删除WPS注册表。</p>
@@ -51,16 +458,183 @@
       </tags>
   </entry>
   <entry>
-    <title>如何在hexo上创建一篇文章</title>
-    <url>/2024/03/10/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="Page-Front-matter"><a href="#Page-Front-matter" class="headerlink" title="Page Front-matter"></a>Page Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">type:</span><br><span class="line">comments:</span><br><span class="line">description:</span><br><span class="line">keywords:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aside:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line"><span class="section">random:</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
-<p>title    【必需】页面标题<br>date    【必需】页面创建日期<br>type    【必需】标签、分类和友情链接三个页面需要配置<br>updated    【可选】页面更新日期<br>description    【可选】页面描述<br>keywords    【可选】页面关键字<br>comments    【可选】显示页面评论模块 (默认 true)<br>top_img    【可选】页面顶部图片<br>mathjax    【可选】显示mathjax (当设置mathjax的per_page: false时，才需要配置，默认 false)<br>katex    【可选】显示katex (当设置katex的per_page: false时，才需要配置，默认 false)<br>aside    【可选】显示侧边栏 (默认 true)<br>aplayer    【可选】在需要的页面加载aplayer的js和css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开 (true/false) (默认为设置中highlight_shrink的配置)<br>random    【可选】配置友情链接是否随机排序（默认为 false)</p>
+    <title>ai绘画基础总结（二）模型插件安装</title>
+    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E6%A8%A1%E5%9E%8B%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><blockquote>
+<p>授人以渔不如授人以渔，这里先给出一些常用的下载地址，首先声明，国内能下载模型的地方很少一盘都是网盘。所以网站是国外的，懂得都懂。</p>
+</blockquote>
+<h2 id="模型干什么的？怎么用？有什么区？"><a href="#模型干什么的？怎么用？有什么区？" class="headerlink" title="模型干什么的？怎么用？有什么区？"></a>模型干什么的？怎么用？有什么区？</h2><p><img src="https://img2.imgtp.com/2024/04/02/fBS7TXRz.png" alt="image-20240402185651541"></p>
+<p>模型主要学习这5类，要是细分，那可太多。我们下载模型单纯看文件名后缀区分不了，所以没必要讲后缀。可以在上传模型到：<a href="https://spell.novelai.dev/">Stable Diffusion 法术解析 (novelai.dev)</a>解析。下载的时候如上图，看下作者上传的是什么类型的模型。按照对应的模型类型拷贝或者直接下载到对应的文件夹内就可以。要是主模型很多也可以在文件夹里再新建文件夹进行分类。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>模型分类</th>
+<th>解释</th>
+<th>功能</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Checkpoint（主模型）</td>
+<td>Checkpoint 大模型是一种<a href="https://so.csdn.net/so/search?q=深度学习模型&amp;spm=1001.2101.3001.7020">深度学习模型</a>，通过将模型参数保存到磁盘上并随时恢复它们来避免重新训练模型的昂贵成本和时间。这种方法可以使用较少的内存和计算资源来加载大型模型，并在需要时恢复模型参数以进行预测。</td>
+<td><strong>Checkpoint 模型</strong>是<strong>基础模型</strong>（<strong>主模型</strong>），常用大模型有sd1.0，sd1.5，sd2.0，SDXL等等。决定 AI 绘画的<strong>整体风格</strong>，文件比较<strong>大</strong>。</td>
+<td>*\ComfyUI\models\checkpoints</td>
+</tr>
+<tr>
+<td>Controlnet</td>
+<td>是一种用于生成图像的深度学习模型，它通过在生成过程中引入外部控制信号来改进生成质量。ControlNet 通过将外部控制信号(如文本描述、关键点或方向向量)与生成网络的输入相结合来实现这一点，从而允许更精细的控制生成的图像内容。</td>
+<td>在控制生成图的<strong>姿态</strong>、<strong>线条</strong>、<strong>结构</strong>、<strong>深度</strong>等方面有非常<strong>惊艳</strong>的<strong>效果</strong>。</td>
+<td>*\ComfyUI\models\controlnet</td>
+</tr>
+<tr>
+<td>VAE（变分自解码器）</td>
+<td>变分自编码器(Variational Autoencoder,VAE)是一种深度学习模型，用于无监督学习，其中模型被训练以重建输入数据。VAE 由两部分组成：编码器和解码器。编码器将输入数据编码为一个低维度的潜在向量，而解码器则将潜在向量解码为重建数据。VAE 通过最大化重建数据的概率来学习数据的潜在分布。</td>
+<td>它的<strong>效果</strong>类似于我们熟悉的<strong>滤镜</strong>，可以调整生成<strong>图片</strong>的<strong>色彩饱和度</strong>。</td>
+<td><em>\ComfyUI\models\vae  </em>\ComfyUI\models\vae_approx</td>
+</tr>
+<tr>
+<td>Embeddings</td>
+<td>嵌入(Embedding)是一种将输入数据映射到连续向量空间的技术，通常用于自然语言处理、计算机视觉和推荐系统等领域。嵌入模型将输入数据(如单词、图像或用户)映射到固定大小的向量，这些向量可以用于后续的机器学习任务，如分类、聚类和预测。</td>
+<td>使用提示词来进行 AI绘画，为准确画出预期的<strong>角色</strong>、<strong>物品</strong>、<strong>行为</strong>或者<strong>画风</strong>，通常需要输入比较多的提示词去<strong>描述</strong>和<strong>限定</strong>它。</td>
+<td>*\ComfyUI\models\embeddings</td>
+</tr>
+<tr>
+<td>LORA</td>
+<td>利低秩适配(Low-Rank Adaptation,LoRA)是一种用于迁移学习的方法，它允许在新任务上微调预训练模型，同时保持原始预训练模型的不变。LoRA 通过在预训练模型的输出和任务特定模型的输入之间引入一个低秩适配矩阵来实现这一点，从而最小化对原始预训练模型的影响。</td>
+<td>擅长调整<strong>画风</strong>，用于<strong>动作</strong>、<strong>角色等其他特定概念</strong>。</td>
+<td>*\ComfyUI\models\loras</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="常用模型推荐"><a href="#常用模型推荐" class="headerlink" title="常用模型推荐"></a>常用模型推荐</h2><h3 id="Checkpoint-模型"><a href="#Checkpoint-模型" class="headerlink" title="Checkpoint 模型"></a><strong>Checkpoint 模型</strong></h3><ul>
+<li><p><strong>Stable Diffusion 1.5</strong>（Stable Diffusion 原模型 v1.5）</p>
+</li>
+<li><p><strong>Anything</strong>（二次元风格图像生成）</p>
+</li>
+<li><p><strong>AbyssOrangeMix2</strong>（二次元风格图像生成）</p>
+</li>
+<li><p><strong>OrangeMixs</strong>（二次元风格图像生成）</p>
+</li>
+<li><p><strong>Counterfeit</strong>（高质量二次元人物和风景图像生成）</p>
+</li>
+<li><p><strong>MeinaMix</strong>（高质量二次元风格人物图像生成）</p>
+</li>
+<li><p><strong>ChilloutMix</strong>（亚洲真人照片风格图像生成）</p>
+</li>
+<li><p><strong>Deliberate</strong>（欧美真人照片风格图像生成）</p>
+</li>
+<li><p><strong>DreamShaper</strong>（写实、原画等多种风格的人像和风景图像生成）</p>
+</li>
+<li><p><strong>Lyriel</strong>（支持多种风格的人物和风景图像生成）</p>
+</li>
+<li><p><strong>Protogen</strong>（支持多种风格的人物和风景图像生成）</p>
+</li>
+<li><p><strong>Dreamlike diffusion</strong>（插画风格图像生成）</p>
+</li>
+<li><p><strong>Dreamlike photoreal</strong>（真实风格图像生成）</p>
+</li>
+<li><p><strong>Realistic vision</strong>（真实世界风格的任务和环境图像生成）</p>
+</li>
+<li><p><strong>DDicon</strong>（B 端风格元素图像生成，配合 DDICON_lora 的LoRA模型使用）</p>
+</li>
+<li><p><strong>Product Design</strong>（工业产品设计相关图像生成）</p>
+</li>
+<li><p><strong>Isometric Future</strong>（等距微缩风格图像生成）</p>
+</li>
+<li><p><strong>Vectorartz Diffusion</strong>（矢量风格图像生成）</p>
+</li>
+<li><p><strong>Samdoesarts Ultmerge</strong>（Samdoesars 艺术风格图像生成）</p>
+</li>
+<li><p><strong>Flonix MJ Style</strong>（Flonix MJ 插画风格图像生成）</p>
+</li>
+<li><p><strong>architectural design sketches with markers</strong>（建筑设计草图风格图像生成）</p>
+</li>
+<li><p><strong>XSarchitectural-InteriorDesign-ForXSLora</strong>（室内设计风格图像生成）</p>
+</li>
+<li><p><strong>Re V Animated</strong>（动漫人物或场景的 2.5D 或 3D 图像生成） </p>
 <hr>
-<h2 id="Post-Front-matter"><a href="#Post-Front-matter" class="headerlink" title="Post Front-matter"></a>Post Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">keywords:</span><br><span class="line">description:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">comments:</span></span><br><span class="line"><span class="emphasis">cover:</span></span><br><span class="line"><span class="emphasis">toc:</span></span><br><span class="line"><span class="emphasis">toc_</span>number:</span><br><span class="line">toc<span class="emphasis">_style_</span>simple:</span><br><span class="line">copyright:</span><br><span class="line">copyright<span class="emphasis">_author:</span></span><br><span class="line"><span class="emphasis">copyright_</span>author<span class="emphasis">_href:</span></span><br><span class="line"><span class="emphasis">copyright_</span>url:</span><br><span class="line">copyright<span class="emphasis">_info:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line">aside:</span><br><span class="line">abcjs:</span><br></pre></td></tr></table></figure>
-<p>写法    解释<br>title    【必需】文章标题<br>date    【必需】文章创建日期<br>updated    【可选】文章更新日期<br>tags    【可选】文章标签<br>categories    【可选】文章分类<br>keywords    【可选】文章关键字<br>description    【可选】文章描述<br>top_img    【可选】文章顶部图片<br>cover    【可选】文章缩略图(如果没有设置top_img,文章页顶部将显示缩略图，可设为false/图片地址/留空)<br>comments    【可选】显示文章评论模块(默认 true)<br>toc    【可选】显示文章TOC(默认为设置中toc的enable配置)<br>toc_number    【可选】显示toc_number(默认为设置中toc的number配置)<br>toc_style_simple    【可选】显示 toc 简洁模式<br>copyright    【可选】显示文章版权模块(默认为设置中post_copyright的enable配置)<br>copyright_author    【可选】文章版权模块的文章作者<br>copyright_author_href    【可选】文章版权模块的文章作者链接<br>copyright_url    【可选】文章版权模块的文章连结链接<br>copyright_info    【可选】文章版权模块的版权声明文字<br>mathjax    【可选】显示mathjax(当设置 mathjax 的 per_page: false 时，才需要配置，默认 false )<br>katex    【可选】显示 katex (当设置 katex 的 per_page: false 时，才需要配置，默认 false )<br>aplayer    【可选】在需要的页面加载 aplayer 的 js 和 css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开(true/false)(默认为设置中 highlight_shrink 的配置)<br>aside    【可选】显示侧边栏 (默认 true)<br>abcjs    【可选】加载 abcjs (当设置 abcjs 的 per_page: false 时，才需要配置，默认 false )</p>
+</li>
+</ul>
+<h3 id="LoRA-模型"><a href="#LoRA-模型" class="headerlink" title="LoRA 模型"></a><strong>LoRA 模型</strong></h3><ul>
+<li><strong>KoreanDollLikeness</strong>（韩国真人照片风格）【推荐主模型：ChilloutMix】</li>
+<li><strong>JapaneseDollLikeness</strong>（日本真人照片风格）【推荐主模型：ChilloutMix】</li>
+<li><strong>ThaiDollLikeness</strong>（泰国真人照片风格）【推荐主模型：ChilloutMix】</li>
+<li><strong>墨心</strong>（水墨画风格）【推荐主模型：ChilloutMix】</li>
+<li><strong>Gacha splash LORA</strong>（带背景的立绘风格）</li>
+<li><strong>沁彩 Colorwater</strong>（水彩风格）</li>
+<li><strong>blindbox</strong>（盲盒娃娃风格）【推荐主模型：RevAnimated】</li>
+<li><strong>DDicon_lora</strong>（B端元素风格）【推荐主模型：DDicon】</li>
+<li><strong>Freljord</strong>（场景凤格）</li>
+<li><strong>剪纸</strong>（剪纸风格）</li>
+<li><strong>Anime Lineart</strong>（线稿画风格）【推荐主模型：Anything v4.5】</li>
+<li><strong>Concept Scenery Scene</strong>（风景场景风格）【推荐主模型：Counterfeit v2.5】</li>
+<li><strong>Howls Moving Castle</strong>（哈尔移动城堡风格）</li>
+<li><strong>Makoto Shinkai</strong>（新海诚风格）</li>
+<li><strong>Studio Ghibli Style</strong>（吉卜力风格）【推荐主模型：Anything v4.5】</li>
+<li><strong>Airconditioner</strong>（城镇、荒野等风景场景风格）</li>
+<li><strong>Stamp_v1</strong>（图标 Loga 风格）</li>
+</ul>
+<h3 id="VAE-模型"><a href="#VAE-模型" class="headerlink" title="VAE 模型"></a><strong>VAE 模型</strong></h3><ul>
+<li><strong>vae.ft-ema-560000-ema-pruned</strong>（Stabilily Al 官方发布的 VAE，适用于大部分场量）</li>
+<li><strong>vae-ft-mse-840000-ema-pruned</strong>（Stability Al 官方发布的 VAE，适用于大部分场景）</li>
+<li><strong>kl-f8-anime2</strong>（适用于二次元动漫场景）</li>
+<li><strong>Grapefruit VAE</strong>（适用于二次元动漫场景）</li>
+</ul>
+<h2 id="常用下载地址"><a href="#常用下载地址" class="headerlink" title="常用下载地址"></a>常用下载地址</h2><p><strong>欢迎在评论区补充，相互学习。</strong></p>
+<h3 id="国外："><a href="#国外：" class="headerlink" title="国外："></a>国外：</h3><p>抱脸：<a href="https://huggingface.co/">https://huggingface.co/</a></p>
+<p>c站：<a href="https://civitai.com/">https://civitai.com/</a></p>
+<h3 id="国内（需要登录是常态）："><a href="#国内（需要登录是常态）：" class="headerlink" title="国内（需要登录是常态）："></a>国内（需要登录是常态）：</h3><p><a href="https://tusiart.com/images/712052869865634751?post_id=712052869861440448&amp;source_id=nzi_pFzkk0a7rPQrb37y8RUm">吐司 tusi.cn | 可在线生图的 AI 模型分享社区，还是免费的！ (tusiart.com)</a>（部分需要付费，也是独家模型）</p>
+<p><a href="https://www.liblib.art/">LiblibAI·哩布哩布AI - 中国领先的AI创作平台</a>（部分需要开会员）</p>
+<h2 id="ai导航工具集"><a href="#ai导航工具集" class="headerlink" title="ai导航工具集"></a>ai导航工具集</h2><p><a href="https://ai-bot.cn/">AI工具集 | 700+ AI工具集合官网，国内外AI工具集导航大全 (ai-bot.cn)</a></p>
+<p><a href="https://top.aibase.com/">AIbase - 智能匹配最适合您的AI产品和网站</a></p>
+<p><a href="https://www.ainavpro.com/huggingface">Hugging Face–有趣的Hugging Face模型 | Ai导航 (ainavpro.com)</a></p>
+<h1 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h1><blockquote>
+<p>学习工作流难免抄作业，可以学学大佬的流程思维方式。如果想完美复刻工作流，注意看下别人使用的模型，你有没有，国外的环境相对较好，国内的好多人都是将模型改名上传。也有很多自炼的，所以很多东西仅供参考。</p>
+</blockquote>
+<p>详细工作流学习参考第三部分</p>
+<h3 id="国外：-1"><a href="#国外：-1" class="headerlink" title="国外："></a>国外：</h3><p><a href="https://comfy.icu/">Comfy.ICU - ComfyUI Cloud</a></p>
+<p><a href="https://comfyworkflows.com/">Comfy Workflows</a></p>
+<h3 id="国内："><a href="#国内：" class="headerlink" title="国内："></a>国内：</h3><p><a href="https://www.aigodlike.com/">www.aigodlike.com</a></p>
+<p>一个大佬的github地址：（现在16类 41项）<a href="https://github.com/ZHO-ZHO-ZHO/ComfyUI-Workflows-ZHO">ZHO-ZHO-ZHO/ComfyUI-Workflows-ZHO: 我的 ComfyUI 工作流合集 | My ComfyUI workflows collection (github.com)</a>介绍了插件和节点等，很有参考价值</p>
+<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>安装方法，满血包里面有绝大多数常用的插件：</p>
+<p>1.下载插件解压粘贴到里面，主要不要文件夹套娃（点开文件夹还要点开一层文件夹才能看到文件）</p>
+<p><img src="https://img2.imgtp.com/2024/04/02/frNyKlks.png" alt="image-20240331154020624"></p>
+<p>2.注意下载安装的时候可以切换源，国内也可享用。<img src="https://img2.imgtp.com/2024/04/02/HSWRB3xG.png" alt="image-20240331154344257"></p>
+<p>3.ComfyUI管理器界面安装</p>
+<p><img src="https://img2.imgtp.com/2024/04/02/RXTXostl.png" alt="image-20240331155025167"></p>
+<blockquote>
+<p>下载插件可能需要科学，已经打包好了放在企鹅群：306146537</p>
+<p>插件安装经常会有提示更新，这个很正常。</p>
+</blockquote>
+<h2 id="AIGODLIKE-COMFYUI-TRANSLATION"><a href="#AIGODLIKE-COMFYUI-TRANSLATION" class="headerlink" title="AIGODLIKE-COMFYUI-TRANSLATION"></a><a href="https://github.com/AIGODLIKE/AIGODLIKE-COMFYUI-TRANSLATION"><strong>AIGODLIKE-COMFYUI-TRANSLATION</strong></a></h2><p>第一步当然是汉化了</p>
+<p>功能：能汉化界面（安装完成后要手动去设置语言），添加能翻译的文本编码器（这个很重要，你就不需要输英文，或者手动翻译了。新建节点&gt;ALEK节点&gt;条件  然后就可以看到了）</p>
+<h2 id="pythongosssss-ComfyUI-Custom-Scripts"><a href="#pythongosssss-ComfyUI-Custom-Scripts" class="headerlink" title="pythongosssss/ComfyUI-Custom-Scripts"></a><a href="https://github.com/pythongosssss/ComfyUI-Custom-Scripts"><strong>pythongosssss/ComfyUI-Custom-Scripts</strong></a></h2><p>功能：自动提示词补全、二级菜单、网络对齐、模型信息查看（来源civitai.com国外）、颜色自定义、网页小图标等等。。。</p>
+<h2 id="SD放大"><a href="#SD放大" class="headerlink" title="SD放大"></a><a href="https://github.com/ssitu/ComfyUI_UltimateSDUpscale"><strong>SD放大</strong></a></h2><p>功能：SD放大</p>
+<h2 id="ComfyUI-WD-1-4-Tagger"><a href="#ComfyUI-WD-1-4-Tagger" class="headerlink" title="ComfyUI WD 1.4 Tagger"></a><a href="https://github.com/pythongosssss/ComfyUI-WD14-Tagger"><strong>ComfyUI WD 1.4 Tagger</strong></a></h2><p><strong>我在这里的时候踩了一个坑，自动下载反推提示词模型需要代理，但是自动下载是在控制台执行的，代理需要开启tun，控制台才能链接代理，要是控制台也了连接不了请参考：<a href="https://xisoul.cn/archives/1712053060615">AI绘画拉取模型失败，DOS开启代理 | XiSoul Blog’s</a></strong></p>
+<p>当然你要是感觉不影响你可以手动下载模型复制到插件的模型文件夹内：</p>
+<blockquote>
+<p>E:\comfyui\ComfyUI\custom_nodes\ComfyUI-WD14-Tagger\models</p>
+</blockquote>
+<p>模型地址：<a href="https://huggingface.co/SmilingWolf">SmilingWolf (Smiling Wolf) (huggingface.co)</a></p>
+<p>功能：传入图片，反推提示词。</p>
+<h2 id="SDXL-Prompt-Styler"><a href="#SDXL-Prompt-Styler" class="headerlink" title="SDXL Prompt Styler"></a>SDXL Prompt Styler</h2><p>twri地址：<a href="https://github.com/twri/sdxl_prompt_styler">twri/sdxl_prompt_styler: Custom prompt styler node for SDXL in ComfyUI (github.com)</a></p>
+<p>wolfden地址：<a href="https://github.com/wolfden/ComfyUi_PromptStylers">wolfden/ComfyUi_PromptStylers: Style Prompts for ComfyUI (github.com)</a>（标准比第一种多一些）</p>
+<p>风格json文件件路径：</p>
+<blockquote>
+<p>E:\comfyui\ComfyUI\custom_nodes\sdxl_prompt_styler</p>
+</blockquote>
+<p>当你有一套固定的风格提示词的时候，你可以直接编辑base.json文件，添加自己的风格模板。</p>
+<p>功能：SDXL风格化提示词，SDXL风格化提示词（高级），记录提示词，高级，用很简单的提词生成不错的图形。</p>
+<h2 id="ComfyUI’s-ControlNet-Auxiliary-Preprocessors"><a href="#ComfyUI’s-ControlNet-Auxiliary-Preprocessors" class="headerlink" title="ComfyUI’s ControlNet Auxiliary Preprocessors"></a><a href="https://github.com/Fannovel16/comfyui_controlnet_aux"><strong>ComfyUI’s ControlNet Auxiliary Preprocessors</strong></a></h2><p>功能：菜单中多出ControlNet预处理器标签页，可是手部修复，控制姿势</p>
+<p>和WD1.4反推一样需要科学下载模型，文件后缀.pth</p>
+<p>模型地址：<strong>*\ComfyUI\custom_nodes\comfyui_controlnet_aux\ckpts\lllyasviel\Annotators</strong></p>
+<p>里面每个模型都是以文件夹的形式存放</p>
 ]]></content>
       <tags>
-        <tag>hexo 教程</tag>
+        <tag>-ComfyUI</tag>
       </tags>
   </entry>
 </search>
