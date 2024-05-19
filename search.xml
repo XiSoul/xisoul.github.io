@@ -637,4 +637,117 @@
         <tag>-ComfyUI</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spring5入门笔记</title>
+    <url>/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="1-EJB存在的问题"><a href="#1-EJB存在的问题" class="headerlink" title="1.EJB存在的问题"></a>1.EJB存在的问题</h2><p>EJB（Enterprise Java Bean） </p>
+<p>1.运行环境苛刻</p>
+<p>2.代码移植性差</p>
+<p>总结：EJB重量级的框架</p>
+<h2 id="2-什么是Spring"><a href="#2-什么是Spring" class="headerlink" title="2.什么是Spring"></a>2.什么是Spring</h2><p>Spring是一个轻量级的JAVAEE解决方案，整合众多优秀的设计模式</p>
+<ul>
+<li>轻量级</li>
+</ul>
+<blockquote>
+<p>1.对于运行环境是没有额外要求的</p>
+<p>​    开源 tomcat resion jetty</p>
+<p>​    收费 weblogic websphere</p>
+<p>2.代码移植性高</p>
+<p>​    不需要实现额外的接口</p>
+</blockquote>
+<ul>
+<li>JavaEE的解决方案</li>
+</ul>
+<p><img src="F:/Pictures/Saved%20Pictures/image-20240417215300298.png" alt="image-20240417215300298"></p>
+<ul>
+<li>整合了设计模式</li>
+</ul>
+<ol>
+<li><p>工厂设计模式</p>
+</li>
+<li><p>代理设计模式</p>
+</li>
+<li><p>模板设计模式</p>
+</li>
+<li><p>策略设计模式</p>
+</li>
+</ol>
+<h2 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3.设计模式"></a>3.设计模式</h2><ol>
+<li><p>广义的概念</p>
+<p>面向对象设计中，解决特定问题的经典代码</p>
+</li>
+<li><p>狭义概念</p>
+<p>GOF4人帮定义的23种设计模式：工厂、适配器、装饰器、门面、代理、模板….</p>
+</li>
+</ol>
+<h2 id="4-工厂设计模式"><a href="#4-工厂设计模式" class="headerlink" title="4.工厂设计模式"></a>4.工厂设计模式</h2><ol>
+<li><p>什么是工厂设计模式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.概念：通过工厂类，创建对象</span></span><br><span class="line">    User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    <span class="type">UserDao</span> <span class="variable">userDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDaoImpl</span>();</span><br><span class="line"><span class="comment">//2.好处：解耦合</span></span><br><span class="line">	<span class="comment">//耦合：指的是代码间的强关联关系，一方的改变，另一方也需要改变</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ActionServletController</span>&#123;</span><br><span class="line">        <span class="comment">//这个地方Service改变。后面调用时，控制器也要跟着改变。</span></span><br><span class="line">		<span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserServiceImpl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//问题：不利于代码维护</span></span><br><span class="line">	<span class="comment">//简单理解：把接口的实现类，硬编码在程序中.</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<p>UserService:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//业务类中提供两种方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>;<span class="comment">//需要用户信息所以用实体对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span>;<span class="comment">//登录需要传入用户名，密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserServiceImpl：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">UserDAO</span> <span class="variable">userDAO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDAOImpl</span>();<span class="comment">//需要DAO接入，引入对象</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        userDAO.sava(user);<span class="comment">//定义数据库中保存</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        userDAO.queryUserByNameAndPassword(username, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserDAOImpl：为了简单定义了两个打印输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDAOImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDAO</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sava</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;insert into user=&quot;</span> + user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">queryUserByNameAndPassword</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;query User name=&quot;</span>+username+<span class="string">&quot; password=&quot;</span>+password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>-java -Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夸克自动签到转存到emby</title>
+    <url>/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/</url>
+    <content><![CDATA[<h1 id="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"><a href="#夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中" class="headerlink" title="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"></a>夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中</h1><p>b站视频地址：<a href="https://www.bilibili.com/video/BV1ry411a7Lt">https://www.bilibili.com/video/BV1ry411a7Lt</a></p>
+<h2 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h2><p>你有服务器或者nas等等，有docker或者青龙都行。</p>
+<p>由于nas在家关机了，我在外地。就不演示推到emby了。</p>
+<p>来自于<a href="https://github.com/Cp0204/quark-auto-save">Cp0204/quark-auto-save: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙 (github.com)</a></p>
+<h2 id="二、青龙搭建"><a href="#二、青龙搭建" class="headerlink" title="二、青龙搭建"></a>二、青龙搭建</h2><p>青龙命令一键就OK</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ql repo https://github.com/Cp0204/quark-auto-save.git &quot;quark&quot; &quot;&quot; &quot;notify&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img2.imgtp.com/2024/05/19/Sbdd7hfK.png" alt="PixPin_2024-05-19_14-41-40"></p>
+<p>然后执行拉库。</p>
+<p><img src="https://img2.imgtp.com/2024/05/19/nQaURxRO.png" alt="image-20240519144328315"></p>
+<p>夸克网页版地址：<a href="https://pan.quark.cn/list#/list/all">夸克网盘 (quark.cn)</a>直接F12刷新找到cookie</p>
+<p><img src="https://img2.imgtp.com/2024/05/19/yBRSYEgH.png" alt="PixPin_2024-05-19_15-22-35"></p>
+<p>直接到此处配置cookie，不是直接使用环境变量。全部复制，粘贴到青龙里面。注意这里不能直接粘贴，我们点击编辑按钮，再进行粘贴，然后保存。</p>
+<p>我们可以测试一下，已经签到成功了，不过任务没有配置。不能转存。以下是json文件，需要的自取。</p>
+<p>正则学习地址：<a href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程 (deerchao.cn)</a></p>
+<p>觉得麻烦的可以直接让ai帮你写。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookie&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//请用手机验证码登录，CK比较完整！</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie1, Only this one will do save task.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie2, Only sign after this.&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;push_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">//无此字段则从环境变量（青龙设置）读取通知设置</span></span><br><span class="line">    <span class="attr">&quot;QUARK_SIGN_NOTIFY&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//是否发送签到成功通知，也可在环境变量中设置</span></span><br><span class="line">    <span class="attr">&quot;QYWX_AM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">//企业微信应用通知示例</span></span><br><span class="line">    <span class="attr">&quot;其他推送渠道//此项可删&quot;</span><span class="punctuation">:</span> <span class="string">&quot;配置方法同青龙&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;emby&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://yourdomain.com:8096&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;apikey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span> <span class="comment">//在后台 高级-API秘钥 中生成</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tasklist&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//无任务则只签到</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;taskname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;shareurl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://pan.quark.cn/s/39xxxx35#/list/share/17xxxx72-鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;savepath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/video/tv/鸣xx年/S01&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;pattern&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^广告内容(\\d+).(mp4|mkv)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\\1.\\2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enddate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-01-30&quot;</span><span class="punctuation">,</span>  <span class="comment">//可选，结束日期</span></span><br><span class="line">      <span class="attr">&quot;emby_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>            <span class="comment">//可选，缺省时按taskname搜索匹配，为0时强制不匹配</span></span><br><span class="line">      <span class="attr">&quot;ignore_extension&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//可选，忽略后缀</span></span><br><span class="line">      <span class="attr">&quot;runweek&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//可选，指定星期几执行，无此字段则均执行</span></span><br><span class="line">      <span class="attr">&quot;update_subdir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">// 可选，子目录递归更新的正则表达式，如 &quot;4k|1080p&quot;</span></span><br><span class="line">      <span class="comment">// 以下字段无需配置</span></span><br><span class="line">      <span class="attr">&quot;shareurl_ban&quot;</span><span class="punctuation">:</span> <span class="string">&quot;分享地址已失效&quot;</span> <span class="comment">//记录分享是否失效；如有此字段将跳过任务，更新链接后请手动删去</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、docker搭建"><a href="#三、docker搭建" class="headerlink" title="三、docker搭建"></a>三、docker搭建</h2><p>我这里已经装了1panel面板，其实任何面板直接ssh命令都是可以的方法大同小异。</p>
+<p>安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name quark-auto-save \</span><br><span class="line">  -p 5005:5005 \</span><br><span class="line">  -e WEBUI_USERNAME=admin \</span><br><span class="line">  -e WEBUI_PASSWORD=admin123 \</span><br><span class="line">  -v ./quark-auto-save/config:/app/config \</span><br><span class="line">  -v /etc/localtime:/etc/localtime \</span><br><span class="line">  --network bridge \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  cp0204/quark-auto-save:latest</span><br></pre></td></tr></table></figure>
+<p>更新命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR quark-auto-save</span><br></pre></td></tr></table></figure>
+<p>管理地址：<a href="http://yourhost:5005/">http://yourip:5005</a></p>
+<p>登录账号密码在环境变量中，可以自行修改。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境变量</th>
+<th>默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>WEBUI_USERNAME</code></td>
+<td><code>admin</code></td>
+<td>管理账号</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>WEBUI_PASSWORD</code></td>
+<td><code>admin123</code></td>
+<td>管理密码</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <tags>
+        <tag>自动签到</tag>
+      </tags>
+  </entry>
 </search>
