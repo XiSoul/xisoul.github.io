@@ -7,7 +7,7 @@
 <p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
 </blockquote>
 <h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240331100214741.png" alt="image-20240331100214741"></p>
+<p><img src="https://pic.xisoul.cn/img/66781d7c5252c.webp" alt="image-20240331100214741"></p>
 <p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
 <p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
 <p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
@@ -22,11 +22,11 @@
 <p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
 </blockquote>
 <h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240331101957453.png" alt="image-20240331101957453"></p>
+<p><img src="https://pic.xisoul.cn/img/66781d8c01826.webp" alt="image-20240331101957453"></p>
 <p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240331103040742.png" alt="image-20240331103040742"></p>
+<p><img src="https://pic.xisoul.cn/img/66781d96abc62.webp" alt="image-20240331103040742"></p>
 <p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240331102524108.png" alt="image-20240331102524108"></p>
+<p><img src="https://pic.xisoul.cn/img/66781da21d835.webp" alt="image-20240331102524108"></p>
 <blockquote>
 <p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
 </blockquote>
@@ -130,7 +130,7 @@
 </tr>
 <tr>
 <td style="text-align:center">调度器</td>
-<td style="text-align:center">karras，ddim（可能会崩），simple（作者实验，不好用），normal（线性降噪╱型，泛用式调度器）<img src="https://pic.xisoul.cn/img/6676c461e0db2.webp" alt="image-20240331141330211" style="zoom: 10%;" />，karras（曲线降噪s型，较为平滑，刚开始比较少，到了中间大幅降噪，快结束时又比较少）<img src="https://pic.xisoul.cn/img/6676c4661bce4.webp" alt="image-20240331141353547" style="zoom: 10%;" />，karras（急速降噪， 后半部，收敛块)<img src="F:/Pictures/Saved%20Pictures/image-20240331141239157.png" alt="image-20240331141239157" style="zoom:10%;" />，sgm配合采样器LCM搭配使用</td>
+<td style="text-align:center">karras，ddim（可能会崩），simple（作者实验，不好用），normal（线性降噪╱型，泛用式调度器）<img src="https://pic.xisoul.cn/img/6676c461e0db2.webp" alt="image-20240331141330211" style="zoom: 10%;" />，karras（曲线降噪s型，较为平滑，刚开始比较少，到了中间大幅降噪，快结束时又比较少）<img src="https://pic.xisoul.cn/img/6676c4661bce4.webp" alt="image-20240331141353547" style="zoom: 10%;" />，karras（急速降噪， 后半部，收敛块)<img src="https://pic.xisoul.cn/img/66781c3577dba.webp" alt="image-20240331141239157" style="zoom:10%;" />，sgm配合采样器LCM搭配使用</td>
 </tr>
 <tr>
 <td style="text-align:center">降噪</td>
@@ -751,34 +751,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用cloudflare搭建自己docker加速源</title>
-    <url>/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/</url>
-    <content><![CDATA[<blockquote>
-<p>项目地址来源：<a href="https://github.com/ImSingee/hammal">ImSingee/hammal: docker-registry proxy run in cloudflare workers (github.com)</a></p>
-<p>在网上看到了许多教程，基本上部署都是手动的，docker镜像都要手动输入选择重新部署。</p>
-<p>需要工具node.js&gt;=>=16.17.0  git</p>
-</blockquote>
-<h1 id="一、先克隆项目到本地"><a href="#一、先克隆项目到本地" class="headerlink" title="一、先克隆项目到本地"></a>一、先克隆项目到本地</h1><p>创建一个文件夹，打开git克隆项目，需要挂梯。</p>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240620234751084.png" alt="image-20240620234751084"></p>
-<p>git没网就开tun，教程：<a href="https://xisoul.cn/archives/1712053060615">AI绘画拉取模型失败，DOS开启代理 | XiSoul Blog’s</a></p>
-<h1 id="二、安装wrangler-命令行工具"><a href="#二、安装wrangler-命令行工具" class="headerlink" title="二、安装wrangler 命令行工具"></a>二、安装wrangler 命令行工具</h1><p><a href="https://developers.cloudflare.com/workers/cli-wrangler/install-update">https://developers.cloudflare.com/workers/cli-wrangler/install-update</a></p>
-<h2 id="安装命令"><a href="#安装命令" class="headerlink" title="安装命令"></a>安装命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install wrangler --save-dev</span><br></pre></td></tr></table></figure>
-<h2 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npx wrangler --version</span><br><span class="line"></span><br><span class="line">npx wrangler version</span><br><span class="line"></span><br><span class="line">npx wrangler -v</span><br></pre></td></tr></table></figure>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install wrangler@latest</span><br></pre></td></tr></table></figure>
-<h1 id="二、拉取hammal"><a href="#二、拉取hammal" class="headerlink" title="二、拉取hammal"></a>二、拉取hammal</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/tomwei7/hammal.git</span><br><span class="line">cd hammal</span><br><span class="line">mv wrangler.toml.sample wrangler.toml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 获取 account_id id,也可以从 CF Workers Dashboard 右侧获得</span><br><span class="line">npx wrangler whoami</span><br><span class="line">#获取不到就登录一下</span><br><span class="line">npx wrangler login</span><br><span class="line"></span><br><span class="line"># 创建 KV namespace</span><br><span class="line">npx wrangler kv:namespace create hammal_cache</span><br></pre></td></tr></table></figure>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240620232105977.png" alt="image-20240620232105977"></p>
-<h1 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h1><p>Alist 安装成功！</p>
-<p>访问地址：<a href="http://YOUR_IP:5244/">http://YOUR_IP:5244/</a></p>
-<p>配置文件路径：/opt/alist/data/config.json<br>————-如何获取密码？————<br>先cd到alist所在目录:<br>cd /opt/alist<br>随机设置新密码:<br>./alist admin random<br>或者手动设置新密码:</p>
-<h2 id="alist-admin-set-NEW-PASSWORD"><a href="#alist-admin-set-NEW-PASSWORD" class="headerlink" title="./alist admin set NEW_PASSWORD"></a>./alist admin set NEW_PASSWORD</h2><p>启动服务中</p>
-<p>查看状态：systemctl status alist<br>启动服务：systemctl start alist<br>重启服务：systemctl restart alist<br>停止服务：systemctl stop alist</p>
-<p>温馨提示：如果端口无法正常访问，请检查 服务器安全组、本机防火墙、Alist状态</p>
-]]></content>
-      <tags>
-        <tag>解决的问题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nvm管理node.js版本</title>
     <url>/2024/06/20/nvm%E7%AE%A1%E7%90%86node-js%E7%89%88%E6%9C%AC/</url>
     <content><![CDATA[<blockquote>
@@ -888,6 +860,44 @@
 ]]></content>
       <tags>
         <tag>软件推荐</tag>
+        <tag>解决的问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用cloudflare-works搭建自己docker加速源</title>
+    <url>/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/</url>
+    <content><![CDATA[<blockquote>
+<p>在网上看到了许多教程，基本上部署都是手动的，docker镜像都要手动输入选择重新部署。要么都是些基本镜像仓库。</p>
+<p>视频地址：【CloudFlare搭建doker加速源。都这么长时间了，你的docker还是跑不通吗？】 <a href="https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995">https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995</a></p>
+</blockquote>
+<h1 id="一、搭建说明"><a href="#一、搭建说明" class="headerlink" title="一、搭建说明"></a>一、搭建说明</h1><ul>
+<li>这个脚本我不知道出处，是我大学同学发我的。如有侵权请联系删除</li>
+<li><strong>需要自己有域名</strong>。用cf的域名，国内会被墙，所以没有什么用。我们需要用自己的域名使用cloudflare的cdn代理。</li>
+<li>需要一个cloudflare账号。</li>
+</ul>
+<h1 id="二、搭建过程"><a href="#二、搭建过程" class="headerlink" title="二、搭建过程"></a>二、搭建过程</h1><h2 id="1-首先注册一个cloudflare账号"><a href="#1-首先注册一个cloudflare账号" class="headerlink" title="1.首先注册一个cloudflare账号"></a>1.首先注册一个cloudflare账号</h2><p>打开cloudflare官网：<a href="https://www.cloudflare-cn.com/">科赋锐信息科技Cloudflare | Cloudflare (cloudflare-cn.com)</a></p>
+<p>有账号的跳过，没账号的需要注册一个。</p>
+<h2 id="2-打开cloudflare-Workers-amp-Pages"><a href="#2-打开cloudflare-Workers-amp-Pages" class="headerlink" title="2.打开cloudflare Workers&amp;Pages"></a>2.打开cloudflare Workers&amp;Pages</h2><p>点击创建<img src="https://pic.xisoul.cn/img/66780efc3278b.webp" alt="image-20240623162646740"></p>
+<p>这个名字随便输</p>
+<p><img src="https://pic.xisoul.cn/img/66780f075c139.webp" alt="image-20240623162749290"></p>
+<p>往下翻点击完成。</p>
+<h2 id="3-填写脚本"><a href="#3-填写脚本" class="headerlink" title="3.填写脚本"></a>3.填写脚本</h2><p>然后点击编辑代码</p>
+<p><img src="https://pic.xisoul.cn/img/66780f10c6706.webp" alt="image-20240623162917517"></p>
+<p>把这里全删掉<img src="https://pic.xisoul.cn/img/66780f1aca907.webp" alt="image-20240623162950578">全选复制下面的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27;use strict&#x27;</span><br><span class="line"></span><br><span class="line">const hub_host = &#x27;registry-1.docker.io&#x27;</span><br><span class="line">const auth_url = &#x27;https://auth.docker.io&#x27;</span><br><span class="line">const workers_url = &#x27;这里填你的下一级域名，有人用的二级有人可能用三级域名，等等&#x27;</span><br><span class="line">/**</span><br><span class="line"> * static files (404.html, sw.js, conf.js)</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/** @type &#123;RequestInit&#125; */</span><br><span class="line">const PREFLIGHT_INIT = &#123;</span><br><span class="line">    status: 204,</span><br><span class="line">    headers: new Headers(&#123;</span><br><span class="line">        &#x27;access-control-allow-origin&#x27;: &#x27;*&#x27;,</span><br><span class="line">        &#x27;access-control-allow-methods&#x27;: &#x27;GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS&#x27;,</span><br><span class="line">        &#x27;access-control-max-age&#x27;: &#x27;1728000&#x27;,</span><br><span class="line">    &#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;any&#125; body</span><br><span class="line"> * @param &#123;number&#125; status</span><br><span class="line"> * @param &#123;Object&lt;string, string&gt;&#125; headers</span><br><span class="line"> */</span><br><span class="line">function makeRes(body, status = 200, headers = &#123;&#125;) &#123;</span><br><span class="line">    headers[&#x27;access-control-allow-origin&#x27;] = &#x27;*&#x27;</span><br><span class="line">    return new Response(body, &#123;status, headers&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;string&#125; urlStr</span><br><span class="line"> */</span><br><span class="line">function newUrl(urlStr) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new URL(urlStr)</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addEventListener(&#x27;fetch&#x27;, e =&gt; &#123;</span><br><span class="line">    const ret = fetchHandler(e)</span><br><span class="line">        .catch(err =&gt; makeRes(&#x27;cfworker error:\n&#x27; + err.stack, 502))</span><br><span class="line">    e.respondWith(ret)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;FetchEvent&#125; e</span><br><span class="line"> */</span><br><span class="line">async function fetchHandler(e) &#123;</span><br><span class="line">  const getReqHeader = (key) =&gt; e.request.headers.get(key);</span><br><span class="line"></span><br><span class="line">  let url = new URL(e.request.url);</span><br><span class="line"></span><br><span class="line">  if (url.pathname === &#x27;/token&#x27;) &#123;</span><br><span class="line">      let token_parameter = &#123;</span><br><span class="line">        headers: &#123;</span><br><span class="line">        &#x27;Host&#x27;: &#x27;auth.docker.io&#x27;,</span><br><span class="line">        &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">        &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">        &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">        &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">        &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">        &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      let token_url = auth_url + url.pathname + url.search</span><br><span class="line">      return fetch(new Request(token_url, e.request), token_parameter)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  url.hostname = hub_host;</span><br><span class="line">  </span><br><span class="line">  let parameter = &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &#x27;Host&#x27;: hub_host,</span><br><span class="line">      &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">      &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">      &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">      &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">      &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">      &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    cacheTtl: 3600</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  if (e.request.headers.has(&quot;Authorization&quot;)) &#123;</span><br><span class="line">    parameter.headers.Authorization = getReqHeader(&quot;Authorization&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let original_response = await fetch(new Request(url, e.request), parameter)</span><br><span class="line">  let original_response_clone = original_response.clone();</span><br><span class="line">  let original_text = original_response_clone.body;</span><br><span class="line">  let response_headers = original_response.headers;</span><br><span class="line">  let new_response_headers = new Headers(response_headers);</span><br><span class="line">  let status = original_response.status;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Www-Authenticate&quot;)) &#123;</span><br><span class="line">    let auth = new_response_headers.get(&quot;Www-Authenticate&quot;);</span><br><span class="line">    let re = new RegExp(auth_url, &#x27;g&#x27;);</span><br><span class="line">    new_response_headers.set(&quot;Www-Authenticate&quot;, response_headers.get(&quot;Www-Authenticate&quot;).replace(re, workers_url));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Location&quot;)) &#123;</span><br><span class="line">    return httpHandler(e.request, new_response_headers.get(&quot;Location&quot;))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let response = new Response(original_text, &#123;</span><br><span class="line">            status,</span><br><span class="line">            headers: new_response_headers</span><br><span class="line">        &#125;)</span><br><span class="line">  return response;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;Request&#125; req</span><br><span class="line"> * @param &#123;string&#125; pathname</span><br><span class="line"> */</span><br><span class="line">function httpHandler(req, pathname) &#123;</span><br><span class="line">    const reqHdrRaw = req.headers</span><br><span class="line"></span><br><span class="line">    // preflight</span><br><span class="line">    if (req.method === &#x27;OPTIONS&#x27; &amp;&amp;</span><br><span class="line">        reqHdrRaw.has(&#x27;access-control-request-headers&#x27;)</span><br><span class="line">    ) &#123;</span><br><span class="line">        return new Response(null, PREFLIGHT_INIT)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let rawLen = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">    const reqHdrNew = new Headers(reqHdrRaw)</span><br><span class="line"></span><br><span class="line">    const refer = reqHdrNew.get(&#x27;referer&#x27;)</span><br><span class="line"></span><br><span class="line">    let urlStr = pathname</span><br><span class="line">    </span><br><span class="line">    const urlObj = newUrl(urlStr)</span><br><span class="line"></span><br><span class="line">    /** @type &#123;RequestInit&#125; */</span><br><span class="line">    const reqInit = &#123;</span><br><span class="line">        method: req.method,</span><br><span class="line">        headers: reqHdrNew,</span><br><span class="line">        redirect: &#x27;follow&#x27;,</span><br><span class="line">        body: req.body</span><br><span class="line">    &#125;</span><br><span class="line">    return proxy(urlObj, reqInit, rawLen, 0)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *</span><br><span class="line"> * @param &#123;URL&#125; urlObj</span><br><span class="line"> * @param &#123;RequestInit&#125; reqInit</span><br><span class="line"> */</span><br><span class="line">async function proxy(urlObj, reqInit, rawLen) &#123;</span><br><span class="line">    const res = await fetch(urlObj.href, reqInit)</span><br><span class="line">    const resHdrOld = res.headers</span><br><span class="line">    const resHdrNew = new Headers(resHdrOld)</span><br><span class="line"></span><br><span class="line">    // verify</span><br><span class="line">    if (rawLen) &#123;</span><br><span class="line">        const newLen = resHdrOld.get(&#x27;content-length&#x27;) || &#x27;&#x27;</span><br><span class="line">        const badLen = (rawLen !== newLen)</span><br><span class="line"></span><br><span class="line">        if (badLen) &#123;</span><br><span class="line">            return makeRes(res.body, 400, &#123;</span><br><span class="line">                &#x27;--error&#x27;: `bad len: $&#123;newLen&#125;, except: $&#123;rawLen&#125;`,</span><br><span class="line">                &#x27;access-control-expose-headers&#x27;: &#x27;--error&#x27;,</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    const status = res.status</span><br><span class="line">    resHdrNew.set(&#x27;access-control-expose-headers&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;access-control-allow-origin&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;Cache-Control&#x27;, &#x27;max-age=1500&#x27;)</span><br><span class="line">    </span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy-report-only&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;clear-site-data&#x27;)</span><br><span class="line"></span><br><span class="line">    return new Response(res.body, &#123;</span><br><span class="line">        status,</span><br><span class="line">        headers: resHdrNew</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们只需要修改这里，填写你自己的域名，这个域名必须能解析到cloudflare上面的。比如我的主域名是xisoul.cn,我填的是我自己的二级域名：docker.xisoul.cn</p>
+<p><img src="https://pic.xisoul.cn/img/66780f24443fe.webp" alt="image-20240623163126241"></p>
+<p>然后的点击右上角部署</p>
+<h1 id="三、修改域名"><a href="#三、修改域名" class="headerlink" title="三、修改域名"></a>三、修改域名</h1><p><img src="https://pic.xisoul.cn/img/66780f2e824e7.webp" alt="image-20240623163334536"></p>
+<p>输入你在脚本里面修改的域名。如果你的域名已经解析，这里直接可以添加域名Add Custom Domain</p>
+<p><img src="https://pic.xisoul.cn/img/66780f3826c11.webp" alt="image-20240623163619596"></p>
+<p>cloudflare解析还是很快的，一两分钟不要就可以用了。</p>
+<h1 id="四、修改配置"><a href="#四、修改配置" class="headerlink" title="四、修改配置"></a>四、修改配置</h1><p>我这是用的是自己香港的机子，有人会说你都用香港机子为什么用docker加速。这玩意官方的多少有点毛病，证书啥的连不通。自己搭建一个也方便使用。因为我是免费的这玩意每天有额度。用的人多了，没额度跑不通。你要是啥都没有可以联系我，免费的二级域名能解析cloudflare的也有很多。b站上面也有很多。</p>
+<p>我的是1panel面板，你们可以自行百度。怎么改加速源.</p>
+<p><img src="https://pic.xisoul.cn/img/66780f41660f1.webp" alt="image-20240623164150074">大同小异都是找到下面这个配置文件然后修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;registry-mirrors&quot;: [</span><br><span class="line">		&quot;https://xxx.xisoul.cn&quot;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
         <tag>解决的问题</tag>
       </tags>
   </entry>
