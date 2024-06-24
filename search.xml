@@ -1,38 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ai绘画基础总结（一）安装设置</title>
-    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE/</url>
+    <title>Spring5入门笔记</title>
+    <url>/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="1-EJB存在的问题"><a href="#1-EJB存在的问题" class="headerlink" title="1.EJB存在的问题"></a>1.EJB存在的问题</h2><p>EJB（Enterprise Java Bean） </p>
+<p>1.运行环境苛刻</p>
+<p>2.代码移植性差</p>
+<p>总结：EJB重量级的框架</p>
+<h2 id="2-什么是Spring"><a href="#2-什么是Spring" class="headerlink" title="2.什么是Spring"></a>2.什么是Spring</h2><p>Spring是一个轻量级的JAVAEE解决方案，整合众多优秀的设计模式</p>
+<ul>
+<li>轻量级</li>
+</ul>
+<blockquote>
+<p>1.对于运行环境是没有额外要求的</p>
+<p>​    开源 tomcat resion jetty</p>
+<p>​    收费 weblogic websphere</p>
+<p>2.代码移植性高</p>
+<p>​    不需要实现额外的接口</p>
+</blockquote>
+<ul>
+<li>JavaEE的解决方案</li>
+</ul>
+<p><img src="F:/Pictures/Saved%20Pictures/image-20240417215300298.png" alt="image-20240417215300298"></p>
+<ul>
+<li>整合了设计模式</li>
+</ul>
+<ol>
+<li><p>工厂设计模式</p>
+</li>
+<li><p>代理设计模式</p>
+</li>
+<li><p>模板设计模式</p>
+</li>
+<li><p>策略设计模式</p>
+</li>
+</ol>
+<h2 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3.设计模式"></a>3.设计模式</h2><ol>
+<li><p>广义的概念</p>
+<p>面向对象设计中，解决特定问题的经典代码</p>
+</li>
+<li><p>狭义概念</p>
+<p>GOF4人帮定义的23种设计模式：工厂、适配器、装饰器、门面、代理、模板….</p>
+</li>
+</ol>
+<h2 id="4-工厂设计模式"><a href="#4-工厂设计模式" class="headerlink" title="4.工厂设计模式"></a>4.工厂设计模式</h2><ol>
+<li><p>什么是工厂设计模式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.概念：通过工厂类，创建对象</span></span><br><span class="line">    User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    <span class="type">UserDao</span> <span class="variable">userDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDaoImpl</span>();</span><br><span class="line"><span class="comment">//2.好处：解耦合</span></span><br><span class="line">	<span class="comment">//耦合：指的是代码间的强关联关系，一方的改变，另一方也需要改变</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ActionServletController</span>&#123;</span><br><span class="line">        <span class="comment">//这个地方Service改变。后面调用时，控制器也要跟着改变。</span></span><br><span class="line">		<span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserServiceImpl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//问题：不利于代码维护</span></span><br><span class="line">	<span class="comment">//简单理解：把接口的实现类，硬编码在程序中.</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<p>UserService:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//业务类中提供两种方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>;<span class="comment">//需要用户信息所以用实体对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span>;<span class="comment">//登录需要传入用户名，密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserServiceImpl：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">UserDAO</span> <span class="variable">userDAO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDAOImpl</span>();<span class="comment">//需要DAO接入，引入对象</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        userDAO.sava(user);<span class="comment">//定义数据库中保存</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        userDAO.queryUserByNameAndPassword(username, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserDAOImpl：为了简单定义了两个打印输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDAOImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDAO</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sava</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;insert into user=&quot;</span> + user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">queryUserByNameAndPassword</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;query User name=&quot;</span>+username+<span class="string">&quot; password=&quot;</span>+password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>-java -Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客搭建</title>
+    <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<blockquote>
-<p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
+<p>hexo博客自由度非常高，对小白来说，不太友好，配置容易出错。网上有很多教程，但是不知道问题在哪还是很容易踩坑，这里我就以我自己的博客搭建过程来讲解一下hexo+github+cloudflare来实现</p>
 </blockquote>
-<h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
-<p><img src="https://pic.xisoul.cn/img/66781d7c5252c.webp" alt="image-20240331100214741"></p>
-<p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
-<p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
-<p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
-<p><strong>疯狂ai启动器</strong>：<a href="https://www.bilibili.com/video/BV1VS421w7fb/">王炸来了！全新Comfyui疯狂Ai启动器,更加好用易用人性化兼容秋叶绘世整合包启动器_哔哩哔哩_bilibili</a>（在群里面薅过来的链接，当然b站也有）</p>
-<p><strong>Comflowy</strong>：<a href="https://www.comflowy.com/zh-CN">Comflowy 介绍 – Comflowy</a></p>
-<p><strong>普通版</strong>：</p>
-<p>123网盘下载地址：<a href="https://www.123pan.com/s/42q0Vv-SYvVd.html">https://www.123pan.com/s/42q0Vv-SYvVd.html</a><br>夸克网盘下载地址：<a href="https://pan.quark.cn/s/41aeb9394841">https://pan.quark.cn/s/41aeb9394841</a><br>百度网盘下载地址：<a href="https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1">https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1</a></p>
-<p><strong>开发者满血版</strong>：</p>
-<p>百度网盘:<br><a href="https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour">https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour</a><br>夸克网盘:<br><a href="https://pan.quark.cn/s/d306fa633fa7">https://pan.quark.cn/s/d306fa633fa7</a></p>
-<p><strong>嘟嘟嘟上传的整合包</strong>:<br><a href="https://www.123pan.com/s/42q0Vv-eXvVd.html">https://www.123pan.com/s/42q0Vv-eXvVd.html</a><br>提取码:KbrA 模型文件需要另外下载,太大,放不进整合包<br><a href="https://www.123pan.com/s/42q0Vv-G2vVd.html">https://www.123pan.com/s/42q0Vv-G2vVd.html</a><br>提取码:BKG7 模型文件,下载完替换上面的整合包即可</p>
+<p>这里引用一下有基础的同志可以参考一下：<a href="https://www.mubu.com/doc/C85kyZw3UU">https://www.mubu.com/doc/C85kyZw3UU</a><strong>首先声明，这个文档不是我写的，转载过来的，为了防止别人删除文档，所以我保存了一份</strong></p>
+<h1 id="一、下载安装必要的工具"><a href="#一、下载安装必要的工具" class="headerlink" title="一、下载安装必要的工具"></a>一、下载安装必要的工具</h1><h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1.安装node.js"></a>1.安装node.js</h2><p>这个是nodejs各个历史版本地址：<a href="https://nodejs.org/en/about/previous-releases">Node.js — Previous Releases (nodejs.org)</a></p>
 <blockquote>
-<p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
+<p>为什么选择历史版本？</p>
+<p>有些博客主题构建，需要的插件不支持新版本，或者构建出来页面空白。所以按照主题开发者的要求的版本来。</p>
 </blockquote>
-<h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
-<p><img src="https://pic.xisoul.cn/img/66781d8c01826.webp" alt="image-20240331101957453"></p>
-<p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
-<p><img src="https://pic.xisoul.cn/img/66781d96abc62.webp" alt="image-20240331103040742"></p>
-<p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
-<p><img src="https://pic.xisoul.cn/img/66781da21d835.webp" alt="image-20240331102524108"></p>
-<blockquote>
-<p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
+<p>如果你已经有了其他冰本的node.js请卸载使用对应的版本</p>
+<h2 id="2-安装git工具"><a href="#2-安装git工具" class="headerlink" title="2.安装git工具"></a>2.安装git工具</h2><blockquote>
+<p>这一步开始你得有一个github的账号，<a href="https://github.com/">https://github.com/</a>  如果是使用gitee账号请参考幕布，为什么我不使用gitee，因为gitee部署静态页面需要实名</p>
 </blockquote>
 ]]></content>
       <tags>
-        <tag>-ComfyUI -AI</tag>
+        <tag>-hexo -搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -70,27 +115,6 @@
 ]]></content>
       <tags>
         <tag>-解决的问题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo博客搭建</title>
-    <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<blockquote>
-<p>hexo博客自由度非常高，对小白来说，不太友好，配置容易出错。网上有很多教程，但是不知道问题在哪还是很容易踩坑，这里我就以我自己的博客搭建过程来讲解一下hexo+github+cloudflare来实现</p>
-</blockquote>
-<p>这里引用一下有基础的同志可以参考一下：<a href="https://www.mubu.com/doc/C85kyZw3UU">https://www.mubu.com/doc/C85kyZw3UU</a><strong>首先声明，这个文档不是我写的，转载过来的，为了防止别人删除文档，所以我保存了一份</strong></p>
-<h1 id="一、下载安装必要的工具"><a href="#一、下载安装必要的工具" class="headerlink" title="一、下载安装必要的工具"></a>一、下载安装必要的工具</h1><h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1.安装node.js"></a>1.安装node.js</h2><p>这个是nodejs各个历史版本地址：<a href="https://nodejs.org/en/about/previous-releases">Node.js — Previous Releases (nodejs.org)</a></p>
-<blockquote>
-<p>为什么选择历史版本？</p>
-<p>有些博客主题构建，需要的插件不支持新版本，或者构建出来页面空白。所以按照主题开发者的要求的版本来。</p>
-</blockquote>
-<p>如果你已经有了其他冰本的node.js请卸载使用对应的版本</p>
-<h2 id="2-安装git工具"><a href="#2-安装git工具" class="headerlink" title="2.安装git工具"></a>2.安装git工具</h2><blockquote>
-<p>这一步开始你得有一个github的账号，<a href="https://github.com/">https://github.com/</a>  如果是使用gitee账号请参考幕布，为什么我不使用gitee，因为gitee部署静态页面需要实名</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>-hexo -搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -416,46 +440,38 @@
       </tags>
   </entry>
   <entry>
-    <title>如何在hexo上创建一篇文章</title>
-    <url>/2024/03/10/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="Page-Front-matter"><a href="#Page-Front-matter" class="headerlink" title="Page Front-matter"></a>Page Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">type:</span><br><span class="line">comments:</span><br><span class="line">description:</span><br><span class="line">keywords:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aside:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line"><span class="section">random:</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
-<p>title    【必需】页面标题<br>date    【必需】页面创建日期<br>type    【必需】标签、分类和友情链接三个页面需要配置<br>updated    【可选】页面更新日期<br>description    【可选】页面描述<br>keywords    【可选】页面关键字<br>comments    【可选】显示页面评论模块 (默认 true)<br>top_img    【可选】页面顶部图片<br>mathjax    【可选】显示mathjax (当设置mathjax的per_page: false时，才需要配置，默认 false)<br>katex    【可选】显示katex (当设置katex的per_page: false时，才需要配置，默认 false)<br>aside    【可选】显示侧边栏 (默认 true)<br>aplayer    【可选】在需要的页面加载aplayer的js和css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开 (true/false) (默认为设置中highlight_shrink的配置)<br>random    【可选】配置友情链接是否随机排序（默认为 false)</p>
-<hr>
-<h2 id="Post-Front-matter"><a href="#Post-Front-matter" class="headerlink" title="Post Front-matter"></a>Post Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">keywords:</span><br><span class="line">description:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">comments:</span></span><br><span class="line"><span class="emphasis">cover:</span></span><br><span class="line"><span class="emphasis">toc:</span></span><br><span class="line"><span class="emphasis">toc_</span>number:</span><br><span class="line">toc<span class="emphasis">_style_</span>simple:</span><br><span class="line">copyright:</span><br><span class="line">copyright<span class="emphasis">_author:</span></span><br><span class="line"><span class="emphasis">copyright_</span>author<span class="emphasis">_href:</span></span><br><span class="line"><span class="emphasis">copyright_</span>url:</span><br><span class="line">copyright<span class="emphasis">_info:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line">aside:</span><br><span class="line">abcjs:</span><br></pre></td></tr></table></figure>
-<p>写法    解释<br>title    【必需】文章标题<br>date    【必需】文章创建日期<br>updated    【可选】文章更新日期<br>tags    【可选】文章标签<br>categories    【可选】文章分类<br>keywords    【可选】文章关键字<br>description    【可选】文章描述<br>top_img    【可选】文章顶部图片<br>cover    【可选】文章缩略图(如果没有设置top_img,文章页顶部将显示缩略图，可设为false/图片地址/留空)<br>comments    【可选】显示文章评论模块(默认 true)<br>toc    【可选】显示文章TOC(默认为设置中toc的enable配置)<br>toc_number    【可选】显示toc_number(默认为设置中toc的number配置)<br>toc_style_simple    【可选】显示 toc 简洁模式<br>copyright    【可选】显示文章版权模块(默认为设置中post_copyright的enable配置)<br>copyright_author    【可选】文章版权模块的文章作者<br>copyright_author_href    【可选】文章版权模块的文章作者链接<br>copyright_url    【可选】文章版权模块的文章连结链接<br>copyright_info    【可选】文章版权模块的版权声明文字<br>mathjax    【可选】显示mathjax(当设置 mathjax 的 per_page: false 时，才需要配置，默认 false )<br>katex    【可选】显示 katex (当设置 katex 的 per_page: false 时，才需要配置，默认 false )<br>aplayer    【可选】在需要的页面加载 aplayer 的 js 和 css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开(true/false)(默认为设置中 highlight_shrink 的配置)<br>aside    【可选】显示侧边栏 (默认 true)<br>abcjs    【可选】加载 abcjs (当设置 abcjs 的 per_page: false 时，才需要配置，默认 false )</p>
-]]></content>
-      <tags>
-        <tag>hexo 教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电脑卸载软件推荐，解决卸载不干净问题</title>
-    <url>/2024/03/18/%E7%94%B5%E8%84%91%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%8D%B8%E8%BD%BD%E4%B8%8D%E5%B9%B2%E5%87%80%E9%97%AE%E9%A2%98/</url>
+    <title>ai绘画基础总结（一）安装设置</title>
+    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<blockquote>
-<p>问题出现在我win11笔记本，电脑里面有office了，之前用的比较习惯，然后电脑里面又有WPS，所以正常按照卸载流程卸载，卸载不干净。问了好多人，网上查阅资料还是不行。有部分人会出现这个问题。</p>
+<p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
 </blockquote>
-<h1 id="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"><a href="#问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。" class="headerlink" title="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"></a>问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。</h1><p>之前出现这个问题，网上的方法：</p>
-<p>一、删除WPS注册表。</p>
-<p>二、然后再就是重装，改默认然后再卸载。</p>
-<p>以上两种方法我都试过了，我通过软件卸载后我大概知道问题出在哪，就是注册表删除不干净。我在使用第一种方法的时候，删除了几条注册表之后还是不行。所以转用第二种方法，我又在官网上面下载了WPS，然后改了修复，改了默认卸载还是不行。最后用软件删除注册表，里面大概有2000多条。</p>
-<hr>
-<h1 id="解决：使用HiBit-uninstaller卸载"><a href="#解决：使用HiBit-uninstaller卸载" class="headerlink" title="解决：使用HiBit uninstaller卸载"></a>解决：使用HiBit uninstaller卸载</h1><p>为什么卸载软件那么多推荐这款，因为比较轻量，功能齐全，免费。</p>
-<p>官网：<a href="https://hibitsoft.ir/">HiBitSoftware</a></p>
-<p><img src="https://pic.xisoul.cn/img/6676b43a6363a.png" alt="1"></p>
-<p>点击下载安装就可以了。</p>
-<p><img src="https://pic.xisoul.cn/img/6676b441748e8.png" alt="2"></p>
-<p>勾选所要卸载的软件，这里也可以多选，然后点击卸载所选项</p>
-<p><img src="https://pic.xisoul.cn/img/6676b4467c3e5.png" alt="3"></p>
-<p>点击启动，卸载完之后这里就变成了扫描。</p>
-<p><img src="https://pic.xisoul.cn/img/6676b44cc9b40.png" alt="4">然后就跳出扫描剩余项，拉倒下面我们看到，电脑残留的文件，还有注册表。</p>
-<p><img src="https://pic.xisoul.cn/img/6676b45269e18.png" alt="5"></p>
-<p>创建备份和日志报告，有分析需求的同志可以的打开。然后点击完成就OK了。</p>
-<p><img src="https://pic.xisoul.cn/img/6676b384b150c.png" alt="6"></p>
-<p>工具里面有很多功能，可以找到自己电脑里面的垃圾文件，和没用的注册表，也可以将软件添加到上下文菜单（也就是鼠标右键）以后使用也方便。</p>
+<h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
+<p><img src="https://pic.xisoul.cn/img/66781d7c5252c.webp" alt="image-20240331100214741"></p>
+<p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
+<p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
+<p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
+<p><strong>疯狂ai启动器</strong>：<a href="https://www.bilibili.com/video/BV1VS421w7fb/">王炸来了！全新Comfyui疯狂Ai启动器,更加好用易用人性化兼容秋叶绘世整合包启动器_哔哩哔哩_bilibili</a>（在群里面薅过来的链接，当然b站也有）</p>
+<p><strong>Comflowy</strong>：<a href="https://www.comflowy.com/zh-CN">Comflowy 介绍 – Comflowy</a></p>
+<p><strong>普通版</strong>：</p>
+<p>123网盘下载地址：<a href="https://www.123pan.com/s/42q0Vv-SYvVd.html">https://www.123pan.com/s/42q0Vv-SYvVd.html</a><br>夸克网盘下载地址：<a href="https://pan.quark.cn/s/41aeb9394841">https://pan.quark.cn/s/41aeb9394841</a><br>百度网盘下载地址：<a href="https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1">https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1</a></p>
+<p><strong>开发者满血版</strong>：</p>
+<p>百度网盘:<br><a href="https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour">https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour</a><br>夸克网盘:<br><a href="https://pan.quark.cn/s/d306fa633fa7">https://pan.quark.cn/s/d306fa633fa7</a></p>
+<p><strong>嘟嘟嘟上传的整合包</strong>:<br><a href="https://www.123pan.com/s/42q0Vv-eXvVd.html">https://www.123pan.com/s/42q0Vv-eXvVd.html</a><br>提取码:KbrA 模型文件需要另外下载,太大,放不进整合包<br><a href="https://www.123pan.com/s/42q0Vv-G2vVd.html">https://www.123pan.com/s/42q0Vv-G2vVd.html</a><br>提取码:BKG7 模型文件,下载完替换上面的整合包即可</p>
+<blockquote>
+<p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
+</blockquote>
+<h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
+<p><img src="https://pic.xisoul.cn/img/66781d8c01826.webp" alt="image-20240331101957453"></p>
+<p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
+<p><img src="https://pic.xisoul.cn/img/66781d96abc62.webp" alt="image-20240331103040742"></p>
+<p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
+<p><img src="https://pic.xisoul.cn/img/66781da21d835.webp" alt="image-20240331102524108"></p>
+<blockquote>
+<p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
+</blockquote>
 ]]></content>
       <tags>
-        <tag>软件推荐</tag>
-        <tag>解决的问题</tag>
+        <tag>-ComfyUI -AI</tag>
       </tags>
   </entry>
   <entry>
@@ -639,118 +655,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring5入门笔记</title>
-    <url>/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="1-EJB存在的问题"><a href="#1-EJB存在的问题" class="headerlink" title="1.EJB存在的问题"></a>1.EJB存在的问题</h2><p>EJB（Enterprise Java Bean） </p>
-<p>1.运行环境苛刻</p>
-<p>2.代码移植性差</p>
-<p>总结：EJB重量级的框架</p>
-<h2 id="2-什么是Spring"><a href="#2-什么是Spring" class="headerlink" title="2.什么是Spring"></a>2.什么是Spring</h2><p>Spring是一个轻量级的JAVAEE解决方案，整合众多优秀的设计模式</p>
-<ul>
-<li>轻量级</li>
-</ul>
-<blockquote>
-<p>1.对于运行环境是没有额外要求的</p>
-<p>​    开源 tomcat resion jetty</p>
-<p>​    收费 weblogic websphere</p>
-<p>2.代码移植性高</p>
-<p>​    不需要实现额外的接口</p>
-</blockquote>
-<ul>
-<li>JavaEE的解决方案</li>
-</ul>
-<p><img src="F:/Pictures/Saved%20Pictures/image-20240417215300298.png" alt="image-20240417215300298"></p>
-<ul>
-<li>整合了设计模式</li>
-</ul>
-<ol>
-<li><p>工厂设计模式</p>
-</li>
-<li><p>代理设计模式</p>
-</li>
-<li><p>模板设计模式</p>
-</li>
-<li><p>策略设计模式</p>
-</li>
-</ol>
-<h2 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3.设计模式"></a>3.设计模式</h2><ol>
-<li><p>广义的概念</p>
-<p>面向对象设计中，解决特定问题的经典代码</p>
-</li>
-<li><p>狭义概念</p>
-<p>GOF4人帮定义的23种设计模式：工厂、适配器、装饰器、门面、代理、模板….</p>
-</li>
-</ol>
-<h2 id="4-工厂设计模式"><a href="#4-工厂设计模式" class="headerlink" title="4.工厂设计模式"></a>4.工厂设计模式</h2><ol>
-<li><p>什么是工厂设计模式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.概念：通过工厂类，创建对象</span></span><br><span class="line">    User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    <span class="type">UserDao</span> <span class="variable">userDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDaoImpl</span>();</span><br><span class="line"><span class="comment">//2.好处：解耦合</span></span><br><span class="line">	<span class="comment">//耦合：指的是代码间的强关联关系，一方的改变，另一方也需要改变</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ActionServletController</span>&#123;</span><br><span class="line">        <span class="comment">//这个地方Service改变。后面调用时，控制器也要跟着改变。</span></span><br><span class="line">		<span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserServiceImpl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//问题：不利于代码维护</span></span><br><span class="line">	<span class="comment">//简单理解：把接口的实现类，硬编码在程序中.</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-<p>UserService:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//业务类中提供两种方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>;<span class="comment">//需要用户信息所以用实体对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span>;<span class="comment">//登录需要传入用户名，密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>UserServiceImpl：</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">UserDAO</span> <span class="variable">userDAO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDAOImpl</span>();<span class="comment">//需要DAO接入，引入对象</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        userDAO.sava(user);<span class="comment">//定义数据库中保存</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">login</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        userDAO.queryUserByNameAndPassword(username, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>UserDAOImpl：为了简单定义了两个打印输出</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDAOImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDAO</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sava</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;insert into user=&quot;</span> + user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">queryUserByNameAndPassword</span><span class="params">(String username, String password)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;query User name=&quot;</span>+username+<span class="string">&quot; password=&quot;</span>+password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>-java -Spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>夸克自动签到转存到emby</title>
-    <url>/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/</url>
-    <content><![CDATA[<h1 id="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"><a href="#夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中" class="headerlink" title="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"></a>夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中</h1><p>b站视频地址：<a href="https://www.bilibili.com/video/BV1ry411a7Lt">https://www.bilibili.com/video/BV1ry411a7Lt</a></p>
-<h2 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h2><p>你有服务器或者nas等等，有docker或者青龙都行。</p>
-<p>由于nas在家关机了，我在外地。就不演示推到emby了。</p>
-<p>来自于<a href="https://github.com/Cp0204/quark-auto-save">Cp0204/quark-auto-save: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙 (github.com)</a></p>
-<h2 id="二、青龙搭建"><a href="#二、青龙搭建" class="headerlink" title="二、青龙搭建"></a>二、青龙搭建</h2><p>青龙命令一键就OK</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ql repo https://github.com/Cp0204/quark-auto-save.git &quot;quark&quot; &quot;&quot; &quot;notify&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="https://pic.xisoul.cn/img/6676bdb6cce4e.webp" alt="PixPin_2024-05-19_14-41-40"></p>
-<p>然后执行拉库。</p>
-<p>夸克网页版地址：<a href="https://pan.quark.cn/list#/list/all">夸克网盘 (quark.cn)</a>直接F12刷新找到cookie</p>
-<p><img src="https://pic.xisoul.cn/img/6676c3f0f3455.webp" alt="PixPin_2024-05-19_15-22-35"></p>
-<p>直接到此处配置cookie，不是直接使用环境变量。全部复制，粘贴到青龙里面。注意这里不能直接粘贴，我们点击编辑按钮，再进行粘贴，然后保存。</p>
-<p>我们可以测试一下，已经签到成功了，不过任务没有配置。不能转存。以下是json文件，需要的自取。</p>
-<p>正则学习地址：<a href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程 (deerchao.cn)</a></p>
-<p>觉得麻烦的可以直接让ai帮你写。</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookie&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//请用手机验证码登录，CK比较完整！</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie1, Only this one will do save task.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie2, Only sign after this.&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;push_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">//无此字段则从环境变量（青龙设置）读取通知设置</span></span><br><span class="line">    <span class="attr">&quot;QUARK_SIGN_NOTIFY&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//是否发送签到成功通知，也可在环境变量中设置</span></span><br><span class="line">    <span class="attr">&quot;QYWX_AM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">//企业微信应用通知示例</span></span><br><span class="line">    <span class="attr">&quot;其他推送渠道//此项可删&quot;</span><span class="punctuation">:</span> <span class="string">&quot;配置方法同青龙&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;emby&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://yourdomain.com:8096&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;apikey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span> <span class="comment">//在后台 高级-API秘钥 中生成</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tasklist&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//无任务则只签到</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;taskname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;shareurl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://pan.quark.cn/s/39xxxx35#/list/share/17xxxx72-鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;savepath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/video/tv/鸣xx年/S01&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;pattern&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^广告内容(\\d+).(mp4|mkv)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\\1.\\2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enddate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-01-30&quot;</span><span class="punctuation">,</span>  <span class="comment">//可选，结束日期</span></span><br><span class="line">      <span class="attr">&quot;emby_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>            <span class="comment">//可选，缺省时按taskname搜索匹配，为0时强制不匹配</span></span><br><span class="line">      <span class="attr">&quot;ignore_extension&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//可选，忽略后缀</span></span><br><span class="line">      <span class="attr">&quot;runweek&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//可选，指定星期几执行，无此字段则均执行</span></span><br><span class="line">      <span class="attr">&quot;update_subdir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">// 可选，子目录递归更新的正则表达式，如 &quot;4k|1080p&quot;</span></span><br><span class="line">      <span class="comment">// 以下字段无需配置</span></span><br><span class="line">      <span class="attr">&quot;shareurl_ban&quot;</span><span class="punctuation">:</span> <span class="string">&quot;分享地址已失效&quot;</span> <span class="comment">//记录分享是否失效；如有此字段将跳过任务，更新链接后请手动删去</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="三、docker搭建"><a href="#三、docker搭建" class="headerlink" title="三、docker搭建"></a>三、docker搭建</h2><p>我这里已经装了1panel面板，其实任何面板直接ssh命令都是可以的方法大同小异。</p>
-<p>安装命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name quark-auto-save \</span><br><span class="line">  -p 5005:5005 \</span><br><span class="line">  -e WEBUI_USERNAME=admin \</span><br><span class="line">  -e WEBUI_PASSWORD=admin123 \</span><br><span class="line">  -v ./quark-auto-save/config:/app/config \</span><br><span class="line">  -v /etc/localtime:/etc/localtime \</span><br><span class="line">  --network bridge \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  cp0204/quark-auto-save:latest</span><br></pre></td></tr></table></figure>
-<p>更新命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR quark-auto-save</span><br></pre></td></tr></table></figure>
-<p>管理地址：<a href="http://yourhost:5005/">http://yourip:5005</a></p>
-<p>登录账号密码在环境变量中，可以自行修改。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">环境变量</th>
-<th>默认</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>WEBUI_USERNAME</code></td>
-<td><code>admin</code></td>
-<td>管理账号</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>WEBUI_PASSWORD</code></td>
-<td><code>admin123</code></td>
-<td>管理密码</td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <tags>
-        <tag>自动签到</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nvm管理node.js版本</title>
     <url>/2024/06/20/nvm%E7%AE%A1%E7%90%86node-js%E7%89%88%E6%9C%AC/</url>
     <content><![CDATA[<blockquote>
@@ -898,6 +802,102 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;registry-mirrors&quot;: [</span><br><span class="line">		&quot;https://xxx.xisoul.cn&quot;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
+        <tag>解决的问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在hexo上创建一篇文章</title>
+    <url>/2024/03/10/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="Page-Front-matter"><a href="#Page-Front-matter" class="headerlink" title="Page Front-matter"></a>Page Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">type:</span><br><span class="line">comments:</span><br><span class="line">description:</span><br><span class="line">keywords:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aside:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line"><span class="section">random:</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+<p>title    【必需】页面标题<br>date    【必需】页面创建日期<br>type    【必需】标签、分类和友情链接三个页面需要配置<br>updated    【可选】页面更新日期<br>description    【可选】页面描述<br>keywords    【可选】页面关键字<br>comments    【可选】显示页面评论模块 (默认 true)<br>top_img    【可选】页面顶部图片<br>mathjax    【可选】显示mathjax (当设置mathjax的per_page: false时，才需要配置，默认 false)<br>katex    【可选】显示katex (当设置katex的per_page: false时，才需要配置，默认 false)<br>aside    【可选】显示侧边栏 (默认 true)<br>aplayer    【可选】在需要的页面加载aplayer的js和css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开 (true/false) (默认为设置中highlight_shrink的配置)<br>random    【可选】配置友情链接是否随机排序（默认为 false)</p>
+<hr>
+<h2 id="Post-Front-matter"><a href="#Post-Front-matter" class="headerlink" title="Post Front-matter"></a>Post Front-matter</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title:</span><br><span class="line">date:</span><br><span class="line">updated:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">keywords:</span><br><span class="line">description:</span><br><span class="line">top<span class="emphasis">_img:</span></span><br><span class="line"><span class="emphasis">comments:</span></span><br><span class="line"><span class="emphasis">cover:</span></span><br><span class="line"><span class="emphasis">toc:</span></span><br><span class="line"><span class="emphasis">toc_</span>number:</span><br><span class="line">toc<span class="emphasis">_style_</span>simple:</span><br><span class="line">copyright:</span><br><span class="line">copyright<span class="emphasis">_author:</span></span><br><span class="line"><span class="emphasis">copyright_</span>author<span class="emphasis">_href:</span></span><br><span class="line"><span class="emphasis">copyright_</span>url:</span><br><span class="line">copyright<span class="emphasis">_info:</span></span><br><span class="line"><span class="emphasis">mathjax:</span></span><br><span class="line"><span class="emphasis">katex:</span></span><br><span class="line"><span class="emphasis">aplayer:</span></span><br><span class="line"><span class="emphasis">highlight_</span>shrink:</span><br><span class="line">aside:</span><br><span class="line">abcjs:</span><br></pre></td></tr></table></figure>
+<p>写法    解释<br>title    【必需】文章标题<br>date    【必需】文章创建日期<br>updated    【可选】文章更新日期<br>tags    【可选】文章标签<br>categories    【可选】文章分类<br>keywords    【可选】文章关键字<br>description    【可选】文章描述<br>top_img    【可选】文章顶部图片<br>cover    【可选】文章缩略图(如果没有设置top_img,文章页顶部将显示缩略图，可设为false/图片地址/留空)<br>comments    【可选】显示文章评论模块(默认 true)<br>toc    【可选】显示文章TOC(默认为设置中toc的enable配置)<br>toc_number    【可选】显示toc_number(默认为设置中toc的number配置)<br>toc_style_simple    【可选】显示 toc 简洁模式<br>copyright    【可选】显示文章版权模块(默认为设置中post_copyright的enable配置)<br>copyright_author    【可选】文章版权模块的文章作者<br>copyright_author_href    【可选】文章版权模块的文章作者链接<br>copyright_url    【可选】文章版权模块的文章连结链接<br>copyright_info    【可选】文章版权模块的版权声明文字<br>mathjax    【可选】显示mathjax(当设置 mathjax 的 per_page: false 时，才需要配置，默认 false )<br>katex    【可选】显示 katex (当设置 katex 的 per_page: false 时，才需要配置，默认 false )<br>aplayer    【可选】在需要的页面加载 aplayer 的 js 和 css,请参考文章下面的音乐 配置<br>highlight_shrink    【可选】配置代码框是否展开(true/false)(默认为设置中 highlight_shrink 的配置)<br>aside    【可选】显示侧边栏 (默认 true)<br>abcjs    【可选】加载 abcjs (当设置 abcjs 的 per_page: false 时，才需要配置，默认 false )</p>
+]]></content>
+      <tags>
+        <tag>hexo 教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夸克自动签到转存到emby</title>
+    <url>/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/</url>
+    <content><![CDATA[<h1 id="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"><a href="#夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中" class="headerlink" title="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"></a>夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中</h1><p>b站视频地址：<a href="https://www.bilibili.com/video/BV1ry411a7Lt">https://www.bilibili.com/video/BV1ry411a7Lt</a></p>
+<h2 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h2><p>你有服务器或者nas等等，有docker或者青龙都行。</p>
+<p>由于nas在家关机了，我在外地。就不演示推到emby了。</p>
+<p>来自于<a href="https://github.com/Cp0204/quark-auto-save">Cp0204/quark-auto-save: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙 (github.com)</a></p>
+<h2 id="二、青龙搭建"><a href="#二、青龙搭建" class="headerlink" title="二、青龙搭建"></a>二、青龙搭建</h2><p>青龙命令一键就OK</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ql repo https://github.com/Cp0204/quark-auto-save.git &quot;quark&quot; &quot;&quot; &quot;notify&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.xisoul.cn/img/6676bdb6cce4e.webp" alt="PixPin_2024-05-19_14-41-40"></p>
+<p>然后执行拉库。</p>
+<p>夸克网页版地址：<a href="https://pan.quark.cn/list#/list/all">夸克网盘 (quark.cn)</a>直接F12刷新找到cookie</p>
+<p><img src="https://pic.xisoul.cn/img/6676c3f0f3455.webp" alt="PixPin_2024-05-19_15-22-35"></p>
+<p>直接到此处配置cookie，不是直接使用环境变量。全部复制，粘贴到青龙里面。注意这里不能直接粘贴，我们点击编辑按钮，再进行粘贴，然后保存。</p>
+<p>我们可以测试一下，已经签到成功了，不过任务没有配置。不能转存。以下是json文件，需要的自取。</p>
+<p>正则学习地址：<a href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程 (deerchao.cn)</a></p>
+<p>觉得麻烦的可以直接让ai帮你写。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookie&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//请用手机验证码登录，CK比较完整！</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie1, Only this one will do save task.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie2, Only sign after this.&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;push_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">//无此字段则从环境变量（青龙设置）读取通知设置</span></span><br><span class="line">    <span class="attr">&quot;QUARK_SIGN_NOTIFY&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//是否发送签到成功通知，也可在环境变量中设置</span></span><br><span class="line">    <span class="attr">&quot;QYWX_AM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">//企业微信应用通知示例</span></span><br><span class="line">    <span class="attr">&quot;其他推送渠道//此项可删&quot;</span><span class="punctuation">:</span> <span class="string">&quot;配置方法同青龙&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;emby&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://yourdomain.com:8096&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;apikey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span> <span class="comment">//在后台 高级-API秘钥 中生成</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tasklist&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//无任务则只签到</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;taskname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;shareurl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://pan.quark.cn/s/39xxxx35#/list/share/17xxxx72-鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;savepath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/video/tv/鸣xx年/S01&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;pattern&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^广告内容(\\d+).(mp4|mkv)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\\1.\\2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enddate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-01-30&quot;</span><span class="punctuation">,</span>  <span class="comment">//可选，结束日期</span></span><br><span class="line">      <span class="attr">&quot;emby_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>            <span class="comment">//可选，缺省时按taskname搜索匹配，为0时强制不匹配</span></span><br><span class="line">      <span class="attr">&quot;ignore_extension&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//可选，忽略后缀</span></span><br><span class="line">      <span class="attr">&quot;runweek&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//可选，指定星期几执行，无此字段则均执行</span></span><br><span class="line">      <span class="attr">&quot;update_subdir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">// 可选，子目录递归更新的正则表达式，如 &quot;4k|1080p&quot;</span></span><br><span class="line">      <span class="comment">// 以下字段无需配置</span></span><br><span class="line">      <span class="attr">&quot;shareurl_ban&quot;</span><span class="punctuation">:</span> <span class="string">&quot;分享地址已失效&quot;</span> <span class="comment">//记录分享是否失效；如有此字段将跳过任务，更新链接后请手动删去</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、docker搭建"><a href="#三、docker搭建" class="headerlink" title="三、docker搭建"></a>三、docker搭建</h2><p>我这里已经装了1panel面板，其实任何面板直接ssh命令都是可以的方法大同小异。</p>
+<p>安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name quark-auto-save \</span><br><span class="line">  -p 5005:5005 \</span><br><span class="line">  -e WEBUI_USERNAME=admin \</span><br><span class="line">  -e WEBUI_PASSWORD=admin123 \</span><br><span class="line">  -v ./quark-auto-save/config:/app/config \</span><br><span class="line">  -v /etc/localtime:/etc/localtime \</span><br><span class="line">  --network bridge \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  cp0204/quark-auto-save:latest</span><br></pre></td></tr></table></figure>
+<p>更新命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR quark-auto-save</span><br></pre></td></tr></table></figure>
+<p>管理地址：<a href="http://yourhost:5005/">http://yourip:5005</a></p>
+<p>登录账号密码在环境变量中，可以自行修改。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境变量</th>
+<th>默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>WEBUI_USERNAME</code></td>
+<td><code>admin</code></td>
+<td>管理账号</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>WEBUI_PASSWORD</code></td>
+<td><code>admin123</code></td>
+<td>管理密码</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <tags>
+        <tag>自动签到</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电脑卸载软件推荐，解决卸载不干净问题</title>
+    <url>/2024/03/18/%E7%94%B5%E8%84%91%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%8D%B8%E8%BD%BD%E4%B8%8D%E5%B9%B2%E5%87%80%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>问题出现在我win11笔记本，电脑里面有office了，之前用的比较习惯，然后电脑里面又有WPS，所以正常按照卸载流程卸载，卸载不干净。问了好多人，网上查阅资料还是不行。有部分人会出现这个问题。</p>
+</blockquote>
+<h1 id="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"><a href="#问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。" class="headerlink" title="问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。"></a>问题：WPS卸载不干净，右键新建还存在WPS的选项，默认方式还是office。</h1><p>之前出现这个问题，网上的方法：</p>
+<p>一、删除WPS注册表。</p>
+<p>二、然后再就是重装，改默认然后再卸载。</p>
+<p>以上两种方法我都试过了，我通过软件卸载后我大概知道问题出在哪，就是注册表删除不干净。我在使用第一种方法的时候，删除了几条注册表之后还是不行。所以转用第二种方法，我又在官网上面下载了WPS，然后改了修复，改了默认卸载还是不行。最后用软件删除注册表，里面大概有2000多条。</p>
+<hr>
+<h1 id="解决：使用HiBit-uninstaller卸载"><a href="#解决：使用HiBit-uninstaller卸载" class="headerlink" title="解决：使用HiBit uninstaller卸载"></a>解决：使用HiBit uninstaller卸载</h1><p>为什么卸载软件那么多推荐这款，因为比较轻量，功能齐全，免费。</p>
+<p>官网：<a href="https://hibitsoft.ir/">HiBitSoftware</a></p>
+<p><img src="https://pic.xisoul.cn/img/6676b43a6363a.png" alt="1"></p>
+<p>点击下载安装就可以了。</p>
+<p><img src="https://pic.xisoul.cn/img/6676b441748e8.png" alt="2"></p>
+<p>勾选所要卸载的软件，这里也可以多选，然后点击卸载所选项</p>
+<p><img src="https://pic.xisoul.cn/img/6676b4467c3e5.png" alt="3"></p>
+<p>点击启动，卸载完之后这里就变成了扫描。</p>
+<p><img src="https://pic.xisoul.cn/img/6676b44cc9b40.png" alt="4">然后就跳出扫描剩余项，拉倒下面我们看到，电脑残留的文件，还有注册表。</p>
+<p><img src="https://pic.xisoul.cn/img/6676b45269e18.png" alt="5"></p>
+<p>创建备份和日志报告，有分析需求的同志可以的打开。然后点击完成就OK了。</p>
+<p><img src="https://pic.xisoul.cn/img/6676b384b150c.png" alt="6"></p>
+<p>工具里面有很多功能，可以找到自己电脑里面的垃圾文件，和没用的注册表，也可以将软件添加到上下文菜单（也就是鼠标右键）以后使用也方便。</p>
+]]></content>
+      <tags>
+        <tag>软件推荐</tag>
         <tag>解决的问题</tag>
       </tags>
   </entry>
