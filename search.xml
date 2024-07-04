@@ -901,4 +901,83 @@
         <tag>解决的问题</tag>
       </tags>
   </entry>
+  <entry>
+    <title>1panel搭建halo+alist+兰空图床</title>
+    <url>/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<blockquote>
+<p>由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。</p>
+</blockquote>
+<h1 id="一、安装1panel"><a href="#一、安装1panel" class="headerlink" title="一、安装1panel"></a>一、安装1panel</h1><p>1panel官方链接：<a href="https://1panel.cn/docs/installation/online_installation/">在线安装 - 1Panel 文档</a></p>
+<p>为什么使用1panel，这玩意里面应用纯纯都是docker，备份方便。管理也方便。都是隔离开的，不用担心环境问题。基本装了就能跑。</p>
+<p>根据自己服务器系统选择，直接复制命令一路回车。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bb5d3a756.webp" alt="image-20240704121348474"></p>
+<p>非大陆服务器需要先安装docker，大陆服务器用1panel一路回车。<img src="https://pic.xisoul.cn/img/6686bbdc81542.webp" alt="image-20240704122013393"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bbe2dd7f4.webp" alt="image-20240704123024615"></p>
+<p>复制外网地址，面板用户密码保存好。浏览器打开这个页面就是成功了。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bbf08464a.webp" alt="image-20240704123245376"></p>
+<p>1panel的应用基于docker，非大陆的服务器最好换源使用。大陆不用换用，直接用1p源就行。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bbf33bb32.webp" alt="image-20240704123643285"></p>
+<h1 id="二、安装PostgreSQL"><a href="#二、安装PostgreSQL" class="headerlink" title="二、安装PostgreSQL"></a>二、安装PostgreSQL</h1><p>在应用商店中找到PostgreSQL安装。这里推荐postgresql内存占用比MySQL小。当然根据你自己喜好选择。</p>
+<p>应用商店-数据库</p>
+<p>记得勾选端口外部访问</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc09f03d9.webp" alt="image-20240704124540739"></p>
+<h1 id="三、配置网站自签证书"><a href="#三、配置网站自签证书" class="headerlink" title="三、配置网站自签证书"></a>三、配置网站自签证书</h1><p>这里安装空闲时间可以先配置证书账户</p>
+<p>顺便将二级域也在cf解析一下</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc0f97c7c.webp" alt="image-20240704195003568"></p>
+<p>网站-证书</p>
+<p>这里推荐DNS账户方式，选择DNS账户方式，每个运营商的配置方式不同。</p>
+<p>改版了，api获取参考：<a href="https://forum.rainyun.com/t/topic/6777">1Panel CloudFlare证书申请失败的解决方案 - 综合讨论 - 雨云论坛 (rainyun.com)</a></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc1297b70.webp" alt="image-20240704124738403"></p>
+<p>创建一个ACME账户，主要密钥算法使用RSA2048</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc1978557.webp" alt="image-20240704141630990"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc2bcc402.webp" alt="image-20240704141705601"></p>
+<p>配置完后，直接安装后面的。等会安装配置完再来配置证书反代。</p>
+<p>当所有安装完毕后，我们来配置证书自签反代。</p>
+<p>点击网站提示安装openresty直接安装就好了，这玩意根据nginx来的<img src="https://pic.xisoul.cn/img/6686bc2d7e870.webp" alt="image-20240704140254477"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc57ad6be.webp" alt="image-20240704140005652"></p>
+<h1 id="四、安装halo"><a href="#四、安装halo" class="headerlink" title="四、安装halo"></a>四、安装halo</h1><p>halo点击安装，都是傻瓜式的安装方法，配置问题的情况。</p>
+<p>数据库记得选择你对应的版本，记得勾选外部端口访问。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc9231799.webp" alt="image-20240704125242282"></p>
+<p>记得修改halo容器的域名，修改完成后重启。这步要是不修改的话，后面你Halo可能会出现很多问题，比如装了一些插件，文章500有些会全局500。还有就是插件授权可能会出现问题。他识别你的域名的是location:8090。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc9a76818.webp" alt="image-20240704193310573">安装完成后，ip+端口访问（默认8090)，这里不要忙着初始化，先把容器域名改了。后面再配置域名证书。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bca2e3996.webp" alt="image-20240704130758379">找到你的halo域名点进去</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcaa5dd35.webp" alt="image-20240704141804916"></p>
+<h1 id="五、安装alist"><a href="#五、安装alist" class="headerlink" title="五、安装alist"></a>五、安装alist</h1><p>应用商店-实用工具</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcb0e63d8.webp" alt="image-20240704125418541"></p>
+<p>默认密码去容器找到alist后面点击终端然后连接,输入下面的命令自己设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./alist admin set 你自己要设置的密码</span><br></pre></td></tr></table></figure>
+<p>直接ip+端口访问（默认5244），后面再反代<img src="https://pic.xisoul.cn/img/6686bcb793c59.webp" alt="image-20240704130535721"></p>
+<p>这样就登录成功了，下面有管理，可以自行配置。<img src="https://pic.xisoul.cn/img/6686bcbeb2a87.webp" alt="image-20240704130612902"></p>
+<p>创建反代<img src="https://pic.xisoul.cn/img/6686bcc6066e9.webp" alt="image-20240704143035818"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bcccf1da8.webp" alt="image-20240704143705459"></p>
+<p>反代完之后要在容器里面重新设置一遍密码。开了https反代后原密码登陆不进去。</p>
+<p>alist怎么使用直接参考官方文档，跟这教程无脑操作就行。</p>
+<h1 id="六、安装兰空图床"><a href="#六、安装兰空图床" class="headerlink" title="六、安装兰空图床"></a>六、安装兰空图床</h1><blockquote>
+<p>兰空注意几点就是你服务器内存够不够大，如果空间足够的情况下，就没必要降画质。你服务器内存和CPU不行的情况下也别降画质开水印，多线程。容易爆内存，卡死。还有就是用户组里面的文件命名不用管，路径这个东西，如果你使用的网盘（建议别用，容易G），路径可以不管，要是使用的相册之内的只能一个文件的，不能多层文件夹，你设置路径直接会导致上传失败。</p>
+</blockquote>
+<p>应用商店-云存储</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcd3bbf90.webp" alt="image-20240704125701030"></p>
+<p>访问ip+端口（默认40027）</p>
+<p>容器安装环境应该都是全的。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcdeae5f0.webp" alt="image-20240704131344608"></p>
+<p>这里报错了<img src="https://pic.xisoul.cn/img/6686bce4d5375.webp" alt="image-20240704131800952"></p>
+<p>我自己手动创建一个数据库。填入到对应里面</p>
+<p><img src="https://pic.xisoul.cn/img/6686bceb32663.webp" alt="image-20240704132211417"></p>
+<p>数据库连接地址直接用容器的。</p>
+<p>数据库名用的LskyPro，密码直接复制即可</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcf1e37ff.webp" alt="image-20240704132041415"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bcfab3fbd.webp" alt="image-20240704132253279"></p>
+<p>创建网站反代</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd02905df.webp" alt="image-20240704143509157"></p>
+<p>如果你直接使用webdav挂载到兰空，可以根据我这样创建图片转发反代。如果你用的oss，请忽略下面步骤。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd0a6c6dc.webp" alt="image-20240704180606575"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bd135dd7b.webp" alt="image-20240704180634668"></p>
+<p>兰空里面创建存储策略，访问域名后面加<strong>/img</strong>，路径就是你alist的挂载路径，前面记得加上<strong>/dav</strong>。加密用<strong>Basic</strong>，网页访问alist的webdav没用的，alist webdav没做界面。但是可以直接用。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd1add680.webp" alt="image-20240704212901629"></p>
+<p>当你弄完这些，可以直接使用picgo或者piclist加上兰空，就可以愉快玩耍了，当然你也可以直接使用alist的webdav</p>
+]]></content>
+      <tags>
+        <tag>-安装教程 -Halo</tag>
+      </tags>
+  </entry>
 </search>

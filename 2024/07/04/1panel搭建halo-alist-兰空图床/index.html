@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>1panel搭建halo+alist+兰空图床 | XiSoul Blog's</title><meta name="author" content="XiSoul"><meta name="copyright" content="XiSoul"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。  一、安装1panel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1panel搭建halo+alist+兰空图床">
+<meta property="og:url" content="https://blog.xisoul.cn/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/index.html">
+<meta property="og:site_name" content="XiSoul Blog&#39;s">
+<meta property="og:description" content="由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。  一、安装1panel">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picsum.photos/329/235?random=11">
+<meta property="article:published_time" content="2024-07-04T04:09:40.000Z">
+<meta property="article:modified_time" content="2024-07-04T15:23:25.923Z">
+<meta property="article:author" content="XiSoul">
+<meta property="article:tag" content="-安装教程 -Halo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picsum.photos/329/235?random=11"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.xisoul.cn/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8682792909775456',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?87097a5eeac3ad135cafb8503d0da9c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GMK6TW981Q"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GMK6TW981Q');
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "lehv0ja1il");</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '1panel搭建halo+alist+兰空图床',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-04 23:23:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/03/10/JmEDdXML6VuSQrw.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://picsum.photos/329/235?random=11')"><nav id="nav"><span id="blog-info"><a href="/" title="XiSoul Blog's"><img class="site-icon" src="https://s2.loli.net/2024/03/10/JYuUIzSrPBCHeFl.png"/><span class="site-name">XiSoul Blog's</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">1panel搭建halo+alist+兰空图床</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-04T04:09:40.000Z" title="发表于 2024-07-04 12:09:40">2024-07-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-04T15:23:25.923Z" title="更新于 2024-07-04 23:23:25">2024-07-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="1panel搭建halo+alist+兰空图床"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。</p>
+</blockquote>
+<h1 id="一、安装1panel"><a href="#一、安装1panel" class="headerlink" title="一、安装1panel"></a>一、安装1panel</h1><p>1panel官方链接：<a target="_blank" rel="noopener" href="https://1panel.cn/docs/installation/online_installation/">在线安装 - 1Panel 文档</a></p>
+<p>为什么使用1panel，这玩意里面应用纯纯都是docker，备份方便。管理也方便。都是隔离开的，不用担心环境问题。基本装了就能跑。</p>
+<p>根据自己服务器系统选择，直接复制命令一路回车。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bb5d3a756.webp" alt="image-20240704121348474"></p>
+<p>非大陆服务器需要先安装docker，大陆服务器用1panel一路回车。<img src="https://pic.xisoul.cn/img/6686bbdc81542.webp" alt="image-20240704122013393"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bbe2dd7f4.webp" alt="image-20240704123024615"></p>
+<p>复制外网地址，面板用户密码保存好。浏览器打开这个页面就是成功了。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bbf08464a.webp" alt="image-20240704123245376"></p>
+<p>1panel的应用基于docker，非大陆的服务器最好换源使用。大陆不用换用，直接用1p源就行。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bbf33bb32.webp" alt="image-20240704123643285"></p>
+<h1 id="二、安装PostgreSQL"><a href="#二、安装PostgreSQL" class="headerlink" title="二、安装PostgreSQL"></a>二、安装PostgreSQL</h1><p>在应用商店中找到PostgreSQL安装。这里推荐postgresql内存占用比MySQL小。当然根据你自己喜好选择。</p>
+<p>应用商店-数据库</p>
+<p>记得勾选端口外部访问</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc09f03d9.webp" alt="image-20240704124540739"></p>
+<h1 id="三、配置网站自签证书"><a href="#三、配置网站自签证书" class="headerlink" title="三、配置网站自签证书"></a>三、配置网站自签证书</h1><p>这里安装空闲时间可以先配置证书账户</p>
+<p>顺便将二级域也在cf解析一下</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc0f97c7c.webp" alt="image-20240704195003568"></p>
+<p>网站-证书</p>
+<p>这里推荐DNS账户方式，选择DNS账户方式，每个运营商的配置方式不同。</p>
+<p>改版了，api获取参考：<a target="_blank" rel="noopener" href="https://forum.rainyun.com/t/topic/6777">1Panel CloudFlare证书申请失败的解决方案 - 综合讨论 - 雨云论坛 (rainyun.com)</a></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc1297b70.webp" alt="image-20240704124738403"></p>
+<p>创建一个ACME账户，主要密钥算法使用RSA2048</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc1978557.webp" alt="image-20240704141630990"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc2bcc402.webp" alt="image-20240704141705601"></p>
+<p>配置完后，直接安装后面的。等会安装配置完再来配置证书反代。</p>
+<p>当所有安装完毕后，我们来配置证书自签反代。</p>
+<p>点击网站提示安装openresty直接安装就好了，这玩意根据nginx来的<img src="https://pic.xisoul.cn/img/6686bc2d7e870.webp" alt="image-20240704140254477"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bc57ad6be.webp" alt="image-20240704140005652"></p>
+<h1 id="四、安装halo"><a href="#四、安装halo" class="headerlink" title="四、安装halo"></a>四、安装halo</h1><p>halo点击安装，都是傻瓜式的安装方法，配置问题的情况。</p>
+<p>数据库记得选择你对应的版本，记得勾选外部端口访问。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc9231799.webp" alt="image-20240704125242282"></p>
+<p>记得修改halo容器的域名，修改完成后重启。这步要是不修改的话，后面你Halo可能会出现很多问题，比如装了一些插件，文章500有些会全局500。还有就是插件授权可能会出现问题。他识别你的域名的是location:8090。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bc9a76818.webp" alt="image-20240704193310573">安装完成后，ip+端口访问（默认8090)，这里不要忙着初始化，先把容器域名改了。后面再配置域名证书。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bca2e3996.webp" alt="image-20240704130758379">找到你的halo域名点进去</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcaa5dd35.webp" alt="image-20240704141804916"></p>
+<h1 id="五、安装alist"><a href="#五、安装alist" class="headerlink" title="五、安装alist"></a>五、安装alist</h1><p>应用商店-实用工具</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcb0e63d8.webp" alt="image-20240704125418541"></p>
+<p>默认密码去容器找到alist后面点击终端然后连接,输入下面的命令自己设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./alist admin set 你自己要设置的密码</span><br></pre></td></tr></table></figure>
+<p>直接ip+端口访问（默认5244），后面再反代<img src="https://pic.xisoul.cn/img/6686bcb793c59.webp" alt="image-20240704130535721"></p>
+<p>这样就登录成功了，下面有管理，可以自行配置。<img src="https://pic.xisoul.cn/img/6686bcbeb2a87.webp" alt="image-20240704130612902"></p>
+<p>创建反代<img src="https://pic.xisoul.cn/img/6686bcc6066e9.webp" alt="image-20240704143035818"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bcccf1da8.webp" alt="image-20240704143705459"></p>
+<p>反代完之后要在容器里面重新设置一遍密码。开了https反代后原密码登陆不进去。</p>
+<p>alist怎么使用直接参考官方文档，跟这教程无脑操作就行。</p>
+<h1 id="六、安装兰空图床"><a href="#六、安装兰空图床" class="headerlink" title="六、安装兰空图床"></a>六、安装兰空图床</h1><blockquote>
+<p>兰空注意几点就是你服务器内存够不够大，如果空间足够的情况下，就没必要降画质。你服务器内存和CPU不行的情况下也别降画质开水印，多线程。容易爆内存，卡死。还有就是用户组里面的文件命名不用管，路径这个东西，如果你使用的网盘（建议别用，容易G），路径可以不管，要是使用的相册之内的只能一个文件的，不能多层文件夹，你设置路径直接会导致上传失败。</p>
+</blockquote>
+<p>应用商店-云存储</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcd3bbf90.webp" alt="image-20240704125701030"></p>
+<p>访问ip+端口（默认40027）</p>
+<p>容器安装环境应该都是全的。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcdeae5f0.webp" alt="image-20240704131344608"></p>
+<p>这里报错了<img src="https://pic.xisoul.cn/img/6686bce4d5375.webp" alt="image-20240704131800952"></p>
+<p>我自己手动创建一个数据库。填入到对应里面</p>
+<p><img src="https://pic.xisoul.cn/img/6686bceb32663.webp" alt="image-20240704132211417"></p>
+<p>数据库连接地址直接用容器的。</p>
+<p>数据库名用的LskyPro，密码直接复制即可</p>
+<p><img src="https://pic.xisoul.cn/img/6686bcf1e37ff.webp" alt="image-20240704132041415"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bcfab3fbd.webp" alt="image-20240704132253279"></p>
+<p>创建网站反代</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd02905df.webp" alt="image-20240704143509157"></p>
+<p>如果你直接使用webdav挂载到兰空，可以根据我这样创建图片转发反代。如果你用的oss，请忽略下面步骤。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd0a6c6dc.webp" alt="image-20240704180606575"></p>
+<p><img src="https://pic.xisoul.cn/img/6686bd135dd7b.webp" alt="image-20240704180634668"></p>
+<p>兰空里面创建存储策略，访问域名后面加<strong>/img</strong>，路径就是你alist的挂载路径，前面记得加上<strong>/dav</strong>。加密用<strong>Basic</strong>，网页访问alist的webdav没用的，alist webdav没做界面。但是可以直接用。</p>
+<p><img src="https://pic.xisoul.cn/img/6686bd1add680.webp" alt="image-20240704212901629"></p>
+<p>当你弄完这些，可以直接使用picgo或者piclist加上兰空，就可以愉快玩耍了，当然你也可以直接使用alist的webdav</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.xisoul.cn">XiSoul</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.xisoul.cn/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/">https://blog.xisoul.cn/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.xisoul.cn" target="_blank">XiSoul Blog's</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Halo/">-安装教程 -Halo</a></div><div class="post_share"><div class="social-share" data-image="https://picsum.photos/329/235?random=11" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/" title="使用cloudflare-works搭建自己docker加速源"><img class="cover" src="https://picsum.photos/329/235?random=10" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">使用cloudflare-works搭建自己docker加速源</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/03/10/JmEDdXML6VuSQrw.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiSoul</div><div class="author-info__description">This is a blog in order to record my learning and growth.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xisoul"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/XiSoul" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xisoul@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%851panel"><span class="toc-number">1.</span> <span class="toc-text">一、安装1panel</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85PostgreSQL"><span class="toc-number">2.</span> <span class="toc-text">二、安装PostgreSQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"><span class="toc-number">3.</span> <span class="toc-text">三、配置网站自签证书</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85halo"><span class="toc-number">4.</span> <span class="toc-text">四、安装halo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85alist"><span class="toc-number">5.</span> <span class="toc-text">五、安装alist</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%89%E8%A3%85%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A"><span class="toc-number">6.</span> <span class="toc-text">六、安装兰空图床</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/" title="1panel搭建halo+alist+兰空图床"><img src="https://picsum.photos/329/235?random=11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1panel搭建halo+alist+兰空图床"/></a><div class="content"><a class="title" href="/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/" title="1panel搭建halo+alist+兰空图床">1panel搭建halo+alist+兰空图床</a><time datetime="2024-07-04T04:09:40.000Z" title="发表于 2024-07-04 12:09:40">2024-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/" title="使用cloudflare-works搭建自己docker加速源"><img src="https://picsum.photos/329/235?random=10" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用cloudflare-works搭建自己docker加速源"/></a><div class="content"><a class="title" href="/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/" title="使用cloudflare-works搭建自己docker加速源">使用cloudflare-works搭建自己docker加速源</a><time datetime="2024-06-20T14:53:52.000Z" title="发表于 2024-06-20 22:53:52">2024-06-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/20/nvm%E7%AE%A1%E7%90%86node-js%E7%89%88%E6%9C%AC/" title="nvm管理node.js版本"><img src="https://picsum.photos/329/235?random=9" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nvm管理node.js版本"/></a><div class="content"><a class="title" href="/2024/06/20/nvm%E7%AE%A1%E7%90%86node-js%E7%89%88%E6%9C%AC/" title="nvm管理node.js版本">nvm管理node.js版本</a><time datetime="2024-06-20T10:05:13.000Z" title="发表于 2024-06-20 18:05:13">2024-06-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/" title="夸克自动签到转存到emby"><img src="https://picsum.photos/329/235?random=8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="夸克自动签到转存到emby"/></a><div class="content"><a class="title" href="/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/" title="夸克自动签到转存到emby">夸克自动签到转存到emby</a><time datetime="2024-05-19T06:31:31.000Z" title="发表于 2024-05-19 14:31:31">2024-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Spring5入门笔记"><img src="https://picsum.photos/329/235?random=8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring5入门笔记"/></a><div class="content"><a class="title" href="/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Spring5入门笔记">Spring5入门笔记</a><time datetime="2024-04-17T13:33:14.000Z" title="发表于 2024-04-17 21:33:14">2024-04-17</time></div></div></div></div></div></div></main><footer id="footer" style="background: rgba(255, 255, 255, 0.5)"><div id="footer-wrap"><div class="copyright">&copy;2024 By XiSoul</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20234060" target="_blank">萌ICP备20234060号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'd0b9a1882837c3232fdf',
+      clientSecret: '5fd9478eec8b11819840a3e8ac9c3cd43f581d96',
+      repo: 'XiSoul/xisoul.github.io',
+      owner: 'XiSoul',
+      admin: ['XiSoul'],
+      id: '09090cfce42ce3fbcf5f3b7ced524c58',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script>(() => {
+  const isChatBtn = false
+  const isChatHideShow = false
+
+  if (isChatBtn) {
+    const close = () => {
+      Chatra('minimizeWidget')
+      Chatra('hide')
+    }
+
+    const open = () => {
+      Chatra('openChat', true)
+      Chatra('show')
+    }
+
+    window.ChatraSetup = {
+      startHidden: true
+    }
+  
+    window.chatBtnFn = () => {
+      const isShow = document.getElementById('chatra').classList.contains('chatra--expanded')
+      isShow ? close() : open()
+    }
+  } else if (isChatHideShow) {
+    window.chatBtn = {
+      hide: () => {
+        Chatra('hide')
+      },
+      show: () => {
+        Chatra('show')
+      }
+    }
+  }
+
+  (function(d, w, c) {
+    w.ChatraID = 'wu58Fkppjr3xxuXTx'
+    var s = d.createElement('script')
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments)
+    }
+    s.async = true
+    s.src = 'https://call.chatra.io/chatra.js'
+    if (d.head) d.head.appendChild(s)
+  })(document, window, 'Chatra')
+
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
