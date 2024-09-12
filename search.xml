@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AI绘画拉取模型失败，DOS开启代理</title>
+    <url>/2024/04/02/AI%E7%BB%98%E7%94%BB%E6%8B%89%E5%8F%96%E6%A8%A1%E5%9E%8B%E5%A4%B1%E8%B4%A5%EF%BC%8CDOS%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>我用了这么久的代理第一次知道DOS里面要开代理，惭愧惭愧。在我远程拉取模型的时候，挂科学也一直失败。在网上找报错找了很长时间没找到，最后经过一位群友的提示下，才知道问题出在DOS代理上面。</p>
+<p>直接看文章第一部分就行，要是直接tun不行，再看下面的</p>
+</blockquote>
+<h1 id="直接开启tun"><a href="#直接开启tun" class="headerlink" title="直接开启tun"></a>直接开启tun</h1><p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827992.png" alt="img"></p>
+<blockquote>
+<p>这个是V2的开启方法</p>
+</blockquote>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827993.png" alt="img"></p>
+<p>测试的时候发现一个问题，开启后不会立马生效需要等个十几秒左右，有可能是系统缓存没刷新<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827994.png" alt="img"></p>
+<h2 id="检查代理"><a href="#检查代理" class="headerlink" title="检查代理"></a>检查代理</h2><p>测试的时候<strong>不要</strong>直接ping，ping不走http。直接用curl。</p>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">curl -vv www.google.com</span><br></pre></td></tr></table></figure>
+<h1 id="Windows代理配置"><a href="#Windows代理配置" class="headerlink" title="Windows代理配置"></a>Windows代理配置</h1><p>单击「开始」，然后在搜索程序和文件框中键入 cmd。<br>在程序列表中右键单击 cmd.exe，然后单击以<strong>管理员身份运行</strong>。<br>键入命令 <strong>netsh winhttp set proxy host:port</strong> 设置代理，由于本机有运行 clash，所以这里设置代理为 127.0.0.1:7890，当然其他软件也有这个功能，自行摸索。</p>
+<h2 id="使用winhttp设置代理"><a href="#使用winhttp设置代理" class="headerlink" title="使用winhttp设置代理"></a>使用winhttp设置代理</h2><p>根据测试这种方法好像不太行</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827995.png" alt="img"></p>
+<h3 id="代理设置："><a href="#代理设置：" class="headerlink" title="代理设置："></a>代理设置：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp <span class="built_in">set</span> proxy <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh winhttp set proxy 127.0.0.1:7897</span><br><span class="line"></span><br><span class="line">当前的 WinHTTP 代理服务器设置:</span><br><span class="line"></span><br><span class="line">    代理服务器:  127.0.0.1:7897</span><br><span class="line">    绕过列表     :  (无)</span><br><span class="line"></span><br><span class="line">C:\WINDOWS\system32&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看代理："><a href="#查看代理：" class="headerlink" title="查看代理："></a>查看代理：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp show proxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">show</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    代理服务器:  127.0.0.1:7897</span></span><br><span class="line"><span class="function">    绕过列表     :  (无)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="取消代理"><a href="#取消代理" class="headerlink" title="取消代理"></a>取消代理</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp reset proxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">reset</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    直接访问(没有代理服务器)。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用环境变量直接用set"><a href="#使用环境变量直接用set" class="headerlink" title="使用环境变量直接用set"></a>使用环境变量直接用set</h2><p>这种方法我也测试了，确实是代理了，但是跑不通。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827996.png" alt="img"></p>
+<p>注意不要直接在clash里面复制命令，因为那玩意复制了后面有空格</p>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set all_proxy=http://127.0.0.1:7897</span><br></pre></td></tr></table></figure>
+<p>查看环境变量 直接cmd里面输入 <strong>set</strong> 在里面就能看到我们刚刚设置的代理了</p>
+<p><strong>电脑重启之后还需要重新配置，set是临时变量</strong></p>
+]]></content>
+      <tags>
+        <tag>-解决的问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1panel搭建halo+alist+兰空图床</title>
+    <url>/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<blockquote>
+<p>由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。</p>
+</blockquote>
+<h1 id="一、安装1panel"><a href="#一、安装1panel" class="headerlink" title="一、安装1panel"></a>一、安装1panel</h1><p>1panel官方链接：<a href="https://1panel.cn/docs/installation/online_installation/">在线安装 - 1Panel 文档</a></p>
+<p>为什么使用1panel，这玩意里面应用纯纯都是docker，备份方便。管理也方便。都是隔离开的，不用担心环境问题。基本装了就能跑。</p>
+<p>根据自己服务器系统选择，直接复制命令一路回车。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845540.png" alt="img"></p>
+<p>非大陆服务器需要先安装docker，大陆服务器用1panel一路回车。<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845541.png" alt="img"></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845542.png" alt="img"></p>
+<p>复制外网地址，面板用户密码保存好。浏览器打开这个页面就是成功了。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845543.png" alt="img"></p>
+<p>1panel的应用基于docker，非大陆的服务器最好换源使用。大陆不用换用，直接用1p源就行。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845544.png" alt="img"></p>
+<h1 id="二、安装PostgreSQL"><a href="#二、安装PostgreSQL" class="headerlink" title="二、安装PostgreSQL"></a>二、安装PostgreSQL</h1><p>在应用商店中找到PostgreSQL安装。这里推荐postgresql内存占用比MySQL小。当然根据你自己喜好选择。</p>
+<p>应用商店-数据库</p>
+<p>记得勾选端口外部访问</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845545.png" alt="img"></p>
+<h1 id="三、配置网站自签证书"><a href="#三、配置网站自签证书" class="headerlink" title="三、配置网站自签证书"></a>三、配置网站自签证书</h1><p>这里安装空闲时间可以先配置证书账户</p>
+<p>顺便将二级域也在cf解析一下</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845546.png" alt="img"></p>
+<p>网站-证书</p>
+<p>这里推荐DNS账户方式，选择DNS账户方式，每个运营商的配置方式不同。</p>
+<p>改版了，api获取参考：<a href="https://forum.rainyun.com/t/topic/6777">1Panel CloudFlare证书申请失败的解决方案 - 综合讨论 - 雨云论坛 (rainyun.com)</a></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845547.png" alt="img"></p>
+<p>创建一个ACME账户，主要密钥算法使用RSA2048</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845548.png" alt="img"></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845549.png" alt="img"></p>
+<p>配置完后，直接安装后面的。等会安装配置完再来配置证书反代。</p>
+<p>当所有安装完毕后，我们来配置证书自签反代。</p>
+<p>点击网站提示安装openresty直接安装就好了，这玩意根据nginx来的<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845550.png" alt="img"></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845551.png" alt="img"></p>
+<h1 id="四、安装halo"><a href="#四、安装halo" class="headerlink" title="四、安装halo"></a>四、安装halo</h1><p>halo点击安装，都是傻瓜式的安装方法，配置问题的情况。</p>
+<p>数据库记得选择你对应的版本，记得勾选外部端口访问。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845552.png" alt="img"></p>
+<p>记得修改halo容器的域名，修改完成后重启。这步要是不修改的话，后面你Halo可能会出现很多问题，比如装了一些插件，文章500有些会全局500。还有就是插件授权可能会出现问题。他识别你的域名的是location:8090。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845553.png" alt="img">安装完成后，ip+端口访问（默认8090)，这里不要忙着初始化，先把容器域名改了。后面再配置域名证书。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845554.png" alt="img">找到你的halo域名点进去</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845555.png" alt="img"></p>
+<h1 id="五、安装alist"><a href="#五、安装alist" class="headerlink" title="五、安装alist"></a>五、安装alist</h1><p>应用商店-实用工具</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845556.png" alt="img"></p>
+<p>默认密码去容器找到alist后面点击终端然后连接,输入下面的命令自己设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./alist admin set 你自己要设置的密码</span><br></pre></td></tr></table></figure>
+<p>直接ip+端口访问（默认5244），后面再反代<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845557.png" alt="img"></p>
+<p>这样就登录成功了，下面有管理，可以自行配置。<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845558.png" alt="img"></p>
+<p>创建反代<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845559.png" alt="img"><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845560.png" alt="img"></p>
+<p>反代完之后要在容器里面重新设置一遍密码。开了https反代后原密码登陆不进去。</p>
+<p>alist怎么使用直接参考官方文档，跟这教程无脑操作就行。</p>
+<h1 id="六、安装兰空图床"><a href="#六、安装兰空图床" class="headerlink" title="六、安装兰空图床"></a>六、安装兰空图床</h1><blockquote>
+<p>兰空注意几点就是你服务器内存够不够大，如果空间足够的情况下，就没必要降画质。你服务器内存和CPU不行的情况下也别降画质开水印，多线程。容易爆内存，卡死。还有就是用户组里面的文件命名不用管，路径这个东西，如果你使用的网盘（建议别用，容易G），路径可以不管，要是使用的相册之内的只能一个文件的，不能多层文件夹，你设置路径直接会导致上传失败。</p>
+</blockquote>
+<p>应用商店-云存储</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845561.png" alt="img"></p>
+<p>访问ip+端口（默认40027）</p>
+<p>容器安装环境应该都是全的。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845562.png" alt="img"></p>
+<p>这里报错了<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845563.png" alt="img"></p>
+<p>我自己手动创建一个数据库。填入到对应里面</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845564.png" alt="img"></p>
+<p>数据库连接地址直接用容器的。</p>
+<p>数据库名用的LskyPro，密码直接复制即可</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845565.png" alt="img"></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845566.png" alt="img"></p>
+<p>创建网站反代</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845567.png" alt="img"></p>
+<p>如果你直接使用webdav挂载到兰空，可以根据我这样创建图片转发反代。如果你用的oss，请忽略下面步骤。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845568.png" alt="img"></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845569.png" alt="img"></p>
+<p>兰空里面创建存储策略，访问域名后面加<strong>/img</strong>，路径就是你alist的挂载路径，前面记得加上<strong>/dav</strong>。加密用<strong>Basic</strong>，网页访问alist的webdav没用的，alist webdav没做界面。但是可以直接用。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845570.png" alt="img"></p>
+<p>当你弄完这些，可以直接使用picgo或者piclist加上兰空，就可以愉快玩耍了，当然你也可以直接使用alist的webdav</p>
+]]></content>
+      <tags>
+        <tag>-安装教程 -Halo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring5入门笔记</title>
     <url>/2024/04/17/Spring5%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="1-EJB存在的问题"><a href="#1-EJB存在的问题" class="headerlink" title="1.EJB存在的问题"></a>1.EJB存在的问题</h2><p>EJB（Enterprise Java Bean） </p>
@@ -60,61 +175,38 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客搭建</title>
-    <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <title>ai绘画基础总结（一）安装设置</title>
+    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<blockquote>
-<p>hexo博客自由度非常高，对小白来说，不太友好，配置容易出错。网上有很多教程，但是不知道问题在哪还是很容易踩坑，这里我就以我自己的博客搭建过程来讲解一下hexo+github+cloudflare来实现</p>
+<p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
 </blockquote>
-<p>这里引用一下有基础的同志可以参考一下：<a href="https://www.mubu.com/doc/C85kyZw3UU">https://www.mubu.com/doc/C85kyZw3UU</a><strong>首先声明，这个文档不是我写的，转载过来的，为了防止别人删除文档，所以我保存了一份</strong></p>
-<h1 id="一、下载安装必要的工具"><a href="#一、下载安装必要的工具" class="headerlink" title="一、下载安装必要的工具"></a>一、下载安装必要的工具</h1><h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1.安装node.js"></a>1.安装node.js</h2><p>这个是nodejs各个历史版本地址：<a href="https://nodejs.org/en/about/previous-releases">Node.js — Previous Releases (nodejs.org)</a></p>
+<h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838778.png" alt="img"></p>
+<p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
+<p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
+<p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
+<p><strong>疯狂ai启动器</strong>：<a href="https://www.bilibili.com/video/BV1VS421w7fb/">王炸来了！全新Comfyui疯狂Ai启动器,更加好用易用人性化兼容秋叶绘世整合包启动器_哔哩哔哩_bilibili</a>（在群里面薅过来的链接，当然b站也有）</p>
+<p><strong>Comflowy</strong>：<a href="https://www.comflowy.com/zh-CN">Comflowy 介绍 – Comflowy</a></p>
+<p><strong>普通版</strong>：</p>
+<p>123网盘下载地址：<a href="https://www.123pan.com/s/42q0Vv-SYvVd.html">https://www.123pan.com/s/42q0Vv-SYvVd.html</a><br>夸克网盘下载地址：<a href="https://pan.quark.cn/s/41aeb9394841">https://pan.quark.cn/s/41aeb9394841</a><br>百度网盘下载地址：<a href="https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1">https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1</a></p>
+<p><strong>开发者满血版</strong>：</p>
+<p>百度网盘:<br><a href="https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour">https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour</a><br>夸克网盘:<br><a href="https://pan.quark.cn/s/d306fa633fa7">https://pan.quark.cn/s/d306fa633fa7</a></p>
+<p><strong>嘟嘟嘟上传的整合包</strong>:<br><a href="https://www.123pan.com/s/42q0Vv-eXvVd.html">https://www.123pan.com/s/42q0Vv-eXvVd.html</a><br>提取码:KbrA 模型文件需要另外下载,太大,放不进整合包<br><a href="https://www.123pan.com/s/42q0Vv-G2vVd.html">https://www.123pan.com/s/42q0Vv-G2vVd.html</a><br>提取码:BKG7 模型文件,下载完替换上面的整合包即可</p>
 <blockquote>
-<p>为什么选择历史版本？</p>
-<p>有些博客主题构建，需要的插件不支持新版本，或者构建出来页面空白。所以按照主题开发者的要求的版本来。</p>
+<p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
 </blockquote>
-<p>如果你已经有了其他冰本的node.js请卸载使用对应的版本</p>
-<h2 id="2-安装git工具"><a href="#2-安装git工具" class="headerlink" title="2.安装git工具"></a>2.安装git工具</h2><blockquote>
-<p>这一步开始你得有一个github的账号，<a href="https://github.com/">https://github.com/</a>  如果是使用gitee账号请参考幕布，为什么我不使用gitee，因为gitee部署静态页面需要实名</p>
+<h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838779.png" alt="img"></p>
+<p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838780.png" alt="img"></p>
+<p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838781.png" alt="img"></p>
+<blockquote>
+<p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
 </blockquote>
 ]]></content>
       <tags>
-        <tag>-hexo -搭建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AI绘画拉取模型失败，DOS开启代理</title>
-    <url>/2024/04/02/AI%E7%BB%98%E7%94%BB%E6%8B%89%E5%8F%96%E6%A8%A1%E5%9E%8B%E5%A4%B1%E8%B4%A5%EF%BC%8CDOS%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<blockquote>
-<p>我用了这么久的代理第一次知道DOS里面要开代理，惭愧惭愧。在我远程拉取模型的时候，挂科学也一直失败。在网上找报错找了很长时间没找到，最后经过一位群友的提示下，才知道问题出在DOS代理上面。</p>
-<p>直接看文章第一部分就行，要是直接tun不行，再看下面的</p>
-</blockquote>
-<h1 id="直接开启tun"><a href="#直接开启tun" class="headerlink" title="直接开启tun"></a>直接开启tun</h1><p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827992.png" alt="img"></p>
-<blockquote>
-<p>这个是V2的开启方法</p>
-</blockquote>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827993.png" alt="img"></p>
-<p>测试的时候发现一个问题，开启后不会立马生效需要等个十几秒左右，有可能是系统缓存没刷新<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827994.png" alt="img"></p>
-<h2 id="检查代理"><a href="#检查代理" class="headerlink" title="检查代理"></a>检查代理</h2><p>测试的时候<strong>不要</strong>直接ping，ping不走http。直接用curl。</p>
-<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">curl -vv www.google.com</span><br></pre></td></tr></table></figure>
-<h1 id="Windows代理配置"><a href="#Windows代理配置" class="headerlink" title="Windows代理配置"></a>Windows代理配置</h1><p>单击「开始」，然后在搜索程序和文件框中键入 cmd。<br>在程序列表中右键单击 cmd.exe，然后单击以<strong>管理员身份运行</strong>。<br>键入命令 <strong>netsh winhttp set proxy host:port</strong> 设置代理，由于本机有运行 clash，所以这里设置代理为 127.0.0.1:7890，当然其他软件也有这个功能，自行摸索。</p>
-<h2 id="使用winhttp设置代理"><a href="#使用winhttp设置代理" class="headerlink" title="使用winhttp设置代理"></a>使用winhttp设置代理</h2><p>根据测试这种方法好像不太行</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827995.png" alt="img"></p>
-<h3 id="代理设置："><a href="#代理设置：" class="headerlink" title="代理设置："></a>代理设置：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp <span class="built_in">set</span> proxy <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh winhttp set proxy 127.0.0.1:7897</span><br><span class="line"></span><br><span class="line">当前的 WinHTTP 代理服务器设置:</span><br><span class="line"></span><br><span class="line">    代理服务器:  127.0.0.1:7897</span><br><span class="line">    绕过列表     :  (无)</span><br><span class="line"></span><br><span class="line">C:\WINDOWS\system32&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看代理："><a href="#查看代理：" class="headerlink" title="查看代理："></a>查看代理：</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp show proxy</span><br></pre></td></tr></table></figure>
-<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">show</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    代理服务器:  127.0.0.1:7897</span></span><br><span class="line"><span class="function">    绕过列表     :  (无)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">xisoul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="取消代理"><a href="#取消代理" class="headerlink" title="取消代理"></a>取消代理</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">netsh winhttp reset proxy</span><br></pre></td></tr></table></figure>
-<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;<span class="title">netsh</span> <span class="title">winhttp</span> <span class="title">reset</span> <span class="title">proxy</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">当前的 <span class="title">WinHTTP</span> 代理服务器设置:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    直接访问(没有代理服务器)。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">WINDOWS</span>\<span class="title">system32</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="使用环境变量直接用set"><a href="#使用环境变量直接用set" class="headerlink" title="使用环境变量直接用set"></a>使用环境变量直接用set</h2><p>这种方法我也测试了，确实是代理了，但是跑不通。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111827996.png" alt="img"></p>
-<p>注意不要直接在clash里面复制命令，因为那玩意复制了后面有空格</p>
-<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7897</span></span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set all_proxy=http://127.0.0.1:7897</span><br></pre></td></tr></table></figure>
-<p>查看环境变量 直接cmd里面输入 <strong>set</strong> 在里面就能看到我们刚刚设置的代理了</p>
-<p><strong>电脑重启之后还需要重新配置，set是临时变量</strong></p>
-]]></content>
-      <tags>
-        <tag>-解决的问题</tag>
+        <tag>-ComfyUI -AI</tag>
       </tags>
   </entry>
   <entry>
@@ -440,41 +532,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ai绘画基础总结（一）安装设置</title>
-    <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<blockquote>
-<p>comfyUI对有工作流经验的小伙伴来说比较友好。小白学习comfyUI门槛也不是很高。</p>
-</blockquote>
-<h1 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h1><p>小白推荐直接整合包，b站有很多秋叶的，圣杯，还有疯狂AI启动器。纯小白推荐使用疯狂AI启动器（满血包）能解决很多依赖问题，自行安装依赖，很多都需要能上外网，所以推荐满血包。高手直接上官方就OK。要是缺金少一块好显卡的小伙伴，可以使用秋叶，圣杯，疯狂ai启动器都能适配低显存的工作模式，不过要设置一手。你们可以根据自己的需求进行选择。疯狂启动器可以将工作流转换成一键式的模板功能：</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838778.png" alt="img"></p>
-<p>首先附上<strong>大佬</strong>官方链接：<a href="https://github.com/comfyanonymous/ComfyUI">comfyanonymous/ComfyUI: The most powerful and modular stable diffusion GUI, api and backend with a graph/nodes interface. (github.com)</a></p>
-<p><strong>秋枼</strong>：<a href="https://www.bilibili.com/video/BV1Ew411776J">【AI绘画】ComfyUI整合包发布！解压即用 一键启动 工作流版界面 超多节点 ☆更新 ☆汉化 秋叶整合包_哔哩哔哩_bilibili</a>视频下方链接：<a href="https://pan.quark.cn/s/64b808baa960">https://pan.quark.cn/s/64b808baa960</a></p>
-<p><strong>无限圣杯、铁锅炖</strong>：<a href="https://www.bilibili.com/video/BV1yM411d79q/">【12月】无限圣杯&amp;ComfyUI满血整合包——AI渲染器原型&amp;更多易用化更新_哔哩哔哩_bilibili</a>视频下方链接启动器+整合包：<a href="https://shimo.im/docs/B1AwdxZewWhjwe3m">https://shimo.im/docs/B1AwdxZewWhjwe3m</a></p>
-<p><strong>疯狂ai启动器</strong>：<a href="https://www.bilibili.com/video/BV1VS421w7fb/">王炸来了！全新Comfyui疯狂Ai启动器,更加好用易用人性化兼容秋叶绘世整合包启动器_哔哩哔哩_bilibili</a>（在群里面薅过来的链接，当然b站也有）</p>
-<p><strong>Comflowy</strong>：<a href="https://www.comflowy.com/zh-CN">Comflowy 介绍 – Comflowy</a></p>
-<p><strong>普通版</strong>：</p>
-<p>123网盘下载地址：<a href="https://www.123pan.com/s/42q0Vv-SYvVd.html">https://www.123pan.com/s/42q0Vv-SYvVd.html</a><br>夸克网盘下载地址：<a href="https://pan.quark.cn/s/41aeb9394841">https://pan.quark.cn/s/41aeb9394841</a><br>百度网盘下载地址：<a href="https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1">https://pan.baidu.com/s/1vb4LIrsRjlP2cp1Z0FFQHQ?pwd=f0n1</a></p>
-<p><strong>开发者满血版</strong>：</p>
-<p>百度网盘:<br><a href="https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour">https://pan.baidu.com/s/18N3jGoLqHeUyUvgJt2PuAA?pwd=lour</a><br>夸克网盘:<br><a href="https://pan.quark.cn/s/d306fa633fa7">https://pan.quark.cn/s/d306fa633fa7</a></p>
-<p><strong>嘟嘟嘟上传的整合包</strong>:<br><a href="https://www.123pan.com/s/42q0Vv-eXvVd.html">https://www.123pan.com/s/42q0Vv-eXvVd.html</a><br>提取码:KbrA 模型文件需要另外下载,太大,放不进整合包<br><a href="https://www.123pan.com/s/42q0Vv-G2vVd.html">https://www.123pan.com/s/42q0Vv-G2vVd.html</a><br>提取码:BKG7 模型文件,下载完替换上面的整合包即可</p>
-<blockquote>
-<p>这种都是下载解压即用的，当然我只用过疯狂ai启动器，秋叶的webui。疯狂ai普通版比较难折腾，推荐直接上满血版。</p>
-</blockquote>
-<h1 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h1><p>下载完成后直接点开设置进行启动模型选择，然后自己去申请一个百度翻译的api（免费），方便后面直接使用中文提示词。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838779.png" alt="img"></p>
-<p>然后直接一键启动，我这是<strong>启动后的样子</strong></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838780.png" alt="img"></p>
-<p>要是依赖出问题了直接的点开控制台，讲报错往ai一丢，根据提示操作。实在不行一键重装所有依赖，插件依赖库</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111838781.png" alt="img"></p>
-<blockquote>
-<p>其他平台的功能就自己慢慢探索了，对照着up的视频来。有问题的可以加群交流。企鹅群：306146537</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>-ComfyUI -AI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ai绘画基础总结（二）模型插件安装</title>
     <url>/2024/03/30/ai%E7%BB%98%E7%94%BB%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E6%A8%A1%E5%9E%8B%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><blockquote>
@@ -655,6 +712,118 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo博客搭建</title>
+    <url>/2024/03/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<blockquote>
+<p>hexo博客自由度非常高，对小白来说，不太友好，配置容易出错。网上有很多教程，但是不知道问题在哪还是很容易踩坑，这里我就以我自己的博客搭建过程来讲解一下hexo+github+cloudflare来实现</p>
+</blockquote>
+<p>这里引用一下有基础的同志可以参考一下：<a href="https://www.mubu.com/doc/C85kyZw3UU">https://www.mubu.com/doc/C85kyZw3UU</a><strong>首先声明，这个文档不是我写的，转载过来的，为了防止别人删除文档，所以我保存了一份</strong></p>
+<h1 id="一、下载安装必要的工具"><a href="#一、下载安装必要的工具" class="headerlink" title="一、下载安装必要的工具"></a>一、下载安装必要的工具</h1><h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1.安装node.js"></a>1.安装node.js</h2><p>这个是nodejs各个历史版本地址：<a href="https://nodejs.org/en/about/previous-releases">Node.js — Previous Releases (nodejs.org)</a></p>
+<blockquote>
+<p>为什么选择历史版本？</p>
+<p>有些博客主题构建，需要的插件不支持新版本，或者构建出来页面空白。所以按照主题开发者的要求的版本来。</p>
+</blockquote>
+<p>如果你已经有了其他冰本的node.js请卸载使用对应的版本</p>
+<h2 id="2-安装git工具"><a href="#2-安装git工具" class="headerlink" title="2.安装git工具"></a>2.安装git工具</h2><blockquote>
+<p>这一步开始你得有一个github的账号，<a href="https://github.com/">https://github.com/</a>  如果是使用gitee账号请参考幕布，为什么我不使用gitee，因为gitee部署静态页面需要实名</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>-hexo -搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用cloudflare-works搭建自己docker加速源</title>
+    <url>/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/</url>
+    <content><![CDATA[<blockquote>
+<p>在网上看到了许多教程，基本上部署都是手动的，docker镜像都要手动输入选择重新部署。要么都是些基本镜像仓库。</p>
+<p>视频地址：【CloudFlare搭建doker加速源。都这么长时间了，你的docker还是跑不通吗？】 <a href="https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995">https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995</a></p>
+</blockquote>
+<h1 id="一、搭建说明"><a href="#一、搭建说明" class="headerlink" title="一、搭建说明"></a>一、搭建说明</h1><ul>
+<li>这个脚本我不知道出处，是我大学同学发我的。如有侵权请联系删除</li>
+<li><strong>需要自己有域名</strong>。用cf的域名，国内会被墙，所以没有什么用。我们需要用自己的域名使用cloudflare的cdn代理。</li>
+<li>需要一个cloudflare账号。</li>
+</ul>
+<h1 id="二、搭建过程"><a href="#二、搭建过程" class="headerlink" title="二、搭建过程"></a>二、搭建过程</h1><h2 id="1-首先注册一个cloudflare账号"><a href="#1-首先注册一个cloudflare账号" class="headerlink" title="1.首先注册一个cloudflare账号"></a>1.首先注册一个cloudflare账号</h2><p>打开cloudflare官网：<a href="https://www.cloudflare-cn.com/">科赋锐信息科技Cloudflare | Cloudflare (cloudflare-cn.com)</a></p>
+<p>有账号的跳过，没账号的需要注册一个。</p>
+<h2 id="2-打开cloudflare-Workers-amp-Pages"><a href="#2-打开cloudflare-Workers-amp-Pages" class="headerlink" title="2.打开cloudflare Workers&amp;Pages"></a>2.打开cloudflare Workers&amp;Pages</h2><p>点击创建<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755706.png" alt="img"></p>
+<p>这个名字随便输</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755707.png" alt="img"></p>
+<p>往下翻点击完成。</p>
+<h2 id="3-填写脚本"><a href="#3-填写脚本" class="headerlink" title="3.填写脚本"></a>3.填写脚本</h2><p>然后点击编辑代码</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755708.png" alt="img"></p>
+<p>把这里全删掉<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755709.png" alt="img">全选复制下面的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27;use strict&#x27;</span><br><span class="line"></span><br><span class="line">const hub_host = &#x27;registry-1.docker.io&#x27;</span><br><span class="line">const auth_url = &#x27;https://auth.docker.io&#x27;</span><br><span class="line">const workers_url = &#x27;这里填你的下一级域名，有人用的二级有人可能用三级域名，等等&#x27;</span><br><span class="line">/**</span><br><span class="line"> * static files (404.html, sw.js, conf.js)</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/** @type &#123;RequestInit&#125; */</span><br><span class="line">const PREFLIGHT_INIT = &#123;</span><br><span class="line">    status: 204,</span><br><span class="line">    headers: new Headers(&#123;</span><br><span class="line">        &#x27;access-control-allow-origin&#x27;: &#x27;*&#x27;,</span><br><span class="line">        &#x27;access-control-allow-methods&#x27;: &#x27;GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS&#x27;,</span><br><span class="line">        &#x27;access-control-max-age&#x27;: &#x27;1728000&#x27;,</span><br><span class="line">    &#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;any&#125; body</span><br><span class="line"> * @param &#123;number&#125; status</span><br><span class="line"> * @param &#123;Object&lt;string, string&gt;&#125; headers</span><br><span class="line"> */</span><br><span class="line">function makeRes(body, status = 200, headers = &#123;&#125;) &#123;</span><br><span class="line">    headers[&#x27;access-control-allow-origin&#x27;] = &#x27;*&#x27;</span><br><span class="line">    return new Response(body, &#123;status, headers&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;string&#125; urlStr</span><br><span class="line"> */</span><br><span class="line">function newUrl(urlStr) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new URL(urlStr)</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addEventListener(&#x27;fetch&#x27;, e =&gt; &#123;</span><br><span class="line">    const ret = fetchHandler(e)</span><br><span class="line">        .catch(err =&gt; makeRes(&#x27;cfworker error:\n&#x27; + err.stack, 502))</span><br><span class="line">    e.respondWith(ret)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;FetchEvent&#125; e</span><br><span class="line"> */</span><br><span class="line">async function fetchHandler(e) &#123;</span><br><span class="line">  const getReqHeader = (key) =&gt; e.request.headers.get(key);</span><br><span class="line"></span><br><span class="line">  let url = new URL(e.request.url);</span><br><span class="line"></span><br><span class="line">  if (url.pathname === &#x27;/token&#x27;) &#123;</span><br><span class="line">      let token_parameter = &#123;</span><br><span class="line">        headers: &#123;</span><br><span class="line">        &#x27;Host&#x27;: &#x27;auth.docker.io&#x27;,</span><br><span class="line">        &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">        &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">        &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">        &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">        &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">        &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      let token_url = auth_url + url.pathname + url.search</span><br><span class="line">      return fetch(new Request(token_url, e.request), token_parameter)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  url.hostname = hub_host;</span><br><span class="line">  </span><br><span class="line">  let parameter = &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &#x27;Host&#x27;: hub_host,</span><br><span class="line">      &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">      &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">      &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">      &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">      &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">      &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    cacheTtl: 3600</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  if (e.request.headers.has(&quot;Authorization&quot;)) &#123;</span><br><span class="line">    parameter.headers.Authorization = getReqHeader(&quot;Authorization&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let original_response = await fetch(new Request(url, e.request), parameter)</span><br><span class="line">  let original_response_clone = original_response.clone();</span><br><span class="line">  let original_text = original_response_clone.body;</span><br><span class="line">  let response_headers = original_response.headers;</span><br><span class="line">  let new_response_headers = new Headers(response_headers);</span><br><span class="line">  let status = original_response.status;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Www-Authenticate&quot;)) &#123;</span><br><span class="line">    let auth = new_response_headers.get(&quot;Www-Authenticate&quot;);</span><br><span class="line">    let re = new RegExp(auth_url, &#x27;g&#x27;);</span><br><span class="line">    new_response_headers.set(&quot;Www-Authenticate&quot;, response_headers.get(&quot;Www-Authenticate&quot;).replace(re, workers_url));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Location&quot;)) &#123;</span><br><span class="line">    return httpHandler(e.request, new_response_headers.get(&quot;Location&quot;))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let response = new Response(original_text, &#123;</span><br><span class="line">            status,</span><br><span class="line">            headers: new_response_headers</span><br><span class="line">        &#125;)</span><br><span class="line">  return response;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;Request&#125; req</span><br><span class="line"> * @param &#123;string&#125; pathname</span><br><span class="line"> */</span><br><span class="line">function httpHandler(req, pathname) &#123;</span><br><span class="line">    const reqHdrRaw = req.headers</span><br><span class="line"></span><br><span class="line">    // preflight</span><br><span class="line">    if (req.method === &#x27;OPTIONS&#x27; &amp;&amp;</span><br><span class="line">        reqHdrRaw.has(&#x27;access-control-request-headers&#x27;)</span><br><span class="line">    ) &#123;</span><br><span class="line">        return new Response(null, PREFLIGHT_INIT)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let rawLen = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">    const reqHdrNew = new Headers(reqHdrRaw)</span><br><span class="line"></span><br><span class="line">    const refer = reqHdrNew.get(&#x27;referer&#x27;)</span><br><span class="line"></span><br><span class="line">    let urlStr = pathname</span><br><span class="line">    </span><br><span class="line">    const urlObj = newUrl(urlStr)</span><br><span class="line"></span><br><span class="line">    /** @type &#123;RequestInit&#125; */</span><br><span class="line">    const reqInit = &#123;</span><br><span class="line">        method: req.method,</span><br><span class="line">        headers: reqHdrNew,</span><br><span class="line">        redirect: &#x27;follow&#x27;,</span><br><span class="line">        body: req.body</span><br><span class="line">    &#125;</span><br><span class="line">    return proxy(urlObj, reqInit, rawLen, 0)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *</span><br><span class="line"> * @param &#123;URL&#125; urlObj</span><br><span class="line"> * @param &#123;RequestInit&#125; reqInit</span><br><span class="line"> */</span><br><span class="line">async function proxy(urlObj, reqInit, rawLen) &#123;</span><br><span class="line">    const res = await fetch(urlObj.href, reqInit)</span><br><span class="line">    const resHdrOld = res.headers</span><br><span class="line">    const resHdrNew = new Headers(resHdrOld)</span><br><span class="line"></span><br><span class="line">    // verify</span><br><span class="line">    if (rawLen) &#123;</span><br><span class="line">        const newLen = resHdrOld.get(&#x27;content-length&#x27;) || &#x27;&#x27;</span><br><span class="line">        const badLen = (rawLen !== newLen)</span><br><span class="line"></span><br><span class="line">        if (badLen) &#123;</span><br><span class="line">            return makeRes(res.body, 400, &#123;</span><br><span class="line">                &#x27;--error&#x27;: `bad len: $&#123;newLen&#125;, except: $&#123;rawLen&#125;`,</span><br><span class="line">                &#x27;access-control-expose-headers&#x27;: &#x27;--error&#x27;,</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    const status = res.status</span><br><span class="line">    resHdrNew.set(&#x27;access-control-expose-headers&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;access-control-allow-origin&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;Cache-Control&#x27;, &#x27;max-age=1500&#x27;)</span><br><span class="line">    </span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy-report-only&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;clear-site-data&#x27;)</span><br><span class="line"></span><br><span class="line">    return new Response(res.body, &#123;</span><br><span class="line">        status,</span><br><span class="line">        headers: resHdrNew</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们只需要修改这里，填写你自己的域名，这个域名必须能解析到cloudflare上面的。比如我的主域名是xisoul.cn,我填的是我自己的二级域名：docker.xisoul.cn</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755710.png" alt="img"></p>
+<p>然后的点击右上角部署</p>
+<h1 id="三、修改域名"><a href="#三、修改域名" class="headerlink" title="三、修改域名"></a>三、修改域名</h1><p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755711.png" alt="img"></p>
+<p>输入你在脚本里面修改的域名。如果你的域名已经解析，这里直接可以添加域名Add Custom Domain</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755712.png" alt="img"></p>
+<p>cloudflare解析还是很快的，一两分钟不要就可以用了。</p>
+<h1 id="四、修改配置"><a href="#四、修改配置" class="headerlink" title="四、修改配置"></a>四、修改配置</h1><p>我这是用的是自己香港的机子，有人会说你都用香港机子为什么用docker加速。这玩意官方的多少有点毛病，证书啥的连不通。自己搭建一个也方便使用。因为我是免费的这玩意每天有额度。用的人多了，没额度跑不通。你要是啥都没有可以联系我，免费的二级域名能解析cloudflare的也有很多。b站上面也有很多。</p>
+<p>我的是1panel面板，你们可以自行百度。怎么改加速源.</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755713.png" alt="img">大同小异都是找到下面这个配置文件然后修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;registry-mirrors&quot;: [</span><br><span class="line">		&quot;https://xxx.xisoul.cn&quot;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>解决的问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夸克自动签到转存到emby</title>
+    <url>/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/</url>
+    <content><![CDATA[<h1 id="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"><a href="#夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中" class="headerlink" title="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"></a>夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中</h1><p>b站视频地址：<a href="https://www.bilibili.com/video/BV1ry411a7Lt">https://www.bilibili.com/video/BV1ry411a7Lt</a></p>
+<h2 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h2><p>你有服务器或者nas等等，有docker或者青龙都行。</p>
+<p>由于nas在家关机了，我在外地。就不演示推到emby了。</p>
+<p>来自于<a href="https://github.com/Cp0204/quark-auto-save">Cp0204/quark-auto-save: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙 (github.com)</a></p>
+<h2 id="二、青龙搭建"><a href="#二、青龙搭建" class="headerlink" title="二、青龙搭建"></a>二、青龙搭建</h2><p>青龙命令一键就OK</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ql repo https://github.com/Cp0204/quark-auto-save.git &quot;quark&quot; &quot;&quot; &quot;notify&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111822206.png" alt="img"></p>
+<p>然后执行拉库。</p>
+<p>夸克网页版地址：<a href="https://pan.quark.cn/list#/list/all">夸克网盘 (quark.cn)</a>直接F12刷新找到cookie</p>
+<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111822207.png" alt="img"></p>
+<p>直接到此处配置cookie，不是直接使用环境变量。全部复制，粘贴到青龙里面。注意这里不能直接粘贴，我们点击编辑按钮，再进行粘贴，然后保存。</p>
+<p>我们可以测试一下，已经签到成功了，不过任务没有配置。不能转存。以下是json文件，需要的自取。</p>
+<p>正则学习地址：<a href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程 (deerchao.cn)</a></p>
+<p>觉得麻烦的可以直接让ai帮你写。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookie&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//请用手机验证码登录，CK比较完整！</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie1, Only this one will do save task.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie2, Only sign after this.&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;push_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">//无此字段则从环境变量（青龙设置）读取通知设置</span></span><br><span class="line">    <span class="attr">&quot;QUARK_SIGN_NOTIFY&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//是否发送签到成功通知，也可在环境变量中设置</span></span><br><span class="line">    <span class="attr">&quot;QYWX_AM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">//企业微信应用通知示例</span></span><br><span class="line">    <span class="attr">&quot;其他推送渠道//此项可删&quot;</span><span class="punctuation">:</span> <span class="string">&quot;配置方法同青龙&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;emby&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://yourdomain.com:8096&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;apikey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span> <span class="comment">//在后台 高级-API秘钥 中生成</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tasklist&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//无任务则只签到</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;taskname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;shareurl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://pan.quark.cn/s/39xxxx35#/list/share/17xxxx72-鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;savepath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/video/tv/鸣xx年/S01&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;pattern&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^广告内容(\\d+).(mp4|mkv)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\\1.\\2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enddate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-01-30&quot;</span><span class="punctuation">,</span>  <span class="comment">//可选，结束日期</span></span><br><span class="line">      <span class="attr">&quot;emby_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>            <span class="comment">//可选，缺省时按taskname搜索匹配，为0时强制不匹配</span></span><br><span class="line">      <span class="attr">&quot;ignore_extension&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//可选，忽略后缀</span></span><br><span class="line">      <span class="attr">&quot;runweek&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//可选，指定星期几执行，无此字段则均执行</span></span><br><span class="line">      <span class="attr">&quot;update_subdir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">// 可选，子目录递归更新的正则表达式，如 &quot;4k|1080p&quot;</span></span><br><span class="line">      <span class="comment">// 以下字段无需配置</span></span><br><span class="line">      <span class="attr">&quot;shareurl_ban&quot;</span><span class="punctuation">:</span> <span class="string">&quot;分享地址已失效&quot;</span> <span class="comment">//记录分享是否失效；如有此字段将跳过任务，更新链接后请手动删去</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、docker搭建"><a href="#三、docker搭建" class="headerlink" title="三、docker搭建"></a>三、docker搭建</h2><p>我这里已经装了1panel面板，其实任何面板直接ssh命令都是可以的方法大同小异。</p>
+<p>安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name quark-auto-save \</span><br><span class="line">  -p 5005:5005 \</span><br><span class="line">  -e WEBUI_USERNAME=admin \</span><br><span class="line">  -e WEBUI_PASSWORD=admin123 \</span><br><span class="line">  -v ./quark-auto-save/config:/app/config \</span><br><span class="line">  -v /etc/localtime:/etc/localtime \</span><br><span class="line">  --network bridge \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  cp0204/quark-auto-save:latest</span><br></pre></td></tr></table></figure>
+<p>更新命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR quark-auto-save</span><br></pre></td></tr></table></figure>
+<p>管理地址：<a href="http://yourhost:5005/">http://yourip:5005</a></p>
+<p>登录账号密码在环境变量中，可以自行修改。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境变量</th>
+<th>默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>WEBUI_USERNAME</code></td>
+<td><code>admin</code></td>
+<td>管理账号</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>WEBUI_PASSWORD</code></td>
+<td><code>admin123</code></td>
+<td>管理密码</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <tags>
+        <tag>自动签到</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nvm管理node.js版本</title>
     <url>/2024/06/20/nvm%E7%AE%A1%E7%90%86node-js%E7%89%88%E6%9C%AC/</url>
     <content><![CDATA[<blockquote>
@@ -763,46 +932,8 @@
 <p>然后nvm use 和nvm on切换一下</p>
 ]]></content>
       <tags>
+        <tag>解决的问题</tag>
         <tag>软件推荐</tag>
-        <tag>解决的问题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用cloudflare-works搭建自己docker加速源</title>
-    <url>/2024/06/20/%E4%BD%BF%E7%94%A8cloudflare-workers%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1docker%E5%8A%A0%E9%80%9F%E6%BA%90/</url>
-    <content><![CDATA[<blockquote>
-<p>在网上看到了许多教程，基本上部署都是手动的，docker镜像都要手动输入选择重新部署。要么都是些基本镜像仓库。</p>
-<p>视频地址：【CloudFlare搭建doker加速源。都这么长时间了，你的docker还是跑不通吗？】 <a href="https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995">https://www.bilibili.com/video/BV1F533eHEsB/?share_source=copy_web&amp;vd_source=0742f75b8f3995695112c41c1b64b995</a></p>
-</blockquote>
-<h1 id="一、搭建说明"><a href="#一、搭建说明" class="headerlink" title="一、搭建说明"></a>一、搭建说明</h1><ul>
-<li>这个脚本我不知道出处，是我大学同学发我的。如有侵权请联系删除</li>
-<li><strong>需要自己有域名</strong>。用cf的域名，国内会被墙，所以没有什么用。我们需要用自己的域名使用cloudflare的cdn代理。</li>
-<li>需要一个cloudflare账号。</li>
-</ul>
-<h1 id="二、搭建过程"><a href="#二、搭建过程" class="headerlink" title="二、搭建过程"></a>二、搭建过程</h1><h2 id="1-首先注册一个cloudflare账号"><a href="#1-首先注册一个cloudflare账号" class="headerlink" title="1.首先注册一个cloudflare账号"></a>1.首先注册一个cloudflare账号</h2><p>打开cloudflare官网：<a href="https://www.cloudflare-cn.com/">科赋锐信息科技Cloudflare | Cloudflare (cloudflare-cn.com)</a></p>
-<p>有账号的跳过，没账号的需要注册一个。</p>
-<h2 id="2-打开cloudflare-Workers-amp-Pages"><a href="#2-打开cloudflare-Workers-amp-Pages" class="headerlink" title="2.打开cloudflare Workers&amp;Pages"></a>2.打开cloudflare Workers&amp;Pages</h2><p>点击创建<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755706.png" alt="img"></p>
-<p>这个名字随便输</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755707.png" alt="img"></p>
-<p>往下翻点击完成。</p>
-<h2 id="3-填写脚本"><a href="#3-填写脚本" class="headerlink" title="3.填写脚本"></a>3.填写脚本</h2><p>然后点击编辑代码</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755708.png" alt="img"></p>
-<p>把这里全删掉<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755709.png" alt="img">全选复制下面的代码。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27;use strict&#x27;</span><br><span class="line"></span><br><span class="line">const hub_host = &#x27;registry-1.docker.io&#x27;</span><br><span class="line">const auth_url = &#x27;https://auth.docker.io&#x27;</span><br><span class="line">const workers_url = &#x27;这里填你的下一级域名，有人用的二级有人可能用三级域名，等等&#x27;</span><br><span class="line">/**</span><br><span class="line"> * static files (404.html, sw.js, conf.js)</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/** @type &#123;RequestInit&#125; */</span><br><span class="line">const PREFLIGHT_INIT = &#123;</span><br><span class="line">    status: 204,</span><br><span class="line">    headers: new Headers(&#123;</span><br><span class="line">        &#x27;access-control-allow-origin&#x27;: &#x27;*&#x27;,</span><br><span class="line">        &#x27;access-control-allow-methods&#x27;: &#x27;GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS&#x27;,</span><br><span class="line">        &#x27;access-control-max-age&#x27;: &#x27;1728000&#x27;,</span><br><span class="line">    &#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;any&#125; body</span><br><span class="line"> * @param &#123;number&#125; status</span><br><span class="line"> * @param &#123;Object&lt;string, string&gt;&#125; headers</span><br><span class="line"> */</span><br><span class="line">function makeRes(body, status = 200, headers = &#123;&#125;) &#123;</span><br><span class="line">    headers[&#x27;access-control-allow-origin&#x27;] = &#x27;*&#x27;</span><br><span class="line">    return new Response(body, &#123;status, headers&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;string&#125; urlStr</span><br><span class="line"> */</span><br><span class="line">function newUrl(urlStr) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new URL(urlStr)</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addEventListener(&#x27;fetch&#x27;, e =&gt; &#123;</span><br><span class="line">    const ret = fetchHandler(e)</span><br><span class="line">        .catch(err =&gt; makeRes(&#x27;cfworker error:\n&#x27; + err.stack, 502))</span><br><span class="line">    e.respondWith(ret)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;FetchEvent&#125; e</span><br><span class="line"> */</span><br><span class="line">async function fetchHandler(e) &#123;</span><br><span class="line">  const getReqHeader = (key) =&gt; e.request.headers.get(key);</span><br><span class="line"></span><br><span class="line">  let url = new URL(e.request.url);</span><br><span class="line"></span><br><span class="line">  if (url.pathname === &#x27;/token&#x27;) &#123;</span><br><span class="line">      let token_parameter = &#123;</span><br><span class="line">        headers: &#123;</span><br><span class="line">        &#x27;Host&#x27;: &#x27;auth.docker.io&#x27;,</span><br><span class="line">        &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">        &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">        &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">        &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">        &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">        &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      let token_url = auth_url + url.pathname + url.search</span><br><span class="line">      return fetch(new Request(token_url, e.request), token_parameter)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  url.hostname = hub_host;</span><br><span class="line">  </span><br><span class="line">  let parameter = &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &#x27;Host&#x27;: hub_host,</span><br><span class="line">      &#x27;User-Agent&#x27;: getReqHeader(&quot;User-Agent&quot;),</span><br><span class="line">      &#x27;Accept&#x27;: getReqHeader(&quot;Accept&quot;),</span><br><span class="line">      &#x27;Accept-Language&#x27;: getReqHeader(&quot;Accept-Language&quot;),</span><br><span class="line">      &#x27;Accept-Encoding&#x27;: getReqHeader(&quot;Accept-Encoding&quot;),</span><br><span class="line">      &#x27;Connection&#x27;: &#x27;keep-alive&#x27;,</span><br><span class="line">      &#x27;Cache-Control&#x27;: &#x27;max-age=0&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    cacheTtl: 3600</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  if (e.request.headers.has(&quot;Authorization&quot;)) &#123;</span><br><span class="line">    parameter.headers.Authorization = getReqHeader(&quot;Authorization&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let original_response = await fetch(new Request(url, e.request), parameter)</span><br><span class="line">  let original_response_clone = original_response.clone();</span><br><span class="line">  let original_text = original_response_clone.body;</span><br><span class="line">  let response_headers = original_response.headers;</span><br><span class="line">  let new_response_headers = new Headers(response_headers);</span><br><span class="line">  let status = original_response.status;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Www-Authenticate&quot;)) &#123;</span><br><span class="line">    let auth = new_response_headers.get(&quot;Www-Authenticate&quot;);</span><br><span class="line">    let re = new RegExp(auth_url, &#x27;g&#x27;);</span><br><span class="line">    new_response_headers.set(&quot;Www-Authenticate&quot;, response_headers.get(&quot;Www-Authenticate&quot;).replace(re, workers_url));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (new_response_headers.get(&quot;Location&quot;)) &#123;</span><br><span class="line">    return httpHandler(e.request, new_response_headers.get(&quot;Location&quot;))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let response = new Response(original_text, &#123;</span><br><span class="line">            status,</span><br><span class="line">            headers: new_response_headers</span><br><span class="line">        &#125;)</span><br><span class="line">  return response;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;Request&#125; req</span><br><span class="line"> * @param &#123;string&#125; pathname</span><br><span class="line"> */</span><br><span class="line">function httpHandler(req, pathname) &#123;</span><br><span class="line">    const reqHdrRaw = req.headers</span><br><span class="line"></span><br><span class="line">    // preflight</span><br><span class="line">    if (req.method === &#x27;OPTIONS&#x27; &amp;&amp;</span><br><span class="line">        reqHdrRaw.has(&#x27;access-control-request-headers&#x27;)</span><br><span class="line">    ) &#123;</span><br><span class="line">        return new Response(null, PREFLIGHT_INIT)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let rawLen = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">    const reqHdrNew = new Headers(reqHdrRaw)</span><br><span class="line"></span><br><span class="line">    const refer = reqHdrNew.get(&#x27;referer&#x27;)</span><br><span class="line"></span><br><span class="line">    let urlStr = pathname</span><br><span class="line">    </span><br><span class="line">    const urlObj = newUrl(urlStr)</span><br><span class="line"></span><br><span class="line">    /** @type &#123;RequestInit&#125; */</span><br><span class="line">    const reqInit = &#123;</span><br><span class="line">        method: req.method,</span><br><span class="line">        headers: reqHdrNew,</span><br><span class="line">        redirect: &#x27;follow&#x27;,</span><br><span class="line">        body: req.body</span><br><span class="line">    &#125;</span><br><span class="line">    return proxy(urlObj, reqInit, rawLen, 0)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *</span><br><span class="line"> * @param &#123;URL&#125; urlObj</span><br><span class="line"> * @param &#123;RequestInit&#125; reqInit</span><br><span class="line"> */</span><br><span class="line">async function proxy(urlObj, reqInit, rawLen) &#123;</span><br><span class="line">    const res = await fetch(urlObj.href, reqInit)</span><br><span class="line">    const resHdrOld = res.headers</span><br><span class="line">    const resHdrNew = new Headers(resHdrOld)</span><br><span class="line"></span><br><span class="line">    // verify</span><br><span class="line">    if (rawLen) &#123;</span><br><span class="line">        const newLen = resHdrOld.get(&#x27;content-length&#x27;) || &#x27;&#x27;</span><br><span class="line">        const badLen = (rawLen !== newLen)</span><br><span class="line"></span><br><span class="line">        if (badLen) &#123;</span><br><span class="line">            return makeRes(res.body, 400, &#123;</span><br><span class="line">                &#x27;--error&#x27;: `bad len: $&#123;newLen&#125;, except: $&#123;rawLen&#125;`,</span><br><span class="line">                &#x27;access-control-expose-headers&#x27;: &#x27;--error&#x27;,</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    const status = res.status</span><br><span class="line">    resHdrNew.set(&#x27;access-control-expose-headers&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;access-control-allow-origin&#x27;, &#x27;*&#x27;)</span><br><span class="line">    resHdrNew.set(&#x27;Cache-Control&#x27;, &#x27;max-age=1500&#x27;)</span><br><span class="line">    </span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;content-security-policy-report-only&#x27;)</span><br><span class="line">    resHdrNew.delete(&#x27;clear-site-data&#x27;)</span><br><span class="line"></span><br><span class="line">    return new Response(res.body, &#123;</span><br><span class="line">        status,</span><br><span class="line">        headers: resHdrNew</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后我们只需要修改这里，填写你自己的域名，这个域名必须能解析到cloudflare上面的。比如我的主域名是xisoul.cn,我填的是我自己的二级域名：docker.xisoul.cn</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755710.png" alt="img"></p>
-<p>然后的点击右上角部署</p>
-<h1 id="三、修改域名"><a href="#三、修改域名" class="headerlink" title="三、修改域名"></a>三、修改域名</h1><p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755711.png" alt="img"></p>
-<p>输入你在脚本里面修改的域名。如果你的域名已经解析，这里直接可以添加域名Add Custom Domain</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755712.png" alt="img"></p>
-<p>cloudflare解析还是很快的，一两分钟不要就可以用了。</p>
-<h1 id="四、修改配置"><a href="#四、修改配置" class="headerlink" title="四、修改配置"></a>四、修改配置</h1><p>我这是用的是自己香港的机子，有人会说你都用香港机子为什么用docker加速。这玩意官方的多少有点毛病，证书啥的连不通。自己搭建一个也方便使用。因为我是免费的这玩意每天有额度。用的人多了，没额度跑不通。你要是啥都没有可以联系我，免费的二级域名能解析cloudflare的也有很多。b站上面也有很多。</p>
-<p>我的是1panel面板，你们可以自行百度。怎么改加速源.</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111755713.png" alt="img">大同小异都是找到下面这个配置文件然后修改。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;registry-mirrors&quot;: [</span><br><span class="line">		&quot;https://xxx.xisoul.cn&quot;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>解决的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -816,59 +947,6 @@
 ]]></content>
       <tags>
         <tag>hexo 教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>夸克自动签到转存到emby</title>
-    <url>/2024/05/19/%E5%A4%B8%E5%85%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E8%BD%AC%E5%AD%98%E5%88%B0emby/</url>
-    <content><![CDATA[<h1 id="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"><a href="#夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中" class="headerlink" title="夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中"></a>夸克自动签到不同于之前的阿里盘内夸克签到脚本，这里可以自动转存管理文件，添加到emby中</h1><p>b站视频地址：<a href="https://www.bilibili.com/video/BV1ry411a7Lt">https://www.bilibili.com/video/BV1ry411a7Lt</a></p>
-<h2 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h2><p>你有服务器或者nas等等，有docker或者青龙都行。</p>
-<p>由于nas在家关机了，我在外地。就不演示推到emby了。</p>
-<p>来自于<a href="https://github.com/Cp0204/quark-auto-save">Cp0204/quark-auto-save: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙 (github.com)</a></p>
-<h2 id="二、青龙搭建"><a href="#二、青龙搭建" class="headerlink" title="二、青龙搭建"></a>二、青龙搭建</h2><p>青龙命令一键就OK</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ql repo https://github.com/Cp0204/quark-auto-save.git &quot;quark&quot; &quot;&quot; &quot;notify&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111822206.png" alt="img"></p>
-<p>然后执行拉库。</p>
-<p>夸克网页版地址：<a href="https://pan.quark.cn/list#/list/all">夸克网盘 (quark.cn)</a>直接F12刷新找到cookie</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111822207.png" alt="img"></p>
-<p>直接到此处配置cookie，不是直接使用环境变量。全部复制，粘贴到青龙里面。注意这里不能直接粘贴，我们点击编辑按钮，再进行粘贴，然后保存。</p>
-<p>我们可以测试一下，已经签到成功了，不过任务没有配置。不能转存。以下是json文件，需要的自取。</p>
-<p>正则学习地址：<a href="https://deerchao.cn/tutorials/regex/regex.htm">正则表达式30分钟入门教程 (deerchao.cn)</a></p>
-<p>觉得麻烦的可以直接让ai帮你写。</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookie&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//请用手机验证码登录，CK比较完整！</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie1, Only this one will do save task.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Your pan.quark.cn Cookie2, Only sign after this.&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;push_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">//无此字段则从环境变量（青龙设置）读取通知设置</span></span><br><span class="line">    <span class="attr">&quot;QUARK_SIGN_NOTIFY&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//是否发送签到成功通知，也可在环境变量中设置</span></span><br><span class="line">    <span class="attr">&quot;QYWX_AM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">//企业微信应用通知示例</span></span><br><span class="line">    <span class="attr">&quot;其他推送渠道//此项可删&quot;</span><span class="punctuation">:</span> <span class="string">&quot;配置方法同青龙&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;emby&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://yourdomain.com:8096&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;apikey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span> <span class="comment">//在后台 高级-API秘钥 中生成</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tasklist&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//无任务则只签到</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;taskname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;shareurl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://pan.quark.cn/s/39xxxx35#/list/share/17xxxx72-鸣xx年&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;savepath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/video/tv/鸣xx年/S01&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;pattern&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^广告内容(\\d+).(mp4|mkv)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;replace&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\\1.\\2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enddate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-01-30&quot;</span><span class="punctuation">,</span>  <span class="comment">//可选，结束日期</span></span><br><span class="line">      <span class="attr">&quot;emby_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>            <span class="comment">//可选，缺省时按taskname搜索匹配，为0时强制不匹配</span></span><br><span class="line">      <span class="attr">&quot;ignore_extension&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> <span class="comment">//可选，忽略后缀</span></span><br><span class="line">      <span class="attr">&quot;runweek&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//可选，指定星期几执行，无此字段则均执行</span></span><br><span class="line">      <span class="attr">&quot;update_subdir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span> <span class="comment">// 可选，子目录递归更新的正则表达式，如 &quot;4k|1080p&quot;</span></span><br><span class="line">      <span class="comment">// 以下字段无需配置</span></span><br><span class="line">      <span class="attr">&quot;shareurl_ban&quot;</span><span class="punctuation">:</span> <span class="string">&quot;分享地址已失效&quot;</span> <span class="comment">//记录分享是否失效；如有此字段将跳过任务，更新链接后请手动删去</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="三、docker搭建"><a href="#三、docker搭建" class="headerlink" title="三、docker搭建"></a>三、docker搭建</h2><p>我这里已经装了1panel面板，其实任何面板直接ssh命令都是可以的方法大同小异。</p>
-<p>安装命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name quark-auto-save \</span><br><span class="line">  -p 5005:5005 \</span><br><span class="line">  -e WEBUI_USERNAME=admin \</span><br><span class="line">  -e WEBUI_PASSWORD=admin123 \</span><br><span class="line">  -v ./quark-auto-save/config:/app/config \</span><br><span class="line">  -v /etc/localtime:/etc/localtime \</span><br><span class="line">  --network bridge \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  cp0204/quark-auto-save:latest</span><br></pre></td></tr></table></figure>
-<p>更新命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR quark-auto-save</span><br></pre></td></tr></table></figure>
-<p>管理地址：<a href="http://yourhost:5005/">http://yourip:5005</a></p>
-<p>登录账号密码在环境变量中，可以自行修改。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">环境变量</th>
-<th>默认</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>WEBUI_USERNAME</code></td>
-<td><code>admin</code></td>
-<td>管理账号</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>WEBUI_PASSWORD</code></td>
-<td><code>admin123</code></td>
-<td>管理密码</td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <tags>
-        <tag>自动签到</tag>
       </tags>
   </entry>
   <entry>
@@ -897,86 +975,8 @@
 <p>工具里面有很多功能，可以找到自己电脑里面的垃圾文件，和没用的注册表，也可以将软件添加到上下文菜单（也就是鼠标右键）以后使用也方便。</p>
 ]]></content>
       <tags>
-        <tag>软件推荐</tag>
         <tag>解决的问题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1panel搭建halo+alist+兰空图床</title>
-    <url>/2024/07/04/1panel%E6%90%AD%E5%BB%BAhalo-alist-%E5%85%B0%E7%A9%BA%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<blockquote>
-<p>由于服务器更新过后，ssh连接不上，机商vnc延迟卡的很，输个命令都不行，刚好centos断更了，换ubuntu系统了。也顺便从MySQL转到PostgreSQL。这个算是个记录，给有基础的人看的，你连ssh都不会连，那你得自己一步一步慢慢百度来。其实还是比较无脑的，除了1panel的反代，感觉设计对小白来说不是那么友好。之前踩过坑了，有些坑也一一列举一下，有些可能忘了。</p>
-</blockquote>
-<h1 id="一、安装1panel"><a href="#一、安装1panel" class="headerlink" title="一、安装1panel"></a>一、安装1panel</h1><p>1panel官方链接：<a href="https://1panel.cn/docs/installation/online_installation/">在线安装 - 1Panel 文档</a></p>
-<p>为什么使用1panel，这玩意里面应用纯纯都是docker，备份方便。管理也方便。都是隔离开的，不用担心环境问题。基本装了就能跑。</p>
-<p>根据自己服务器系统选择，直接复制命令一路回车。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845540.png" alt="img"></p>
-<p>非大陆服务器需要先安装docker，大陆服务器用1panel一路回车。<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845541.png" alt="img"></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845542.png" alt="img"></p>
-<p>复制外网地址，面板用户密码保存好。浏览器打开这个页面就是成功了。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845543.png" alt="img"></p>
-<p>1panel的应用基于docker，非大陆的服务器最好换源使用。大陆不用换用，直接用1p源就行。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845544.png" alt="img"></p>
-<h1 id="二、安装PostgreSQL"><a href="#二、安装PostgreSQL" class="headerlink" title="二、安装PostgreSQL"></a>二、安装PostgreSQL</h1><p>在应用商店中找到PostgreSQL安装。这里推荐postgresql内存占用比MySQL小。当然根据你自己喜好选择。</p>
-<p>应用商店-数据库</p>
-<p>记得勾选端口外部访问</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845545.png" alt="img"></p>
-<h1 id="三、配置网站自签证书"><a href="#三、配置网站自签证书" class="headerlink" title="三、配置网站自签证书"></a>三、配置网站自签证书</h1><p>这里安装空闲时间可以先配置证书账户</p>
-<p>顺便将二级域也在cf解析一下</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845546.png" alt="img"></p>
-<p>网站-证书</p>
-<p>这里推荐DNS账户方式，选择DNS账户方式，每个运营商的配置方式不同。</p>
-<p>改版了，api获取参考：<a href="https://forum.rainyun.com/t/topic/6777">1Panel CloudFlare证书申请失败的解决方案 - 综合讨论 - 雨云论坛 (rainyun.com)</a></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845547.png" alt="img"></p>
-<p>创建一个ACME账户，主要密钥算法使用RSA2048</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845548.png" alt="img"></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845549.png" alt="img"></p>
-<p>配置完后，直接安装后面的。等会安装配置完再来配置证书反代。</p>
-<p>当所有安装完毕后，我们来配置证书自签反代。</p>
-<p>点击网站提示安装openresty直接安装就好了，这玩意根据nginx来的<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845550.png" alt="img"></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845551.png" alt="img"></p>
-<h1 id="四、安装halo"><a href="#四、安装halo" class="headerlink" title="四、安装halo"></a>四、安装halo</h1><p>halo点击安装，都是傻瓜式的安装方法，配置问题的情况。</p>
-<p>数据库记得选择你对应的版本，记得勾选外部端口访问。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845552.png" alt="img"></p>
-<p>记得修改halo容器的域名，修改完成后重启。这步要是不修改的话，后面你Halo可能会出现很多问题，比如装了一些插件，文章500有些会全局500。还有就是插件授权可能会出现问题。他识别你的域名的是location:8090。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845553.png" alt="img">安装完成后，ip+端口访问（默认8090)，这里不要忙着初始化，先把容器域名改了。后面再配置域名证书。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845554.png" alt="img">找到你的halo域名点进去</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845555.png" alt="img"></p>
-<h1 id="五、安装alist"><a href="#五、安装alist" class="headerlink" title="五、安装alist"></a>五、安装alist</h1><p>应用商店-实用工具</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845556.png" alt="img"></p>
-<p>默认密码去容器找到alist后面点击终端然后连接,输入下面的命令自己设置。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./alist admin set 你自己要设置的密码</span><br></pre></td></tr></table></figure>
-<p>直接ip+端口访问（默认5244），后面再反代<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845557.png" alt="img"></p>
-<p>这样就登录成功了，下面有管理，可以自行配置。<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845558.png" alt="img"></p>
-<p>创建反代<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845559.png" alt="img"><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845560.png" alt="img"></p>
-<p>反代完之后要在容器里面重新设置一遍密码。开了https反代后原密码登陆不进去。</p>
-<p>alist怎么使用直接参考官方文档，跟这教程无脑操作就行。</p>
-<h1 id="六、安装兰空图床"><a href="#六、安装兰空图床" class="headerlink" title="六、安装兰空图床"></a>六、安装兰空图床</h1><blockquote>
-<p>兰空注意几点就是你服务器内存够不够大，如果空间足够的情况下，就没必要降画质。你服务器内存和CPU不行的情况下也别降画质开水印，多线程。容易爆内存，卡死。还有就是用户组里面的文件命名不用管，路径这个东西，如果你使用的网盘（建议别用，容易G），路径可以不管，要是使用的相册之内的只能一个文件的，不能多层文件夹，你设置路径直接会导致上传失败。</p>
-</blockquote>
-<p>应用商店-云存储</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845561.png" alt="img"></p>
-<p>访问ip+端口（默认40027）</p>
-<p>容器安装环境应该都是全的。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845562.png" alt="img"></p>
-<p>这里报错了<img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845563.png" alt="img"></p>
-<p>我自己手动创建一个数据库。填入到对应里面</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845564.png" alt="img"></p>
-<p>数据库连接地址直接用容器的。</p>
-<p>数据库名用的LskyPro，密码直接复制即可</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845565.png" alt="img"></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845566.png" alt="img"></p>
-<p>创建网站反代</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845567.png" alt="img"></p>
-<p>如果你直接使用webdav挂载到兰空，可以根据我这样创建图片转发反代。如果你用的oss，请忽略下面步骤。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845568.png" alt="img"></p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845569.png" alt="img"></p>
-<p>兰空里面创建存储策略，访问域名后面加<strong>/img</strong>，路径就是你alist的挂载路径，前面记得加上<strong>/dav</strong>。加密用<strong>Basic</strong>，网页访问alist的webdav没用的，alist webdav没做界面。但是可以直接用。</p>
-<p><img src="https://v1.a2k6.com/xisoul/i/2024/09/11/202409111845570.png" alt="img"></p>
-<p>当你弄完这些，可以直接使用picgo或者piclist加上兰空，就可以愉快玩耍了，当然你也可以直接使用alist的webdav</p>
-]]></content>
-      <tags>
-        <tag>-安装教程 -Halo</tag>
+        <tag>软件推荐</tag>
       </tags>
   </entry>
 </search>
